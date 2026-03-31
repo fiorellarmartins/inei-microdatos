@@ -138,6 +138,9 @@ def _parse_docs(html: str) -> list[Doc]:
         dc, dn = clean(tds[5]), clean(tds[6])
         if not dc:
             continue
+        # Skip header row
+        if not dc.isdigit() or "&" in tds[5]:
+            continue
         zips = re.findall(r"/iinei/srienaho/descarga/DocumentosZIP/([^\"'<>\s]+)", row)
         fp = re.findall(r"VerFicha\('([^']+)','([^']+)','([^']+)','([^']+)','([^']+)'\)", row)
         docs.append(Doc(

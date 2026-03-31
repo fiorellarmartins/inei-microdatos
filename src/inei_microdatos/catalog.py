@@ -240,8 +240,13 @@ def filter_catalog(
     sq = survey.lower() if survey else None
 
     for entry in catalog:
-        if sq and sq not in entry["label"].lower():
-            continue
+        if sq:
+            # Normalize Windows-1252 en-dash (\x96) and collapse whitespace
+            import re as _re
+            label_norm = _re.sub(r"[\x96\s]+", " ", entry["label"]).lower()
+            sq_norm = _re.sub(r"\s+", " ", sq)
+            if sq_norm not in label_norm:
+                continue
 
         filtered_years = {}
         for yr, year_data in entry["years"].items():
