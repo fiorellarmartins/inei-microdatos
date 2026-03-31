@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Programmatic access to INEI Peru's microdata portal"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [{ name = "Fiorella Ramirez" }]
 keywords = ["peru", "inei", "microdata", "statistics", "enaho", "endes"]
 classifiers = [

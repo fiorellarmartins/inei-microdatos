@@ -20,7 +20,7 @@ Este paquete maneja todo eso.
 pip install inei-microdatos
 ```
 
-Requiere Python 3.8+. Incluye pandas y pyreadstat para leer datos en todos los formatos (CSV, STATA, SPSS).
+Requiere Python 3.9+. Incluye pandas y pyreadstat para leer datos en todos los formatos (CSV, STATA, SPSS).
 
 ## Inicio rápido
 
@@ -290,7 +290,7 @@ This package handles all of that.
 pip install inei-microdatos
 ```
 
-Requires Python 3.8+. Includes pandas and pyreadstat to read data in all formats (CSV, STATA, SPSS).
+Requires Python 3.9+. Includes pandas and pyreadstat to read data in all formats (CSV, STATA, SPSS).
 
 ## Quick start
 
