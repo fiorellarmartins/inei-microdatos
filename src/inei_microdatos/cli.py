@@ -19,6 +19,8 @@ from inei_microdatos.download import LAYOUTS, download_docs, download_modules
 
 DEFAULT_CATALOG = Path.home() / ".inei-microdatos" / "catalog.json"
 
+SURVEY_HELP = 'Survey name or alias (e.g. "enaho", "endes", "cenagro"). Run `aliases` to see all.'
+CATALOG_HELP = "Path to catalog JSON file (defaults to bundled catalog)."
 LAYOUT_HELP = (
     "Folder layout for downloaded files. Presets: "
     + ", ".join(f'"{k}" ({v})' for k, v in LAYOUTS.items())
@@ -29,14 +31,22 @@ LAYOUT_HELP = (
 @click.group()
 @click.version_option()
 def cli():
-    """INEI Microdatos — programmatic access to Peru's national statistics microdata."""
+    """INEI Microdatos — programmatic access to Peru's national statistics microdata.
+
+    \b
+    Quick start:
+      inei-microdatos list --survey enaho
+      inei-microdatos download --survey endes --year-min 2024 --format CSV --dest ./data/
+      inei-microdatos read ./data/968-Modulo1629.zip --info
+      inei-microdatos aliases
+    """
 
 
 @cli.command()
 @click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
-              help="Path to catalog JSON file.")
+              help=CATALOG_HELP)
 @click.option("--refresh", is_flag=True, help="Force re-crawl even if catalog exists.")
-@click.option("--survey", multiple=True, help="Filter to surveys matching this substring.")
+@click.option("--survey", multiple=True, help=SURVEY_HELP)
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 def crawl(catalog_path, refresh, survey, year_min, year_max):
@@ -63,13 +73,20 @@ def crawl(catalog_path, refresh, survey, year_min, year_max):
 
 @cli.command("list")
 @click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
-              help="Path to catalog JSON file.")
-@click.option("--survey", help="Filter to surveys matching this substring.")
+              help=CATALOG_HELP)
+@click.option("--survey", help=SURVEY_HELP)
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 @click.option("--period", help="Filter to periods matching this substring.")
 def list_cmd(catalog_path, survey, year_min, year_max, period):
-    """List surveys and their available data."""
+    """List surveys and their available data.
+
+    \b
+    Examples:
+      inei-microdatos list
+      inei-microdatos list --survey enaho --year-min 2020
+      inei-microdatos list --survey cenagro
+    """
     catalog = load_catalog(catalog_path)
     catalog = filter_catalog(catalog, survey=survey, year_min=year_min, year_max=year_max, period=period)
 
@@ -95,22 +112,28 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 
 
 @cli.command()
-@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG))
-@click.option("--survey", help="Filter to surveys matching this substring.")
+@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
+              help=CATALOG_HELP)
+@click.option("--survey", help=SURVEY_HELP)
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 @click.option("--period", help="Filter to periods matching this substring.")
-@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS"], case_sensitive=False), default="CSV")
+@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS"], case_sensitive=False), default="CSV",
+              help="Download format (default: CSV).")
 @click.option("--dest", type=click.Path(), required=True, help="Destination directory.")
 @click.option("--layout", default="default", help=LAYOUT_HELP)
-@click.option("--workers", type=int, default=4, help="Parallel download threads.")
+@click.option("--workers", type=int, default=4, help="Parallel download threads (default: 4).")
 @click.option("--no-fallback", is_flag=True, help="Don't fall back to another format when preferred isn't available.")
 @click.option("--dry-run", is_flag=True, help="Show what would be downloaded without downloading.")
 @click.option("--include-docs", is_flag=True, help="Also download documentation.")
 def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout, workers, no_fallback, dry_run, include_docs):
     """Download microdata files.
 
-    SURVEY can be a short alias (e.g. "enaho", "endes") or a substring of the full name.
+    \b
+    Examples:
+      inei-microdatos download --survey endes --year-min 2024 --format CSV --dest ./data/
+      inei-microdatos download --survey enaho --period Anual --format STATA --dest ./data/
+      inei-microdatos download --survey endes --dest ./data/ --dry-run
     """
     catalog = load_catalog(catalog_path)
     catalog = filter_catalog(catalog, survey=survey, year_min=year_min, year_max=year_max, period=period)
@@ -137,15 +160,22 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
 
 
 @cli.command()
-@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG))
-@click.option("--survey", help="Filter to surveys matching this substring.")
+@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
+              help=CATALOG_HELP)
+@click.option("--survey", help=SURVEY_HELP)
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 @click.option("--dest", type=click.Path(), required=True, help="Destination directory.")
 @click.option("--layout", default="default", help=LAYOUT_HELP)
-@click.option("--workers", type=int, default=4)
+@click.option("--workers", type=int, default=4, help="Parallel download threads (default: 4).")
 def docs(catalog_path, survey, year_min, year_max, dest, layout, workers):
-    """Download documentation files only."""
+    """Download documentation files only (questionnaires, dictionaries, fichas).
+
+    \b
+    Examples:
+      inei-microdatos docs --survey endes --year-min 2020 --dest ./docs/
+      inei-microdatos docs --survey enaho --year-min 2024 --dest ./docs/
+    """
     catalog = load_catalog(catalog_path)
     catalog = filter_catalog(catalog, survey=survey, year_min=year_min, year_max=year_max)
 
@@ -166,7 +196,14 @@ def docs(catalog_path, survey, year_min, year_max, dest, layout, workers):
 def read(source, table, fmt, info):
     """Read a module ZIP and show its contents.
 
+    \b
     SOURCE can be a path to a ZIP file or a download code like "968-Modulo1629".
+
+    \b
+    Examples:
+      inei-microdatos read ./data/968-Modulo1629.zip --info
+      inei-microdatos read ./data/968-Modulo1629.zip -t RECH0
+      inei-microdatos read 968-Modulo1629
     """
     from inei_microdatos.reader import list_tables, read_module
 
@@ -198,7 +235,17 @@ def read(source, table, fmt, info):
 
 @cli.command()
 def aliases():
-    """List available short survey aliases."""
+    """List available short survey aliases.
+
+    \b
+    Aliases work everywhere --survey is accepted: list, download, docs, crawl.
+
+    \b
+    Examples:
+      inei-microdatos aliases
+      inei-microdatos list --survey enaho
+      inei-microdatos download --survey endes --dest ./data/
+    """
     from inei_microdatos.aliases import ALIASES
     click.echo(f"{'Alias':<20} {'Matches'}")
     click.echo("-" * 70)
@@ -207,9 +254,15 @@ def aliases():
 
 
 @cli.command()
-@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG))
+@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
+              help=CATALOG_HELP)
 def stats(catalog_path):
-    """Show catalog statistics."""
+    """Show catalog statistics.
+
+    \b
+    Examples:
+      inei-microdatos stats
+    """
     catalog = load_catalog(catalog_path)
     age = catalog_age(catalog_path)
     _print_stats(catalog_stats(catalog))
