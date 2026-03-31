@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "inei-microdatos"
+version = "0.1.0"
+description = "Programmatic access to INEI Peru's microdata portal"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [{ name = "Fiorella Ramirez" }]
+keywords = ["peru", "inei", "microdata", "statistics", "enaho", "endes"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "requests>=2.28",
+    "tqdm>=4.60",
+    "click>=8.0",
+]
+
+[project.scripts]
+inei-microdatos = "inei_microdatos.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/fiorellarmartins/inei-microdatos"
