@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y libiconv-hook-dev || true
-
       - name: Install package
-        run: pip install -e ".[test]"
+        run: |
+          pip install --upgrade pip
+          pip install pyreadstat --only-binary=:all: || pip install pyreadstat
+          pip install -e ".[test]"
 
       - name: Run tests
         run: pytest tests/ -v
