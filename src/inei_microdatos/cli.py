@@ -233,6 +233,144 @@ def read(source, table, fmt, info):
         click.echo(df.head(5).to_string())
 
 
+@cli.command("search")
+@click.argument("query")
+@click.option("--survey", help=SURVEY_HELP)
+@click.option("--year", help="Filter to this year.")
+@click.option("--module", help="Filter to module name substring.")
+@click.option("--exact", is_flag=True, help="Match variable name exactly.")
+def search_cmd(query, survey, year, module, exact):
+    """Search for variables by name or label.
+
+    \b
+    Examples:
+      inei-microdatos search ingreso
+      inei-microdatos search p21 --survey enaho --exact
+      inei-microdatos search "material predominante" --year 2024
+    """
+    from inei_microdatos.variables import search
+
+    try:
+        results = search(query, survey=survey, year=year, module=module, exact=exact)
+    except FileNotFoundError as e:
+        click.echo(str(e))
+        return
+
+    if not results:
+        click.echo(f'No variables matching "{query}" found.')
+        return
+
+    click.echo(f'{len(results)} matches for "{query}":\n')
+
+    # Group by variable name
+    by_var = {}
+    for r in results:
+        key = r["variable"]
+        if key not in by_var:
+            by_var[key] = []
+        by_var[key].append(r)
+
+    for var_name, matches in sorted(by_var.items()):
+        years = sorted(set(m["year"] for m in matches))
+        label = matches[0]["label"]
+        surveys = sorted(set(m["survey"][:40] for m in matches))
+        yr_str = f"{years[0]}-{years[-1]}" if len(years) > 1 else years[0]
+        click.echo(f"  {var_name:<20} {label[:50]}")
+        click.echo(f"  {'':20} {surveys[0]} | {yr_str} ({len(years)} years, {len(matches)} modules)")
+        if len(surveys) > 1:
+            for s in surveys[1:]:
+                click.echo(f"  {'':20} {s}")
+        click.echo()
+
+
+@cli.command("track")
+@click.argument("variable")
+@click.option("--survey", help=SURVEY_HELP)
+def track_cmd(variable, survey):
+    """Track a variable across years — shows when it appears, changes, or disappears.
+
+    \b
+    Examples:
+      inei-microdatos track p21 --survey enaho
+      inei-microdatos track p101
+    """
+    from inei_microdatos.variables import search_across_years
+
+    try:
+        by_year = search_across_years(variable, survey=survey)
+    except FileNotFoundError as e:
+        click.echo(str(e))
+        return
+
+    if not by_year:
+        click.echo(f'Variable "{variable}" not found in any indexed module.')
+        return
+
+    click.echo(f'Variable "{variable}" across years:\n')
+
+    prev_label = None
+    for yr, matches in by_year.items():
+        labels = set(m["label"] for m in matches if m["label"])
+        modules = [m["module_code"] for m in matches]
+        label = next(iter(labels)) if labels else ""
+
+        changed = ""
+        if prev_label is not None and label != prev_label:
+            changed = "  ** label changed"
+        prev_label = label
+
+        click.echo(f"  {yr}  {label[:55]}{changed}")
+        if len(modules) > 1:
+            click.echo(f"  {'':6}{len(modules)} modules: {', '.join(modules[:5])}")
+
+    # Summary
+    all_years = sorted(by_year.keys())
+    click.echo(f"\n  Present in {len(all_years)} years ({all_years[0]}-{all_years[-1]})")
+
+
+@cli.command("index")
+@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG),
+              help=CATALOG_HELP)
+@click.option("--survey", help=SURVEY_HELP + " Required.", required=True)
+@click.option("--year-min", type=int, help="Minimum year.")
+@click.option("--year-max", type=int, help="Maximum year.")
+@click.option("--period", help="Filter to periods matching this substring.")
+@click.option("--dest", type=click.Path(), default=str(Path.home() / ".inei-microdatos" / "variable_index.json.gz"),
+              help="Where to save the index.")
+@click.option("--workers", type=int, default=4, help="Parallel download threads (default: 4).")
+def index_cmd(catalog_path, survey, year_min, year_max, period, dest, workers):
+    """Build variable index for a survey (downloads modules in parallel).
+
+    \b
+    Downloads each module ZIP, extracts variable metadata, deletes the ZIP.
+    Max disk usage: ~workers ZIPs at a time.
+
+    \b
+    Examples:
+      inei-microdatos index --survey enaho
+      inei-microdatos index --survey enaho --year-min 2020
+      inei-microdatos index --survey endes --year-min 2024
+    """
+    from inei_microdatos.variables import build_index, load_index, save_index
+
+    catalog = load_catalog(catalog_path)
+    catalog = filter_catalog(catalog, survey=survey, year_min=year_min, year_max=year_max, period=period)
+
+    if not catalog:
+        click.echo("No matching data found.")
+        return
+
+    n_mods = sum(len(p["modules"]) for e in catalog for y in e["years"].values() for p in y.values())
+    click.echo(f"Indexing {n_mods} modules...")
+
+    new_entries = build_index(catalog, dest=dest, workers=workers)
+
+    click.echo(f"\nIndexed {len(new_entries)} modules.")
+    total_vars = sum(len(e["variables"]) for e in new_entries)
+    click.echo(f"Total variables: {total_vars}")
+    click.echo(f"Saved to {dest}")
+
+
 @cli.command()
 def aliases():
     """List available short survey aliases.
