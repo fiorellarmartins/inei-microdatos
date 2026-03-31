@@ -146,26 +146,46 @@ def build_index(
 
     from tqdm import tqdm
 
-    entries = []
-    modules = _collect_modules(catalog)
+    # Load existing index to merge with
+    dest = Path(dest)
+    existing = []
+    if dest.exists():
+        existing = _read_index_file(dest)
+    existing_keys = set(
+        (e["survey"], e["year"], e["period"], e["module_code"])
+        for e in existing
+    )
 
-    bar = tqdm(total=len(modules), desc="Indexing", disable=not progress)
+    modules = _collect_modules(catalog)
+    # Skip already-indexed modules
+    to_index = [
+        m for m in modules
+        if (m["survey"], m["year"], m["period"], m["module_code"]) not in existing_keys
+    ]
+
+    if not to_index:
+        return existing
+
+    new_entries = []
+    bar = tqdm(total=len(to_index), desc="Indexing", disable=not progress)
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(_index_one_module, mod): mod for mod in modules}
+        futures = {pool.submit(_index_one_module, mod): mod for mod in to_index}
         for future in as_completed(futures):
             bar.update(1)
             try:
                 entry = future.result()
                 if entry:
-                    entries.append(entry)
-                    bar.set_postfix(indexed=len(entries))
+                    new_entries.append(entry)
+                    bar.set_postfix(indexed=len(new_entries))
             except Exception:
                 pass
 
     bar.close()
-    save_index(entries, dest)
-    return entries
+
+    merged = existing + new_entries
+    save_index(merged, dest)
+    return merged
 
 
 def _collect_modules(catalog: list) -> list:
