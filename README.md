@@ -4,6 +4,8 @@ Acceso programático al [portal de microdatos del INEI](https://proyectos.inei.g
 
 El portal alberga **67 encuestas**, **5,900+ módulos descargables** y **8,100+ archivos de documentación** desde 1994 hasta 2025 — incluyendo encuestas de hogares (ENAHO), encuestas demográficas y de salud (ENDES), encuestas de empleo (EPEN), censos agropecuarios (CENAGRO), encuestas económicas (EEA) y decenas más.
 
+Incluye un **índice de variables** pre-construido con **525,000+ variables** de 3,600+ módulos que permite buscar variables por nombre o descripción sin descargar datos.
+
 [English version below](#english)
 
 ---
@@ -45,6 +47,65 @@ for name, df in dfs.items():
 # RECH1: (135045, 36)
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
+```
+
+## Búsqueda de variables
+
+El paquete incluye un índice pre-construido con **525,000+ variables** de 16 encuestas principales. Busca variables por nombre o descripción sin descargar nada.
+
+### CLI
+
+```bash
+# Buscar por nombre o descripción
+inei-microdatos search ingreso
+inei-microdatos search "material predominante"
+inei-microdatos search p21 --exact
+
+# Filtrar por encuesta o año
+inei-microdatos search pobreza --survey enaho
+inei-microdatos search CIIU --survey eea --year 2024
+
+# Rastrear una variable a través de los años
+inei-microdatos track p21 --survey enaho
+inei-microdatos track ubigeo
+```
+
+### Python
+
+```python
+from inei_microdatos import search_variables, search_across_years
+
+# Buscar variables
+results = search_variables("ingreso")
+for r in results[:5]:
+    print(f'{r["variable"]:<20} {r["label"]:<50} {r["year"]}')
+
+# Rastrear cambios a través de los años
+by_year = search_across_years("p21", survey="enaho")
+for year, matches in by_year.items():
+    print(f'{year}: {matches[0]["label"][:60]}')
+```
+
+### Encuestas indexadas
+
+| Encuesta | Módulos | Variables | Años |
+|----------|---------|-----------|------|
+| ENAHO | 680 | 220,000+ | 2004-2024 |
+| ENAHO PANEL | 68 | 154,000+ | 2010-2024 |
+| EEA | 604 | 9,000+ | 2001-2024 |
+| EPEN (Ciudades/Deptos/Lima) | 892 | 108,000+ | 2001-2026 |
+| ENDES | 264 | 27,000+ | 1996-2024 |
+| Instituciones Educativas | 286 | 75,000+ | 2009-2021 |
+| ENAPRES | 204 | 35,000+ | 2010-2024 |
+| CENAGRO | 291 | 12,000+ | 2012 |
+| Agropecuaria | 220 | 14,000+ | 2014-2024 |
+| RENAMU | 75 | 10,000+ | 2004-2025 |
+| MAPA DE POBREZA | 92 | 18,000+ | 2013 |
+
+Para indexar encuestas adicionales:
+
+```bash
+inei-microdatos index --survey endes --workers 6
 ```
 
 ## Aliases de encuestas
@@ -196,6 +257,26 @@ tables = list_tables("./data/968-Modulo1629.zip")
 # [{'name': 'RECH0', 'format': 'csv', 'size_bytes': 6598376, ...}, ...]
 ```
 
+### Búsqueda de variables
+
+```python
+from inei_microdatos import search_variables, search_across_years
+
+# Buscar por nombre o descripción
+results = search_variables("ingreso")
+# [{'survey': '...', 'year': '2024', 'variable': 'p21', 'label': '...', ...}, ...]
+
+# Búsqueda exacta por nombre de variable
+results = search_variables("p21", exact=True)
+
+# Filtrar por encuesta
+results = search_variables("pobreza", survey="enaho")
+
+# Rastrear una variable a través de los años
+by_year = search_across_years("ubigeo")
+# {'2004': [...], '2005': [...], ..., '2024': [...]}
+```
+
 ### Cliente (bajo nivel)
 
 ```python
@@ -278,6 +359,8 @@ Programmatic access to Peru's [INEI microdata portal](https://proyectos.inei.gob
 
 The portal hosts **67 surveys**, **5,900+ downloadable modules**, and **8,100+ documentation files** spanning from 1994 to 2025 — covering household surveys (ENAHO), demographic and health surveys (ENDES), employment surveys (EPEN), agricultural censuses (CENAGRO), economic surveys (EEA), and dozens more.
 
+Includes a **pre-built variable index** with **525,000+ variables** from 3,600+ modules for searching variables by name or description without downloading data.
+
 ## The problem
 
 INEI's microdata portal is an old ASP application with cascading AJAX dropdowns. There is no API. Downloading a single module requires 4 clicks. Downloading an entire survey across years requires hundreds. The portal uses Windows-1252 encoding with JavaScript-style escape sequences that break standard HTTP clients.
@@ -315,6 +398,65 @@ for name, df in dfs.items():
 # RECH1: (135045, 36)
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
+```
+
+## Variable search
+
+The package includes a pre-built index with **525,000+ variables** from 16 major surveys. Search variables by name or description without downloading anything.
+
+### CLI
+
+```bash
+# Search by name or description
+inei-microdatos search ingreso
+inei-microdatos search "material predominante"
+inei-microdatos search p21 --exact
+
+# Filter by survey or year
+inei-microdatos search pobreza --survey enaho
+inei-microdatos search CIIU --survey eea --year 2024
+
+# Track a variable across years
+inei-microdatos track p21 --survey enaho
+inei-microdatos track ubigeo
+```
+
+### Python
+
+```python
+from inei_microdatos import search_variables, search_across_years
+
+# Search variables
+results = search_variables("ingreso")
+for r in results[:5]:
+    print(f'{r["variable"]:<20} {r["label"]:<50} {r["year"]}')
+
+# Track changes across years
+by_year = search_across_years("p21", survey="enaho")
+for year, matches in by_year.items():
+    print(f'{year}: {matches[0]["label"][:60]}')
+```
+
+### Indexed surveys
+
+| Survey | Modules | Variables | Years |
+|--------|---------|-----------|-------|
+| ENAHO | 680 | 220,000+ | 2004-2024 |
+| ENAHO PANEL | 68 | 154,000+ | 2010-2024 |
+| EEA | 604 | 9,000+ | 2001-2024 |
+| EPEN (Cities/Departments/Lima) | 892 | 108,000+ | 2001-2026 |
+| ENDES | 264 | 27,000+ | 1996-2024 |
+| Educational Institutions | 286 | 75,000+ | 2009-2021 |
+| ENAPRES | 204 | 35,000+ | 2010-2024 |
+| CENAGRO | 291 | 12,000+ | 2012 |
+| Agricultural Survey | 220 | 14,000+ | 2014-2024 |
+| RENAMU | 75 | 10,000+ | 2004-2025 |
+| Poverty Map | 92 | 18,000+ | 2013 |
+
+To index additional surveys:
+
+```bash
+inei-microdatos index --survey endes --workers 6
 ```
 
 ## Survey aliases
@@ -464,6 +606,26 @@ dfs = read_catalog_entry(catalog[0], year="2024", module="Hogar")
 # Inspect without reading
 tables = list_tables("./data/968-Modulo1629.zip")
 # [{'name': 'RECH0', 'format': 'csv', 'size_bytes': 6598376, ...}, ...]
+```
+
+### Variable search
+
+```python
+from inei_microdatos import search_variables, search_across_years
+
+# Search by name or description
+results = search_variables("ingreso")
+# [{'survey': '...', 'year': '2024', 'variable': 'p21', 'label': '...', ...}, ...]
+
+# Exact match on variable name
+results = search_variables("p21", exact=True)
+
+# Filter by survey
+results = search_variables("pobreza", survey="enaho")
+
+# Track a variable across years
+by_year = search_across_years("ubigeo")
+# {'2004': [...], '2005': [...], ..., '2024': [...]}
 ```
 
 ### Client (low-level)
