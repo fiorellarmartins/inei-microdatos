@@ -5,7 +5,7 @@ from inei_microdatos.catalog import build_catalog, load_catalog, save_catalog, c
 from inei_microdatos.download import download_modules, download_docs, LAYOUTS
 from inei_microdatos.reader import read_module, read_catalog_entry, list_tables
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = [
     "INEIClient",
     "build_catalog",
