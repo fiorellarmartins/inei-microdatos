@@ -26,6 +26,9 @@ dependencies = [
     "pyreadstat>=1.0",
 ]
 
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
 [project.scripts]
 inei-microdatos = "inei_microdatos.cli:cli"
 
