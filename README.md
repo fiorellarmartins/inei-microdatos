@@ -2,7 +2,7 @@
 
 Acceso programático al [portal de microdatos del INEI](https://proyectos.inei.gob.pe/microdatos/). Descarga microdatos de encuestas, censos y documentación sin navegar los dropdowns del portal.
 
-El portal alberga **67 encuestas**, **5,900+ módulos descargables** y **9,100+ archivos de documentación** desde 1994 hasta 2025 — incluyendo encuestas de hogares (ENAHO), encuestas demográficas y de salud (ENDES), encuestas de empleo (EPEN), censos agropecuarios (CENAGRO), encuestas económicas (EEA) y decenas más.
+El portal alberga **67 encuestas**, **5,900+ módulos descargables** y **8,100+ archivos de documentación** desde 1994 hasta 2025 — incluyendo encuestas de hogares (ENAHO), encuestas demográficas y de salud (ENDES), encuestas de empleo (EPEN), censos agropecuarios (CENAGRO), encuestas económicas (EEA) y decenas más.
 
 [English version below](#english)
 
@@ -240,9 +240,9 @@ inei-microdatos crawl --survey enaho     # solo una encuesta específica
 
 | Formato | Cobertura | Notas |
 |---------|-----------|-------|
-| **SPSS** (.sav) | ~99% de los módulos | Mayor cobertura |
-| **STATA** (.dta) | ~47% | Incluye etiquetas de valores |
-| **CSV** | ~42% | UTF-8 con BOM |
+| **SPSS** (.sav) | ~98% de los módulos | Mayor cobertura |
+| **STATA** (.dta) | ~42% | Incluye etiquetas de valores |
+| **CSV** | ~43% | UTF-8 con BOM |
 
 Las encuestas antiguas (pre-2008) frecuentemente solo están disponibles en SPSS/STATA, no en CSV. El flag `--format CSV` automáticamente cae a STATA o SPSS cuando CSV no está disponible. Usa `--no-fallback` para desactivar esto.
 
@@ -280,7 +280,7 @@ MIT
 
 Programmatic access to Peru's [INEI microdata portal](https://proyectos.inei.gob.pe/microdatos/). Download survey microdata, census files, and documentation without clicking through the portal's dropdowns.
 
-The portal hosts **67 surveys**, **5,900+ downloadable modules**, and **9,100+ documentation files** spanning from 1994 to 2025 — covering household surveys (ENAHO), demographic and health surveys (ENDES), employment surveys (EPEN), agricultural censuses (CENAGRO), economic surveys (EEA), and dozens more.
+The portal hosts **67 surveys**, **5,900+ downloadable modules**, and **8,100+ documentation files** spanning from 1994 to 2025 — covering household surveys (ENAHO), demographic and health surveys (ENDES), employment surveys (EPEN), agricultural censuses (CENAGRO), economic surveys (EEA), and dozens more.
 
 ## The problem
 
@@ -514,9 +514,9 @@ inei-microdatos crawl --survey enaho     # crawl specific survey only
 
 | Format | Coverage | Notes |
 |--------|----------|-------|
-| **SPSS** (.sav) | ~99% of modules | Best coverage |
-| **STATA** (.dta) | ~47% | Value labels included |
-| **CSV** | ~42% | UTF-8 with BOM |
+| **SPSS** (.sav) | ~98% of modules | Best coverage |
+| **STATA** (.dta) | ~42% | Value labels included |
+| **CSV** | ~43% | UTF-8 with BOM |
 
 Older surveys (pre-2008) are often available only in SPSS/STATA, not CSV. The `--format CSV` flag automatically falls back to STATA or SPSS when CSV isn't available. Use `--no-fallback` to disable this.
 
