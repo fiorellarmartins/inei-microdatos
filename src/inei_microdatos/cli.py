@@ -182,12 +182,6 @@ def read(source, table, fmt, info):
             click.echo(f"{t['name']:<30} {t['format']:<8} {size_mb:>9.1f} MB")
         return
 
-    try:
-        import pandas as pd
-    except ImportError:
-        click.echo("pandas is required to read data files. Install with: pip install pandas")
-        return
-
     dfs = read_module(source, tables=list(table) if table else None, fmt=fmt)
 
     if not dfs:
