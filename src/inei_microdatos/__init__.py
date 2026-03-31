@@ -6,7 +6,7 @@ from inei_microdatos.download import download_modules, download_docs, LAYOUTS
 from inei_microdatos.reader import read_module, read_catalog_entry, list_tables
 from inei_microdatos.variables import search as search_variables, search_across_years
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 __all__ = [
     "INEIClient",
     "build_catalog",
