@@ -272,7 +272,7 @@ def search_cmd(query, survey, year, module, exact):
 
     for var_name, matches in sorted(by_var.items()):
         years = sorted(set(m["year"] for m in matches))
-        label = matches[0]["label"]
+        label = matches[0]["label"] or ""
         surveys = sorted(set(m["survey"][:40] for m in matches))
         yr_str = f"{years[0]}-{years[-1]}" if len(years) > 1 else years[0]
         click.echo(f"  {var_name:<20} {label[:50]}")
