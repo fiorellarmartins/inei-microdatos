@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "inei-microdatos"
-version = "0.2.0"
+version = "0.2.1"
 description = "Programmatic access to INEI Peru's microdata portal"
 readme = "README.md"
 license = "MIT"
