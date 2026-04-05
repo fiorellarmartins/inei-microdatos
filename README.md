@@ -1,5 +1,9 @@
 # inei-microdatos
 
+[![PyPI](https://img.shields.io/pypi/v/inei-microdatos)](https://pypi.org/project/inei-microdatos/)
+[![Python 3.9+](https://img.shields.io/pypi/pyversions/inei-microdatos)](https://pypi.org/project/inei-microdatos/)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-ff5e5b?logo=ko-fi)](https://ko-fi.com/fiorellarmartins)
+
 Acceso programático al [portal de microdatos del INEI](https://proyectos.inei.gob.pe/microdatos/). Descarga microdatos de encuestas, censos y documentación sin navegar los dropdowns del portal.
 
 El portal alberga **67 encuestas**, **5,900+ módulos descargables** y **8,100+ archivos de documentación** desde 1994 hasta 2025 — incluyendo encuestas de hogares (ENAHO), encuestas demográficas y de salud (ENDES), encuestas de empleo (EPEN), censos agropecuarios (CENAGRO), encuestas económicas (EEA) y decenas más.
@@ -354,6 +358,10 @@ MIT
 <a name="english"></a>
 
 # inei-microdatos (English)
+
+[![PyPI](https://img.shields.io/pypi/v/inei-microdatos)](https://pypi.org/project/inei-microdatos/)
+[![Python 3.9+](https://img.shields.io/pypi/pyversions/inei-microdatos)](https://pypi.org/project/inei-microdatos/)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-ff5e5b?logo=ko-fi)](https://ko-fi.com/fiorellarmartins)
 
 Programmatic access to Peru's [INEI microdata portal](https://proyectos.inei.gob.pe/microdatos/). Download survey microdata, census files, and documentation without clicking through the portal's dropdowns.
 
