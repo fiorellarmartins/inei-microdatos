@@ -205,7 +205,13 @@ def _read_data(data: io.BytesIO, fmt: str, name: str) -> "pandas.DataFrame":
             data.seek(0)
             return pd.read_csv(data, encoding="latin-1", low_memory=False)
     elif fmt == "stata":
-        return pd.read_stata(data)
+        try:
+            return pd.read_stata(data)
+        except ValueError:
+            # INEI STATA files sometimes have duplicate value labels
+            # (e.g. same label for different codes). Retry without categoricals.
+            data.seek(0)
+            return pd.read_stata(data, convert_categoricals=False)
     elif fmt == "spss":
         try:
             return pd.read_spss(data)
