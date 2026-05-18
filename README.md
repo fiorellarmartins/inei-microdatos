@@ -8,7 +8,7 @@ Acceso programático al [portal de microdatos del INEI](https://proyectos.inei.g
 
 El portal alberga **67 encuestas**, **5,900+ módulos descargables** y **8,100+ archivos de documentación** desde 1994 hasta 2025 — incluyendo encuestas de hogares (ENAHO), encuestas demográficas y de salud (ENDES), encuestas de empleo (EPEN), censos agropecuarios (CENAGRO), encuestas económicas (EEA) y decenas más.
 
-Incluye un **índice de variables** pre-construido con **525,000+ variables** de 3,600+ módulos que permite buscar variables por nombre o descripción sin descargar datos.
+Incluye un **índice de variables** pre-construido con **551,000+ variables** de 3,700+ módulos que permite buscar variables por nombre o descripción sin descargar datos.
 
 [English version below](#english)
 
@@ -55,7 +55,7 @@ for name, df in dfs.items():
 
 ## Búsqueda de variables
 
-El paquete incluye un índice pre-construido con **525,000+ variables** de 16 encuestas principales. Busca variables por nombre o descripción sin descargar nada.
+El paquete incluye un índice pre-construido con **551,000+ variables** de 16 encuestas principales. Busca variables por nombre o descripción sin descargar nada.
 
 ### CLI
 
@@ -94,7 +94,7 @@ for year, matches in by_year.items():
 
 | Encuesta | Módulos | Variables | Años |
 |----------|---------|-----------|------|
-| ENAHO | 680 | 220,000+ | 2004-2024 |
+| ENAHO | 730 | 90,000+ | 2004-2025 |
 | ENAHO PANEL | 68 | 154,000+ | 2010-2024 |
 | EEA | 604 | 9,000+ | 2001-2024 |
 | EPEN (Ciudades/Deptos/Lima) | 892 | 108,000+ | 2001-2026 |
@@ -367,7 +367,7 @@ Programmatic access to Peru's [INEI microdata portal](https://proyectos.inei.gob
 
 The portal hosts **67 surveys**, **5,900+ downloadable modules**, and **8,100+ documentation files** spanning from 1994 to 2025 — covering household surveys (ENAHO), demographic and health surveys (ENDES), employment surveys (EPEN), agricultural censuses (CENAGRO), economic surveys (EEA), and dozens more.
 
-Includes a **pre-built variable index** with **525,000+ variables** from 3,600+ modules for searching variables by name or description without downloading data.
+Includes a **pre-built variable index** with **551,000+ variables** from 3,700+ modules for searching variables by name or description without downloading data.
 
 ## The problem
 
@@ -410,7 +410,7 @@ for name, df in dfs.items():
 
 ## Variable search
 
-The package includes a pre-built index with **525,000+ variables** from 16 major surveys. Search variables by name or description without downloading anything.
+The package includes a pre-built index with **551,000+ variables** from 16 major surveys. Search variables by name or description without downloading anything.
 
 ### CLI
 
@@ -449,7 +449,7 @@ for year, matches in by_year.items():
 
 | Survey | Modules | Variables | Years |
 |--------|---------|-----------|-------|
-| ENAHO | 680 | 220,000+ | 2004-2024 |
+| ENAHO | 730 | 90,000+ | 2004-2025 |
 | ENAHO PANEL | 68 | 154,000+ | 2010-2024 |
 | EEA | 604 | 9,000+ | 2001-2024 |
 | EPEN (Cities/Departments/Lima) | 892 | 108,000+ | 2001-2026 |
