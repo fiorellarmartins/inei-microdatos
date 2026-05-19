@@ -29,10 +29,16 @@ BUNDLED_INDEX = Path("src/inei_microdatos/data/variable_index.json.gz")
 
 
 def patch_catalog_year(bundled: list[dict], fresh: list[dict], year: str) -> list[dict]:
-    """Replace year data in bundled catalog with fresh data for matching surveys."""
+    """Replace year data in bundled catalog with fresh data for matching surveys.
+
+    Skips "Anterior" entries — they only hold pre-2004 data and should never
+    receive years from a modern crawl.
+    """
     fresh_by_value = {e["value"]: e for e in fresh}
 
     for entry in bundled:
+        if "Anterior" in entry.get("category", ""):
+            continue
         val = entry["value"]
         if val in fresh_by_value:
             fresh_years = fresh_by_value[val]["years"]
