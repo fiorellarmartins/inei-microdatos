@@ -210,7 +210,7 @@ from inei_microdatos.catalog import filter_catalog, catalog_stats, catalog_age
 catalog = load_catalog()
 
 # Verificar cuándo se generó
-print(catalog_age())  # "2026-03-31T16:00:31+00:00"
+print(catalog_age())  # "2026-05-19T13:36:51+00:00"
 
 # Estadísticas
 print(catalog_stats(catalog))
@@ -565,7 +565,7 @@ from inei_microdatos.catalog import filter_catalog, catalog_stats, catalog_age
 catalog = load_catalog()
 
 # Check when it was crawled
-print(catalog_age())  # "2026-03-31T16:00:31+00:00"
+print(catalog_age())  # "2026-05-19T13:36:51+00:00"
 
 # Stats
 print(catalog_stats(catalog))
