@@ -1,4 +1,4 @@
-"""Variable index — search across surveys, modules, and years."""
+"""Search survey variables, census source variables, and census table titles."""
 
 from __future__ import annotations
 
@@ -22,30 +22,38 @@ def search(
     module: Optional[str] = None,
     exact: bool = False,
 ) -> List[dict]:
-    """Search for variables by name or label.
+    """Search variables and census tables by source name or label.
 
     Args:
         query: Search string — matched against variable name and label.
         index: Variable index (loaded if not provided).
-        survey: Filter to this survey (substring match).
+        survey: Survey alias or name substring; census year aliases also filter year.
         year: Filter to this year.
         module: Filter to this module (substring match).
         exact: If True, match variable name exactly (case-insensitive).
 
     Returns:
         List of matches, each with keys: survey, year, period, module_code,
-        module_name, format, variable, label, value_labels (if any).
+        module_name, format, variable, label, values (if any), kind, data_kind,
+        table (worksheet when applicable), and source_url.
     """
     if index is None:
         index = load_index()
 
     query_lower = query.lower()
+    from inei_microdatos.aliases import resolve_alias, ALIAS_YEARS
+    alias_year = ALIAS_YEARS.get(survey.lower()) if survey else None
+    if alias_year is not None:
+        if year is not None and str(year) != str(alias_year):
+            return []
+        year = str(alias_year)
+    survey_filter = resolve_alias(survey).lower() if survey else None
     results = []
 
     for entry in index:
-        if survey and survey.lower() not in entry["survey"].lower():
+        if survey_filter and survey_filter not in entry["survey"].lower():
             continue
-        if year and entry["year"] != year:
+        if year is not None and entry["year"] != str(year):
             continue
         if module and module.lower() not in entry["module_name"].lower():
             continue
@@ -82,6 +90,8 @@ def search_across_years(
     matches = search(variable, index=index, survey=survey, exact=True)
     by_year = {}
     for m in matches:
+        if m["kind"] != "variable":
+            continue  # Matching table names do not establish variable continuity.
         yr = m["year"]
         if yr not in by_year:
             by_year[yr] = []
@@ -136,11 +146,14 @@ def build_index(
     dest: str | Path = _USER_INDEX,
     workers: int = 4,
     progress: bool = True,
+    data_dir: Optional[str | Path] = None,
 ) -> list:
-    """Build variable index by downloading modules in parallel, extracting metadata, and deleting.
+    """Build a search index of source variables and census table metadata.
 
-    Downloads each ZIP, reads STATA/SPSS metadata, caches variable info, deletes the ZIP.
-    Max disk usage: ~workers ZIPs at a time.
+    Downloads ZIPs for STATA/SPSS metadata. Census source-variable codes and
+    2007 table titles come from the catalog; XLSX titles come from workbooks.
+    data_dir optionally reuses downloaded census XLSX files (searched recursively).
+    Temporary downloads are deleted; max disk usage is ~workers modules at a time.
     """
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -170,7 +183,7 @@ def build_index(
     bar = tqdm(total=len(to_index), desc="Indexing", disable=not progress)
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(_index_one_module, mod): mod for mod in to_index}
+        futures = {pool.submit(_index_one_module, mod, data_dir=data_dir): mod for mod in to_index}
         for future in as_completed(futures):
             bar.update(1)
             try:
@@ -178,8 +191,9 @@ def build_index(
                 if entry:
                     new_entries.append(entry)
                     bar.set_postfix(indexed=len(new_entries))
-            except Exception:
-                pass
+            except Exception as exc:
+                import warnings
+                warnings.warn(f"Could not index {futures[future]['module_code']}: {exc}", RuntimeWarning)
 
     bar.close()
 
@@ -195,6 +209,17 @@ def _collect_modules(catalog: list) -> list:
         for year, year_data in entry["years"].items():
             for period_label, period_data in year_data.items():
                 for mod in period_data["modules"]:
+                    if entry.get("data_kind") == "aggregate_tables":
+                        if mod.get("redatam_query") or mod.get("xlsx_url") or mod.get("xls_url"):
+                            modules.append({
+                                "survey": entry["label"], "category": entry["category"],
+                                "year": year, "period": period_label,
+                                "module_code": mod["module_code"],
+                                "module_name": mod["module_name"],
+                                "format": "XLSX" if mod.get("xlsx_url") else "XLS",
+                                "source_url": period_data["source_url"], "census_module": mod,
+                            })
+                        continue
                     code = mod.get("stata_code") or mod.get("spss_code")
                     if not code:
                         continue
@@ -213,8 +238,12 @@ def _collect_modules(catalog: list) -> list:
     return modules
 
 
-def _index_one_module(mod_info: dict) -> Optional[dict]:
+def _index_one_module(mod_info: dict, data_dir=None) -> Optional[dict]:
     """Download one module ZIP, extract metadata, delete ZIP. Returns index entry."""
+    if "census_module" in mod_info:
+        from inei_microdatos.census_index import index_census_module
+        return index_census_module(mod_info, data_dir=data_dir)
+
     import requests
     import zipfile
     import io
@@ -313,6 +342,11 @@ def _make_result(entry: dict, var: dict) -> dict:
         "variable": var["name"],
         "label": var.get("label", ""),
         "values": var.get("values"),
+        "kind": var.get("kind", "variable"),
+        "format": entry.get("format"),
+        "data_kind": entry.get("data_kind", "microdata"),
+        "table": var.get("table"),
+        "source_url": entry.get("source_url"),
     }
 
 

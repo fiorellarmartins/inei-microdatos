@@ -265,7 +265,7 @@ def read(source, table, fmt, info):
 @click.option("--module", help="Filter to module name substring.")
 @click.option("--exact", is_flag=True, help="Match variable name exactly.")
 def search_cmd(query, survey, year, module, exact):
-    """Search for variables by name or label.
+    """Search variables and census tables by name or label.
 
     \b
     Examples:
@@ -282,7 +282,7 @@ def search_cmd(query, survey, year, module, exact):
         return
 
     if not results:
-        click.echo(f'No variables matching "{query}" found.')
+        click.echo(f'No variables or tables matching "{query}" found.')
         return
 
     click.echo(f'{len(results)} matches for "{query}":\n')
@@ -290,6 +290,11 @@ def search_cmd(query, survey, year, module, exact):
     # Group by variable name
     by_var = {}
     for r in results:
+        if r["kind"] == "table":
+            click.echo(f"  [table] {r['variable']} | {r['year']}")
+            click.echo(f"    {r['label']}")
+            click.echo(f"    {r['module_code']} | {r['module_name']}\n")
+            continue
         key = r["variable"]
         if key not in by_var:
             by_var[key] = []
@@ -301,6 +306,8 @@ def search_cmd(query, survey, year, module, exact):
         surveys = sorted(set(m["survey"][:40] for m in matches))
         yr_str = f"{years[0]}-{years[-1]}" if len(years) > 1 else years[0]
         click.echo(f"  {var_name:<20} {label[:50]}")
+        if any(m["data_kind"] == "aggregate_tables" for m in matches):
+            click.echo("                       [REDATAM variable; aggregate query output]")
         click.echo(f"  {'':20} {surveys[0]} | {yr_str} ({len(years)} years, {len(matches)} modules)")
         if len(surveys) > 1:
             for s in surveys[1:]:
@@ -363,20 +370,23 @@ def track_cmd(variable, survey):
 @click.option("--dest", type=click.Path(), default=str(Path.home() / ".inei-microdatos" / "variable_index.json.gz"),
               help="Where to save the index.")
 @click.option("--workers", type=int, default=4, help="Parallel download threads (default: 4).")
-def index_cmd(catalog_path, survey, year_min, year_max, period, dest, workers):
-    """Build variable index for a survey (downloads modules in parallel).
+@click.option("--data-dir", type=click.Path(exists=True, file_okay=False),
+              help="Reuse downloaded census XLSX files under this directory.")
+def index_cmd(catalog_path, survey, year_min, year_max, period, dest, workers, data_dir):
+    """Index survey variables or census source variables and table titles.
 
     \b
-    Downloads each module ZIP, extracts variable metadata, deletes the ZIP.
-    Max disk usage: ~workers ZIPs at a time.
+    Reads ZIP metadata or census workbook titles and removes temporary files.
+    REDATAM variable names and 2007 table titles use catalog metadata directly.
 
     \b
     Examples:
       inei-microdatos index --survey enaho
       inei-microdatos index --survey enaho --year-min 2020
       inei-microdatos index --survey endes --year-min 2024
+      inei-microdatos index --survey censo --data-dir ./data
     """
-    from inei_microdatos.variables import build_index, load_index, save_index
+    from inei_microdatos.variables import build_index
 
     catalog = load_catalog(catalog_path)
     catalog = filter_catalog(catalog, survey=survey, year_min=year_min, year_max=year_max, period=period)
@@ -388,11 +398,14 @@ def index_cmd(catalog_path, survey, year_min, year_max, period, dest, workers):
     n_mods = sum(len(p["modules"]) for e in catalog for y in e["years"].values() for p in y.values())
     click.echo(f"Indexing {n_mods} modules...")
 
-    new_entries = build_index(catalog, dest=dest, workers=workers)
+    new_entries = build_index(catalog, dest=dest, workers=workers, data_dir=data_dir)
 
     click.echo(f"\nIndexed {len(new_entries)} modules.")
-    total_vars = sum(len(e["variables"]) for e in new_entries)
+    total_vars = sum(v.get("kind", "variable") == "variable" for e in new_entries for v in e["variables"])
+    total_tables = sum(v.get("kind") == "table" for e in new_entries for v in e["variables"])
     click.echo(f"Total variables: {total_vars}")
+    if total_tables:
+        click.echo(f"Total census tables: {total_tables}")
     click.echo(f"Saved to {dest}")
 
 

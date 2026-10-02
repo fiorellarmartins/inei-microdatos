@@ -106,8 +106,9 @@ cruces personalizados, selección regional ni extracción de registros individua
 que los otros datasets. Para XLSX, cada hoja conserva todas sus filas
 (`header=None`); para XLS 2007, la tabla `tabDetalle` conserva sus encabezados.
 Los XLS de REDATAM se leen como `REDATAM`, conservando títulos, filas vacías y notas.
-`--table` permite seleccionar una hoja o tabla. Los tabulados no forman parte
-del índice de variables de microdatos. Los archivos conservan `.xlsx` o `.xls`
+`--table` permite seleccionar una hoja o tabla. La búsqueda incluida cubre las
+variables de origen REDATAM y los títulos de los tabulados, identificando cada
+resultado como variable o tabla. Los archivos conservan `.xlsx` o `.xls`
 con cualquier layout. Con fallback activado, CSV puede descargar el Excel
 original; no se convierte a CSV. Usa `--no-fallback` para exigir el formato.
 
@@ -119,11 +120,34 @@ inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
 inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
 ```
 
-Para actualizar la entrada incluida: `python scripts/update_census.py`.
+El índice incluido cubre los 309 módulos censales: **190 variables REDATAM**
+(1981: 87; 1993: 76; 2005: 27) y **281 tablas** (2007: 103; 2017: 83; 2025: 95).
+Las tablas se buscan por su título oficial y nombre de hoja; no se presentan
+como columnas de microdatos ni se indexan sus cifras, notas o anexos.
+
+```bash
+inei-microdatos search sexo --survey censo
+inei-microdatos search agua --survey censo2025
+inei-microdatos search PERSONA.SEXO --survey censo1981 --exact
+inei-microdatos index --survey censo --data-dir ./data/
+```
+
+La búsqueda funciona sin conexión con el índice incluido. La reconstrucción
+usa el catálogo para los códigos y etiquetas REDATAM y los títulos de 2007;
+descarga los 16 libros XLSX de 2017/2025 o reutiliza los archivos de `--data-dir`.
+Los resultados de Python incluyen `kind` (`variable` o `table`), `data_kind`,
+`module_code`, `table` (hoja para lectura, cuando corresponde) y `source_url`.
+`track` compara únicamente códigos de variables exactos; no armoniza los códigos
+entre censos ni compara nombres de tablas.
+
+Para actualizar el catálogo incluido: `python scripts/update_census.py`.
+Para reconstruir el índice censal incluido: `python scripts/update_census_index.py`
+(opcionalmente `--data-dir ./data/`). El script conserva el índice de encuestas y
+rechaza una reconstrucción incompleta.
 
 ## Búsqueda de variables
 
-El paquete incluye un índice pre-construido con **551,000+ variables** de 16 encuestas principales. Busca variables por nombre o descripción sin descargar nada.
+El paquete incluye un índice pre-construido con **551,000+ variables** de 16 encuestas principales, además de variables y tablas de los seis censos de población y vivienda. Busca por nombre o descripción sin descargar nada.
 
 ### CLI
 
@@ -530,7 +554,8 @@ individual-record extraction are not included.
 API as other datasets. XLSX sheets retain all rows (`header=None`); 2007 XLS
 exports retain the heading rows in `tabDetalle`. REDATAM XLS exports are read as
 `REDATAM`, retaining titles, blank rows, and notes. Use `--table` to select a sheet
-or table. Aggregate tables are not part of the microdata variable index. All
+or table. The bundled search covers REDATAM source variables and published
+table titles, identifying each result as a variable or table. All
 layouts retain `.xlsx` or `.xls`. With fallback enabled, a CSV request may fetch
 the original Excel file; no conversion takes place. Use `--no-fallback` to
 require the requested format.
@@ -543,11 +568,34 @@ inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
 inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
 ```
 
-Refresh the bundled entry with `python scripts/update_census.py`.
+The bundled index covers all 309 census modules: **190 REDATAM variables**
+(1981: 87; 1993: 76; 2005: 27) and **281 tables** (2007: 103; 2017: 83; 2025: 95).
+Tables are searchable by their official titles and worksheet names; they are
+not represented as microdata columns. Figures, presentation notes, and annexes
+are not indexed.
+
+```bash
+inei-microdatos search sexo --survey censo
+inei-microdatos search agua --survey censo2025
+inei-microdatos search PERSONA.SEXO --survey censo1981 --exact
+inei-microdatos index --survey censo --data-dir ./data/
+```
+
+Search works offline with the bundled index. Rebuilding uses catalog metadata
+for REDATAM codes/labels and 2007 titles; it downloads the 16 XLSX workbooks from
+2017/2025 or reuses files under `--data-dir`. Python results include `kind`
+(`variable` or `table`), `data_kind`, `module_code`, `table` (the worksheet to read,
+where applicable), and `source_url`. `track` compares exact variable codes only;
+it does not harmonize codes across census years or compare table names.
+
+To refresh the bundled catalog: `python scripts/update_census.py`.
+To rebuild the bundled census index: `python scripts/update_census_index.py`
+(optionally `--data-dir ./data/`). The script preserves survey entries and
+rejects an incomplete rebuild.
 
 ## Variable search
 
-The package includes a pre-built index with **551,000+ variables** from 16 major surveys. Search variables by name or description without downloading anything.
+The package includes a pre-built index with **551,000+ variables** from 16 major surveys, plus variables and tables from all six population and housing censuses. Search by name or description without downloading anything.
 
 ### CLI
 
