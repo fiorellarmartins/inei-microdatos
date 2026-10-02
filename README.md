@@ -26,7 +26,7 @@ Este paquete maneja todo eso.
 pip install inei-microdatos
 ```
 
-Requiere Python 3.9+. Incluye pandas y pyreadstat para leer datos en todos los formatos (CSV, STATA, SPSS).
+Requiere Python 3.9+. Incluye pandas, pyreadstat y openpyxl para leer CSV, STATA, SPSS y XLSX.
 
 ## Inicio rápido
 
@@ -52,6 +52,74 @@ for name, df in dfs.items():
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
 ```
+
+## Censos de Población y Vivienda
+
+Un solo dataset, con la misma jerarquía del resto del catálogo:
+**censo → año → periodo `Unico` → módulos**. Usa `censo`, `cpv` o
+`censo-poblacion`. Los alias por año (`censo2017`, `cpv2025`, etc.) filtran esa
+misma entrada; no crean datasets duplicados.
+
+| Año | Acceso incluido | Formato |
+|-----|-----------------|---------|
+| 1981 | 87 frecuencias nacionales de REDATAM, generadas al descargar | XLS (SYLK) |
+| 1993 | 76 frecuencias nacionales de REDATAM, generadas al descargar | XLS (SYLK) |
+| 2005 | 27 frecuencias nacionales de REDATAM, generadas al descargar | XLS (SYLK) |
+| 2007 | 103 cuadros descubiertos en el índice temático, selección nacional | XLS (tablas HTML servidas por INEI como Excel) |
+| 2017 | 5 tomos nacionales de resultados definitivos | XLSX |
+| 2025 | 11 libros nacionales de población, hogares y viviendas | XLSX |
+
+Fuentes: [directorio de censos](https://www.inei.gob.pe/estadisticas/censos/),
+[REDATAM 1981](http://censos1.inei.gob.pe/censos1981/redatam/),
+[REDATAM 1993](http://censos1.inei.gob.pe/censos1993/redatam/),
+[REDATAM 2005](http://censos1.inei.gob.pe/Censos2005/redatam/),
+[tabulados 2007](https://censos.inei.gob.pe/cpv2007/tabulados/),
+[resultados 2017](https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/),
+[tabulados 2025](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
+
+```bash
+inei-microdatos list --survey censo
+inei-microdatos list --survey censo --year-min 2017 --period Unico
+inei-microdatos download --survey censo --year-min 2017 --format XLSX --dest ./data/
+inei-microdatos download --survey censo2007 --format XLS --dest ./data/
+inei-microdatos download --survey censo1993 --format XLS --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA/2017/Unico/CPV2017-00-tomo-01.xlsx" --info
+```
+
+Son **tabulados agregados**, no microdatos. `Unico` significa una ronda censal,
+no una encuesta anual. La estructura del catálogo es uniforme, pero las tablas,
+definiciones y geografías originales pueden cambiar entre censos; no se unen
+ni se armonizan sus filas. No se incluyen muestras de IPUMS ni descargas de libros
+regionales.
+
+Para 1981, 1993 y 2005, cada módulo es la frecuencia nacional de una variable
+del formulario oficial de población, hogar o vivienda. La descarga ejecuta la
+consulta, sigue el enlace temporal y guarda el Excel original de INEI (contenido
+SYLK con extensión `.xls`). El catálogo conserva los parámetros, no los enlaces
+temporales. Las consultas se ejecutan secuencialmente y los archivos válidos se
+reutilizan. Se conservan los pesos del formulario, incluido `PERSONA.FACTEXP`
+en 1981, y la cobertura de la base consultada; no se ajustan sus totales.
+Este soporte requiere que el servidor REDATAM esté disponible; no incluye
+cruces personalizados, selección regional ni extracción de registros individuales.
+
+`download_modules()`, `read_module()` y `read_catalog_entry()` usan la misma API
+que los otros datasets. Para XLSX, cada hoja conserva todas sus filas
+(`header=None`); para XLS 2007, la tabla `tabDetalle` conserva sus encabezados.
+Los XLS de REDATAM se leen como `REDATAM`, conservando títulos, filas vacías y notas.
+`--table` permite seleccionar una hoja o tabla. Los tabulados no forman parte
+del índice de variables de microdatos. Los archivos conservan `.xlsx` o `.xls`
+con cualquier layout. Con fallback activado, CSV puede descargar el Excel
+original; no se convierte a CSV. Usa `--no-fallback` para exigir el formato.
+
+Un catálogo local anterior tiene prioridad sobre el incluido. Puedes crear uno
+separado actualizado sin reemplazarlo:
+
+```bash
+inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
+inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
+```
+
+Para actualizar la entrada incluida: `python scripts/update_census.py`.
 
 ## Búsqueda de variables
 
@@ -324,6 +392,8 @@ inei-microdatos crawl --survey enaho     # solo una encuesta específica
 | **SPSS** (.sav) | ~98% de los módulos | Mayor cobertura |
 | **STATA** (.dta) | ~42% | Incluye etiquetas de valores |
 | **CSV** | ~43% | UTF-8 con BOM |
+| **XLSX** | Censos 2017 y 2025 | Tabulados agregados nacionales |
+| **XLS** | Censo 2007 | Exportaciones HTML de INEI |
 
 Las encuestas antiguas (pre-2008) frecuentemente solo están disponibles en SPSS/STATA, no en CSV. El flag `--format CSV` automáticamente cae a STATA o SPSS cuando CSV no está disponible. Usa `--no-fallback` para desactivar esto.
 
@@ -381,7 +451,7 @@ This package handles all of that.
 pip install inei-microdatos
 ```
 
-Requires Python 3.9+. Includes pandas and pyreadstat to read data in all formats (CSV, STATA, SPSS).
+Requires Python 3.9+. Includes pandas, pyreadstat, and openpyxl to read CSV, STATA, SPSS, and XLSX.
 
 ## Quick start
 
@@ -407,6 +477,73 @@ for name, df in dfs.items():
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
 ```
+
+## Population and Housing Censuses
+
+One dataset, using the catalog's existing hierarchy:
+**censo → year → `Unico` period → modules**. Use `censo`, `cpv`, or
+`censo-poblacion`. Year-specific aliases (`censo2017`, `cpv2025`, etc.) filter
+that same entry rather than creating duplicate datasets.
+
+| Year | Included access | Format |
+|------|-----------------|--------|
+| 1981 | 87 national REDATAM frequencies, generated at download time | XLS (SYLK) |
+| 1993 | 76 national REDATAM frequencies, generated at download time | XLS (SYLK) |
+| 2005 | 27 national REDATAM frequencies, generated at download time | XLS (SYLK) |
+| 2007 | 103 tables discovered in the thematic index, national selection | XLS (HTML tables served by INEI as Excel) |
+| 2017 | 5 national volumes of final results | XLSX |
+| 2025 | 11 national population, household, and housing workbooks | XLSX |
+
+Sources: [census directory](https://www.inei.gob.pe/estadisticas/censos/),
+[REDATAM 1981](http://censos1.inei.gob.pe/censos1981/redatam/),
+[REDATAM 1993](http://censos1.inei.gob.pe/censos1993/redatam/),
+[REDATAM 2005](http://censos1.inei.gob.pe/Censos2005/redatam/),
+[2007 tables](https://censos.inei.gob.pe/cpv2007/tabulados/),
+[2017 results](https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/),
+[2025 tables](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
+
+```bash
+inei-microdatos list --survey censo
+inei-microdatos list --survey censo --year-min 2017 --period Unico
+inei-microdatos download --survey censo --year-min 2017 --format XLSX --dest ./data/
+inei-microdatos download --survey censo2007 --format XLS --dest ./data/
+inei-microdatos download --survey censo1993 --format XLS --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA/2017/Unico/CPV2017-00-tomo-01.xlsx" --info
+```
+
+These are **aggregated tables**, not microdata. `Unico` denotes one census round,
+not an annual survey. The catalog hierarchy is consistent, but original tables,
+definitions, and geographies may differ across censuses; rows are not combined or
+harmonized. IPUMS samples and regional-workbook downloads are not included.
+
+For 1981, 1993, and 2005, each module is a national frequency table for one
+variable from the official population, household, or housing form. Downloading
+runs the query, follows its temporary link, and saves INEI's original Excel
+export (SYLK content with an `.xls` extension). The catalog stores query
+parameters, not temporary URLs. Queries run sequentially and valid local files
+are reused. Form weights, including `PERSONA.FACTEXP` in 1981, and the queried
+database's coverage are preserved; totals are not adjusted. This requires a
+working REDATAM server. Custom cross-tabulations, regional selections, and
+individual-record extraction are not included.
+
+`download_modules()`, `read_module()`, and `read_catalog_entry()` follow the same
+API as other datasets. XLSX sheets retain all rows (`header=None`); 2007 XLS
+exports retain the heading rows in `tabDetalle`. REDATAM XLS exports are read as
+`REDATAM`, retaining titles, blank rows, and notes. Use `--table` to select a sheet
+or table. Aggregate tables are not part of the microdata variable index. All
+layouts retain `.xlsx` or `.xls`. With fallback enabled, a CSV request may fetch
+the original Excel file; no conversion takes place. Use `--no-fallback` to
+require the requested format.
+
+An older local catalog takes precedence over the bundled one. Refresh into a
+separate file without replacing it:
+
+```bash
+inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
+inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
+```
+
+Refresh the bundled entry with `python scripts/update_census.py`.
 
 ## Variable search
 
@@ -679,6 +816,8 @@ inei-microdatos crawl --survey enaho     # crawl specific survey only
 | **SPSS** (.sav) | ~98% of modules | Best coverage |
 | **STATA** (.dta) | ~42% | Value labels included |
 | **CSV** | ~43% | UTF-8 with BOM |
+| **XLSX** | Censos 2017 and 2025 | National aggregated tables |
+| **XLS** | Censo 2007 | INEI HTML exports |
 
 Older surveys (pre-2008) are often available only in SPSS/STATA, not CSV. The `--format CSV` flag automatically falls back to STATA or SPSS when CSV isn't available. Use `--no-fallback` to disable this.
 

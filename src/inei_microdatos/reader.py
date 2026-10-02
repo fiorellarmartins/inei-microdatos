@@ -15,14 +15,17 @@ def read_module(
     tables: Optional[List[str]] = None,
     fmt: Optional[str] = None,
 ) -> Dict[str, "pandas.DataFrame"]:
-    """Read a module ZIP into a dict of DataFrames.
+    """Read a module ZIP, XLSX workbook, or INEI HTML/SYLK XLS export.
+
+    XLSX sheets retain every row (header=None) because census workbooks contain
+    titles, notes, merged headings, and totals rather than rectangular microdata.
 
     Args:
-        source: Path to a ZIP file, or a download code like "968-Modulo1629".
+        source: Path to a ZIP/XLSX/XLS file, or a download code like "968-Modulo1629".
             If a code is given, downloads it first.
         tables: Optional list of table names to read (e.g. ["RECH0", "RECH1"]).
             If None, reads all data files.
-        fmt: Format hint — "csv", "stata", "spss". Auto-detected from file
+        fmt: Format hint — "csv", "stata", "spss", "xlsx", "xls". Auto-detected from file
             extensions if not specified.
 
     Returns:
@@ -34,12 +37,26 @@ def read_module(
     source = str(source)
 
     # If it's a download code (not a file path), download to a temp location
-    if not source.endswith(".zip") and "/" not in source and "\\" not in source:
+    if not source.lower().endswith((".zip", ".xlsx", ".xls")) and "/" not in source and "\\" not in source:
         source = _download_to_temp(source, fmt)
 
     path = Path(source)
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
+
+    if path.suffix.lower() == ".xls":
+        name = _legacy_table_name(path)
+        return {name: _read_legacy_excel(path)} if not tables or any(
+            t.lower() in name.lower() for t in tables
+        ) else {}
+
+    if path.suffix.lower() == ".xlsx":
+        with pd.ExcelFile(path, engine="openpyxl") as workbook:
+            return {
+                name: workbook.parse(name, header=None)
+                for name in workbook.sheet_names
+                if not tables or any(t.lower() in name.lower() for t in tables)
+            }
 
     result = {}
 
@@ -75,7 +92,7 @@ def read_catalog_entry(
         year: Year to read.
         period: Period label (if None, uses the first available period).
         module: Module name substring to filter (if None, reads first module).
-        fmt: Preferred format — "csv", "stata", "spss".
+        fmt: Preferred format — "csv", "stata", "spss", "xlsx", "xls".
         dest: Cache directory for downloads. If None, uses temp dir.
 
     Returns:
@@ -106,48 +123,55 @@ def read_catalog_entry(
         raise ValueError("No matching modules found.")
 
     mod = mods[0]
-    fmt_upper = fmt.upper()
-    code_key = {"CSV": "csv_code", "STATA": "stata_code", "SPSS": "spss_code"}
+    from inei_microdatos.download import module_download, _download_one
 
-    # Try preferred format, then fallback
-    code = None
-    actual_fmt = fmt_upper
-    for try_fmt in [fmt_upper, "STATA", "SPSS", "CSV"]:
-        code = mod.get(code_key.get(try_fmt, ""))
-        if code:
-            actual_fmt = try_fmt
-            break
-
-    if not code:
-        raise ValueError(f"No download code available for module {mod['module_name']}")
-
-    url = f"{DOWNLOAD_BASE}{actual_fmt}/{code}.zip"
+    selected = module_download(mod, fmt)
+    if not selected:
+        raise ValueError(f"No download available for module {mod['module_name']}")
+    url, code, actual_fmt, extension = selected
 
     if dest:
-        dest_path = Path(dest) / f"{code}.zip"
+        dest_path = Path(dest) / f"{code}{extension}"
     else:
         import tempfile
-        dest_path = Path(tempfile.gettempdir()) / "inei_microdatos" / f"{code}.zip"
+        dest_path = Path(tempfile.gettempdir()) / "inei_microdatos" / f"{code}{extension}"
 
-    if not dest_path.exists():
-        dest_path.parent.mkdir(parents=True, exist_ok=True)
-        import requests
-        r = requests.get(url, timeout=120, stream=True)
-        r.raise_for_status()
-        with open(dest_path, "wb") as f:
-            for chunk in r.iter_content(8192):
-                f.write(chunk)
+    status = _download_one(url, dest_path)
+    if status not in ("ok", "skipped"):
+        raise OSError(f"Could not download module {mod['module_name']}: {status}")
 
     return read_module(dest_path, fmt=actual_fmt.lower())
 
 
 def list_tables(source: Union[str, Path]) -> List[dict]:
-    """List data tables inside a module ZIP without reading them.
+    """List data files inside a ZIP, XLSX sheets, or the table in an INEI XLS export.
 
     Returns:
         List of dicts with keys: name, format, size_bytes, full_path.
     """
     path = Path(source)
+    if path.suffix.lower() == ".xls":
+        _read_legacy_excel(path)  # Reject error pages disguised as Excel.
+        name = _legacy_table_name(path)
+        return [{"name": name, "format": "xls",
+                 "size_bytes": path.stat().st_size, "full_path": name}]
+    if path.suffix.lower() == ".xlsx":
+        from xml.etree import ElementTree as ET
+        with zipfile.ZipFile(path) as workbook:
+            root = ET.fromstring(workbook.read("xl/workbook.xml"))
+            rels = ET.fromstring(workbook.read("xl/_rels/workbook.xml.rels"))
+            targets = {rel.attrib["Id"]: rel.attrib["Target"] for rel in rels}
+            result = []
+            for sheet in root.findall(".//{*}sheet"):
+                rel_id = sheet.attrib["{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"]
+                target = targets[rel_id]
+                target = target.lstrip("/") if target.startswith("/") else "xl/" + target
+                result.append({
+                    "name": sheet.attrib["name"], "format": "xlsx",
+                    "size_bytes": workbook.getinfo(target).file_size,
+                    "full_path": target,
+                })
+            return result
     result = []
     with zipfile.ZipFile(path) as zf:
         for name, detected_fmt, table_name in _find_data_files(zf.namelist()):
@@ -170,6 +194,72 @@ _DATA_EXTENSIONS = {
     ".dta": "stata",
     ".sav": "spss",
 }
+
+
+def _legacy_table_name(path: Path) -> str:
+    with path.open("rb") as stream:
+        return "REDATAM" if stream.read(3) == b"ID;" else "tabDetalle"
+
+
+def _read_sylk(text: str):
+    """Read the cell-value records in INEI exports without executing formulas.
+
+    Preserve title, blank, heading and footer rows. Formatting records and the
+    unreliable declared dimensions are ignored; unsupported cell records fail.
+    """
+    import re
+    import pandas as pd
+    if not text.rstrip().endswith("\nE"):
+        raise ValueError("Incomplete SYLK export")
+    cells = {}
+    x = y = 1
+    for line in text.splitlines():
+        if not line.startswith("C;"):
+            continue
+        coords, separator, value = line.partition(";K")
+        if not separator or not re.fullmatch(r"C(?:;[XY][0-9]+)*", coords):
+            raise ValueError("Unsupported SYLK cell record")
+        for axis, number in re.findall(r";([XY])([0-9]+)", coords):
+            if axis == "X":
+                x = int(number)
+            else:
+                y = int(number)
+        if x < 1 or y < 1 or x > 256 or y > 65536:
+            raise ValueError("Invalid SYLK cell coordinates")
+        if value.startswith('"') and value.endswith('"'):
+            value = value[1:-1].replace('""', '"').replace(';;', ';')
+        elif re.fullmatch(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?", value):
+            value = float(value)
+        else:
+            raise ValueError("Unsupported SYLK cell value")
+        cells[y - 1, x - 1] = value
+    if not cells:
+        raise ValueError("No cells in SYLK export")
+    rows = max(row for row, col in cells) + 1
+    cols = max(col for row, col in cells) + 1
+    if rows * cols > 1_000_000:
+        raise ValueError("SYLK frequency table is too large")
+    frame = pd.DataFrame(index=range(rows), columns=range(cols), dtype=object)
+    for (row, col), value in cells.items():
+        frame.iat[row, col] = value
+    return frame
+
+
+def _read_legacy_excel(path: Path):
+    """Read INEI HTML or SYLK Excel exports, preserving heading rows."""
+    import re
+    import pandas as pd
+    text = path.read_bytes().decode("cp1252")
+    if text.startswith("ID;"):
+        return _read_sylk(text)
+    if re.search(r"(?:Microsoft OLE DB|ADODB|Active Server Pages).*error", text, re.I | re.S):
+        raise ValueError("INEI returned an error page instead of a census table")
+    # Prevent pandas from promoting the multirow heading to column labels.
+    text = re.sub(r"<(/?)thead\b", r"<\1tbody", text, flags=re.I)
+    frames = pd.read_html(io.StringIO(text), attrs={"id": "tabDetalle"}, header=None, flavor="lxml")
+    if not frames or frames[0].empty:
+        raise ValueError("No census table in Excel export")
+    return frames[0]
 
 
 def _find_data_files(names: List[str]) -> List[tuple]:

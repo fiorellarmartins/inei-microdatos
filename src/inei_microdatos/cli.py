@@ -19,7 +19,7 @@ from inei_microdatos.download import LAYOUTS, download_docs, download_modules
 
 DEFAULT_CATALOG = Path.home() / ".inei-microdatos" / "catalog.json"
 
-SURVEY_HELP = 'Survey name or alias (e.g. "enaho", "endes", "cenagro"). Run `aliases` to see all.'
+SURVEY_HELP = 'Survey name or alias (e.g. "enaho", "endes", "censo"). Run `aliases` to see all.'
 CATALOG_HELP = "Path to catalog JSON file (defaults to bundled catalog)."
 LAYOUT_HELP = (
     "Folder layout for downloaded files. Presets: "
@@ -108,6 +108,19 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
         )
         yr_range = f"{years[0]}-{years[-1]}" if years else "N/A"
         click.echo(f"  [{entry['category'][:3]}] {entry['label']}")
+        if entry.get("data_kind") == "aggregate_tables":
+            click.echo("        Aggregated tables | National selection (Perú), not microdata")
+            for year in years:
+                for period_data in entry["years"][year].values():
+                    formats = sorted({f for m in period_data["modules"] for f in ("XLS", "XLSX") if m.get(f.lower() + "_url") or (f == "XLS" and m.get("redatam_query"))})
+                    if formats:
+                        click.echo(f"        {year}: {len(period_data['modules'])} modules | {', '.join(formats)}")
+                        if period_data.get("access") == "query_export":
+                            click.echo("          REDATAM national frequencies generated on demand")
+                    else:
+                        click.echo(f"        {year}: online query only; no automated downloads")
+                        for resource in period_data.get("resources", []):
+                            click.echo(f"          {resource['name']}: {resource['url']}")
         click.echo(f"        {yr_range} | {len(years)} years | {n_mods} modules | {n_docs} docs")
 
 
@@ -118,7 +131,7 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 @click.option("--period", help="Filter to periods matching this substring.")
-@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS"], case_sensitive=False), default="CSV",
+@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS", "XLSX", "XLS"], case_sensitive=False), default="CSV",
               help="Download format (default: CSV).")
 @click.option("--dest", type=click.Path(), required=True, help="Destination directory.")
 @click.option("--layout", default="default", help=LAYOUT_HELP)
@@ -127,7 +140,7 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 @click.option("--dry-run", is_flag=True, help="Show what would be downloaded without downloading.")
 @click.option("--include-docs", is_flag=True, help="Also download documentation.")
 def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout, workers, no_fallback, dry_run, include_docs):
-    """Download microdata files.
+    """Download microdata files or aggregate census tables.
 
     \b
     Examples:
@@ -144,6 +157,18 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
 
     stats = catalog_stats(catalog)
     click.echo(f"Matched: {stats['surveys']} surveys, {stats['downloadable_modules']} downloadable modules")
+
+    if any(e.get("data_kind") == "aggregate_tables" for e in catalog):
+        click.echo("Population and housing census: original aggregate XLS/XLSX tables; no microdata or CSV conversion.")
+        for entry in catalog:
+            for year, periods in entry["years"].items():
+                for data in periods.values():
+                    if data.get("access") == "query_export":
+                        click.echo(f"{year}: generating national REDATAM frequency tables; server requests run sequentially.")
+                    if data.get("access") == "online_query":
+                        click.echo(f"{year}: online query only; automated download unavailable.")
+                        for resource in data.get("resources", []):
+                            click.echo(f"  {resource['url']}")
 
     result = download_modules(catalog, dest, fmt=fmt, fallback=not no_fallback, layout=layout, workers=workers, dry_run=dry_run)
     if dry_run:
@@ -190,11 +215,11 @@ def docs(catalog_path, survey, year_min, year_max, dest, layout, workers):
 @cli.command()
 @click.argument("source")
 @click.option("--table", "-t", multiple=True, help="Table names to read (reads all if omitted).")
-@click.option("--format", "fmt", type=click.Choice(["csv", "stata", "spss"], case_sensitive=False),
+@click.option("--format", "fmt", type=click.Choice(["csv", "stata", "spss", "xlsx", "xls"], case_sensitive=False),
               help="Format hint (auto-detected if omitted).")
-@click.option("--info", is_flag=True, help="Just list tables inside the ZIP, don't read.")
+@click.option("--info", is_flag=True, help="Just list tables or workbook sheets, don't read.")
 def read(source, table, fmt, info):
-    """Read a module ZIP and show its contents.
+    """Read a module ZIP, XLSX workbook, or census XLS export and show its contents.
 
     \b
     SOURCE can be a path to a ZIP file or a download code like "968-Modulo1629".
@@ -210,7 +235,7 @@ def read(source, table, fmt, info):
     if info:
         tables = list_tables(source)
         if not tables:
-            click.echo("No data files found in ZIP.")
+            click.echo("No data tables found.")
             return
         click.echo(f"{'Table':<30} {'Format':<8} {'Size':>12}")
         click.echo("-" * 52)
@@ -227,7 +252,7 @@ def read(source, table, fmt, info):
 
     for name, df in dfs.items():
         click.echo(f"\n=== {name} ({len(df)} rows, {len(df.columns)} columns) ===")
-        click.echo(f"Columns: {', '.join(df.columns[:15])}")
+        click.echo(f"Columns: {', '.join(map(str, df.columns[:15]))}")
         if len(df.columns) > 15:
             click.echo(f"  ... +{len(df.columns) - 15} more")
         click.echo(df.head(5).to_string())

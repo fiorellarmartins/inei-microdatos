@@ -36,12 +36,12 @@ def download_modules(
     progress: bool = True,
     dry_run: bool = False,
 ) -> dict[str, int]:
-    """Download microdata ZIP files for all modules in a catalog.
+    """Download microdata ZIPs or aggregate XLS/XLSX tables from a catalog.
 
     Args:
         catalog: Catalog entries (from build_catalog or load_catalog).
         dest: Destination directory.
-        fmt: Format — "CSV", "STATA", or "SPSS".
+        fmt: Format — "CSV", "STATA", "SPSS", "XLSX", or "XLS".
         fallback: If True, fall back to another format when preferred isn't available.
         layout: Folder layout — "default", "flat", "by-year", "by-format",
             or a custom template with {survey}, {year}, {period}, {code},
@@ -54,8 +54,8 @@ def download_modules(
         Dict with counts: ok, skipped, failed, bad_zip (or files/would_skip for dry_run).
     """
     fmt = fmt.upper()
-    if fmt not in ("CSV", "STATA", "SPSS"):
-        raise ValueError(f"Invalid format: {fmt}. Must be CSV, STATA, or SPSS.")
+    if fmt not in ("CSV", "STATA", "SPSS", "XLSX", "XLS"):
+        raise ValueError(f"Invalid format: {fmt}. Must be CSV, STATA, SPSS, XLSX, or XLS.")
 
     template = LAYOUTS.get(layout, layout)
     tasks = _collect_module_tasks(catalog, dest, fmt, fallback, template)
@@ -89,33 +89,50 @@ def download_docs(
 # ---------------------------------------------------------------------------
 
 _FORMAT_KEYS = {"CSV": "csv_code", "STATA": "stata_code", "SPSS": "spss_code"}
-_FALLBACK_ORDER = {"CSV": ["csv_code", "stata_code", "spss_code"],
-                   "STATA": ["stata_code", "csv_code", "spss_code"],
-                   "SPSS": ["spss_code", "stata_code", "csv_code"]}
-_KEY_TO_FMT = {"csv_code": "CSV", "stata_code": "STATA", "spss_code": "SPSS"}
+_FORMATS = ("CSV", "STATA", "SPSS", "XLSX", "XLS")
+
+
+def module_download(mod: dict, fmt: str, fallback: bool = True):
+    """Return (URL or query descriptor, code, format, extension), or None."""
+    fmt = fmt.upper()
+    if fmt not in _FORMATS:
+        raise ValueError(f"Invalid format: {fmt}")
+    order = {
+        "CSV": ("CSV", "STATA", "SPSS", "XLSX", "XLS"),
+        "STATA": ("STATA", "CSV", "SPSS", "XLSX", "XLS"),
+        "SPSS": ("SPSS", "STATA", "CSV", "XLSX", "XLS"),
+        "XLSX": ("XLSX", "XLS", "CSV", "STATA", "SPSS"),
+        "XLS": ("XLS", "XLSX", "CSV", "STATA", "SPSS"),
+    }
+    formats = order[fmt] if fallback else [fmt]
+    for actual_fmt in formats:
+        if actual_fmt in ("XLSX", "XLS"):
+            if actual_fmt == "XLS" and mod.get("redatam_query"):
+                return mod["redatam_query"], mod["module_code"], "XLS", ".xls"
+            url = mod.get(actual_fmt.lower() + "_url")
+            if url:
+                return url, mod["module_code"], actual_fmt, "." + actual_fmt.lower()
+        else:
+            code = mod.get(_FORMAT_KEYS[actual_fmt])
+            if code:
+                return f"{DOWNLOAD_BASE}{actual_fmt}/{code}.zip", code, actual_fmt, ".zip"
+    return None
 
 
 def _collect_module_tasks(
     catalog: list[dict], dest: str | Path, fmt: str, fallback: bool,
     template: str,
-) -> list[tuple[str, Path]]:
+) -> list[tuple[str | dict, Path]]:
     dest = Path(dest)
     tasks = []
     for entry in catalog:
         for year, year_data in entry["years"].items():
             for period_label, period_data in year_data.items():
                 for mod in period_data["modules"]:
-                    keys = _FALLBACK_ORDER[fmt] if fallback else [_FORMAT_KEYS[fmt]]
-                    code = None
-                    actual_fmt = fmt
-                    for key in keys:
-                        code = mod.get(key)
-                        if code:
-                            actual_fmt = _KEY_TO_FMT[key]
-                            break
-                    if not code:
+                    selected = module_download(mod, fmt, fallback)
+                    if not selected:
                         continue
-                    url = f"{DOWNLOAD_BASE}{actual_fmt}/{code}.zip"
+                    url, code, actual_fmt, extension = selected
                     rel = template.format(
                         survey=_safe_dirname(entry["label"]),
                         year=year,
@@ -124,6 +141,8 @@ def _collect_module_tasks(
                         module_name=_safe_dirname(mod.get("module_name", code)),
                         format=actual_fmt,
                     )
+                    if extension in (".xlsx", ".xls"):
+                        rel = str(Path(rel).with_suffix(extension))
                     tasks.append((url, dest / rel))
     return tasks
 
@@ -158,7 +177,7 @@ def _collect_doc_tasks(
 
 
 def _run_downloads(
-    tasks: list[tuple[str, Path]],
+    tasks: list[tuple[str | dict, Path]],
     workers: int,
     progress: bool,
     desc: str,
@@ -182,21 +201,40 @@ def _run_downloads(
     return stats
 
 
-def _download_one(url: str, dest: Path) -> str:
+def _valid_download(path: Path) -> bool:
+    if path.suffix.lower() == ".xls":
+        from inei_microdatos.reader import _read_legacy_excel
+        try:
+            return not _read_legacy_excel(path).empty
+        except (ValueError, OSError):
+            return False
+    if not zipfile.is_zipfile(path):
+        return False
+    if path.suffix.lower() == ".xlsx":
+        with zipfile.ZipFile(path) as workbook:
+            return {"[Content_Types].xml", "xl/workbook.xml"}.issubset(workbook.namelist())
+    return True
+
+
+def _download_one(url: str | dict, dest: Path) -> str:
     if dest.exists():
-        if dest.stat().st_size > 0 and zipfile.is_zipfile(dest):
+        if dest.stat().st_size > 0 and _valid_download(dest):
             return "skipped"
 
     dest.parent.mkdir(parents=True, exist_ok=True)
 
     for attempt in range(_MAX_RETRIES):
         try:
-            r = requests.get(url, timeout=_TIMEOUT, stream=True)
-            r.raise_for_status()
-            with open(dest, "wb") as f:
-                for chunk in r.iter_content(_CHUNK):
-                    f.write(chunk)
-            if not zipfile.is_zipfile(dest):
+            if isinstance(url, dict):
+                from inei_microdatos.redatam import export_excel
+                dest.write_bytes(export_excel(url))
+            else:
+                r = requests.get(url, timeout=_TIMEOUT, stream=True)
+                r.raise_for_status()
+                with open(dest, "wb") as f:
+                    for chunk in r.iter_content(_CHUNK):
+                        f.write(chunk)
+            if not _valid_download(dest):
                 dest.unlink(missing_ok=True)
                 return "bad_zip"
             return "ok"
@@ -211,12 +249,10 @@ def _download_one(url: str, dest: Path) -> str:
 
 def _dry_run_report(tasks: list) -> dict:
     """Print what would be downloaded and return summary stats."""
-    import zipfile as _zf
-
     would_download = 0
     would_skip = 0
     for url, path in tasks:
-        if path.exists() and path.stat().st_size > 0 and _zf.is_zipfile(path):
+        if path.exists() and path.stat().st_size > 0 and _valid_download(path):
             would_skip += 1
         else:
             would_download += 1
