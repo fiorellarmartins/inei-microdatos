@@ -223,7 +223,7 @@ def catalog_stats(catalog: list[dict]) -> dict[str, int]:
                 n_docs += len(period_data["docs"])
                 n_downloadable += sum(
                     1 for m in mods
-                    if m.get("csv_code") or m.get("stata_code") or m.get("spss_code") or m.get("xlsx_url") or m.get("xls_url")
+                    if m.get("csv_code") or m.get("stata_code") or m.get("spss_code") or m.get("xlsx_url") or m.get("xls_url") or m.get("redatam_query")
                 )
     return {
         "surveys": n_surveys,

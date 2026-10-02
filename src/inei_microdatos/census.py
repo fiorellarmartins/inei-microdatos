@@ -153,8 +153,8 @@ def requested_census_years(surveys=None, years=None) -> list[int]:
 def build_census_catalog(years=None) -> dict:
     """Build one dataset with year/period/modules, preserving original tables.
 
-    Older years without a verified download adapter contain explicit REDATAM
-    references, not fabricated files. No IPUMS samples are mixed with INEI tables.
+    Legacy REDATAM years store reproducible queries, not temporary export URLs.
+    No IPUMS samples are mixed with INEI tables.
     """
     selected = CENSUS_YEARS if years is None else years
     builders = {2007: _modules_2007, 2017: _modules_2017, 2025: _modules_2025}
@@ -164,14 +164,19 @@ def build_census_catalog(years=None) -> dict:
     for year in CENSUS_YEARS:
         if year not in selected:
             continue
-        modules = builders[year]() if year in builders else []
+        if year in builders:
+            modules = builders[year]()
+        else:
+            from inei_microdatos.redatam import discover_modules
+            modules = discover_modules(year)
         year_data[str(year)] = {"Unico": {
             "period_value": "unico", "modules": modules, "docs": [],
-            "access": "download" if modules else "online_query",
+            "access": "download" if year in builders else "query_export",
             "source_url": sources.get(year, QUERY_URLS[year]),
             "resources": [{"name": "REDATAM", "url": QUERY_URLS[year], "type": "online_query"}],
             "note": "Original national tabulations; layouts and definitions vary by census."
-                    if modules else "Online query reference only; automated downloads are not supported for this year.",
+                    if year in builders else "National REDATAM frequency tables generated on demand; "
+                    "original form weights are preserved. Not individual microdata.",
         }}
     return {
         "category": "Censos", "value": CENSUS_VALUE, "label": CENSUS_LABEL,

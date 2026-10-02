@@ -157,8 +157,9 @@ def test_unified_census_years_and_aliases():
     assert list(filter_catalog(entries, survey="censo", year_min=2017)[0]["years"]) == ["2017", "2025"]
     for year in ("1981", "1993", "2005"):
         period = entries[0]["years"][year]["Unico"]
-        assert period["access"] == "online_query"
-        assert period["modules"] == []
+        assert period["access"] == "query_export"
+        assert period["modules"]
+        assert all(m.get("redatam_query") for m in period["modules"])
         assert period["resources"][0]["url"].startswith("http://censos1.inei.gob.pe/")
 
 
@@ -169,8 +170,11 @@ def test_year_filter_applied_before_discovery(monkeypatch):
     assert requested_census_years(["endes"]) == []
     builder = Mock(return_value=[])
     monkeypatch.setattr("inei_microdatos.census._modules_2025", builder)
+    legacy = Mock(return_value=[{"module_code": "example"}])
+    monkeypatch.setattr("inei_microdatos.redatam.discover_modules", legacy)
     result = build_census_catalog(years=[1981])
     builder.assert_not_called()
+    legacy.assert_called_once_with(1981)
     assert list(result["years"]) == ["1981"]
 
 
@@ -222,15 +226,15 @@ def test_legacy_html_excel_download_read_and_reject_error(tmp_path, monkeypatch)
     assert not path.exists()
 
 
-def test_query_only_cli_explains_missing_download(tmp_path):
+def test_redatam_cli_describes_generated_download(tmp_path):
     from inei_microdatos.catalog import save_catalog
     catalog = tmp_path / "catalog.json"
     save_catalog(filter_catalog(load_catalog(), survey="cpv1981"), catalog)
     result = CliRunner().invoke(cli, ["download", "--catalog", str(catalog),
-                                    "--survey", "censo", "--dest", str(tmp_path / "out")])
+                                    "--survey", "censo", "--dest", str(tmp_path / "out"), "--dry-run"])
     assert result.exit_code == 0
-    assert "1981: online query only" in result.output
-    assert "censos1981/redatam/" in result.output
+    assert "1981: generating national REDATAM frequency tables" in result.output
+    assert "PERSONA.FACTEXP" in result.output
     assert not (tmp_path / "out").exists()
 
 

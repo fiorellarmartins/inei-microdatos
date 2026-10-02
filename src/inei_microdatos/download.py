@@ -93,7 +93,7 @@ _FORMATS = ("CSV", "STATA", "SPSS", "XLSX", "XLS")
 
 
 def module_download(mod: dict, fmt: str, fallback: bool = True):
-    """Return (URL, code, actual format, extension), or None if unavailable."""
+    """Return (URL or query descriptor, code, format, extension), or None."""
     fmt = fmt.upper()
     if fmt not in _FORMATS:
         raise ValueError(f"Invalid format: {fmt}")
@@ -107,6 +107,8 @@ def module_download(mod: dict, fmt: str, fallback: bool = True):
     formats = order[fmt] if fallback else [fmt]
     for actual_fmt in formats:
         if actual_fmt in ("XLSX", "XLS"):
+            if actual_fmt == "XLS" and mod.get("redatam_query"):
+                return mod["redatam_query"], mod["module_code"], "XLS", ".xls"
             url = mod.get(actual_fmt.lower() + "_url")
             if url:
                 return url, mod["module_code"], actual_fmt, "." + actual_fmt.lower()
@@ -120,7 +122,7 @@ def module_download(mod: dict, fmt: str, fallback: bool = True):
 def _collect_module_tasks(
     catalog: list[dict], dest: str | Path, fmt: str, fallback: bool,
     template: str,
-) -> list[tuple[str, Path]]:
+) -> list[tuple[str | dict, Path]]:
     dest = Path(dest)
     tasks = []
     for entry in catalog:
@@ -175,7 +177,7 @@ def _collect_doc_tasks(
 
 
 def _run_downloads(
-    tasks: list[tuple[str, Path]],
+    tasks: list[tuple[str | dict, Path]],
     workers: int,
     progress: bool,
     desc: str,
@@ -214,7 +216,7 @@ def _valid_download(path: Path) -> bool:
     return True
 
 
-def _download_one(url: str, dest: Path) -> str:
+def _download_one(url: str | dict, dest: Path) -> str:
     if dest.exists():
         if dest.stat().st_size > 0 and _valid_download(dest):
             return "skipped"
@@ -223,11 +225,15 @@ def _download_one(url: str, dest: Path) -> str:
 
     for attempt in range(_MAX_RETRIES):
         try:
-            r = requests.get(url, timeout=_TIMEOUT, stream=True)
-            r.raise_for_status()
-            with open(dest, "wb") as f:
-                for chunk in r.iter_content(_CHUNK):
-                    f.write(chunk)
+            if isinstance(url, dict):
+                from inei_microdatos.redatam import export_excel
+                dest.write_bytes(export_excel(url))
+            else:
+                r = requests.get(url, timeout=_TIMEOUT, stream=True)
+                r.raise_for_status()
+                with open(dest, "wb") as f:
+                    for chunk in r.iter_content(_CHUNK):
+                        f.write(chunk)
             if not _valid_download(dest):
                 dest.unlink(missing_ok=True)
                 return "bad_zip"

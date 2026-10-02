@@ -15,7 +15,7 @@ def read_module(
     tables: Optional[List[str]] = None,
     fmt: Optional[str] = None,
 ) -> Dict[str, "pandas.DataFrame"]:
-    """Read a module ZIP, XLSX workbook, or INEI HTML-based XLS export.
+    """Read a module ZIP, XLSX workbook, or INEI HTML/SYLK XLS export.
 
     XLSX sheets retain every row (header=None) because census workbooks contain
     titles, notes, merged headings, and totals rather than rectangular microdata.
@@ -45,8 +45,9 @@ def read_module(
         raise FileNotFoundError(f"File not found: {path}")
 
     if path.suffix.lower() == ".xls":
-        return {"tabDetalle": _read_legacy_excel(path)} if not tables or any(
-            t.lower() in "tabdetalle" for t in tables
+        name = _legacy_table_name(path)
+        return {name: _read_legacy_excel(path)} if not tables or any(
+            t.lower() in name.lower() for t in tables
         ) else {}
 
     if path.suffix.lower() == ".xlsx":
@@ -151,8 +152,9 @@ def list_tables(source: Union[str, Path]) -> List[dict]:
     path = Path(source)
     if path.suffix.lower() == ".xls":
         _read_legacy_excel(path)  # Reject error pages disguised as Excel.
-        return [{"name": "tabDetalle", "format": "xls",
-                 "size_bytes": path.stat().st_size, "full_path": "tabDetalle"}]
+        name = _legacy_table_name(path)
+        return [{"name": name, "format": "xls",
+                 "size_bytes": path.stat().st_size, "full_path": name}]
     if path.suffix.lower() == ".xlsx":
         from xml.etree import ElementTree as ET
         with zipfile.ZipFile(path) as workbook:
@@ -194,11 +196,62 @@ _DATA_EXTENSIONS = {
 }
 
 
+def _legacy_table_name(path: Path) -> str:
+    with path.open("rb") as stream:
+        return "REDATAM" if stream.read(3) == b"ID;" else "tabDetalle"
+
+
+def _read_sylk(text: str):
+    """Read the cell-value records in INEI exports without executing formulas.
+
+    Preserve title, blank, heading and footer rows. Formatting records and the
+    unreliable declared dimensions are ignored; unsupported cell records fail.
+    """
+    import re
+    import pandas as pd
+    if not text.rstrip().endswith("\nE"):
+        raise ValueError("Incomplete SYLK export")
+    cells = {}
+    x = y = 1
+    for line in text.splitlines():
+        if not line.startswith("C;"):
+            continue
+        coords, separator, value = line.partition(";K")
+        if not separator or not re.fullmatch(r"C(?:;[XY][0-9]+)*", coords):
+            raise ValueError("Unsupported SYLK cell record")
+        for axis, number in re.findall(r";([XY])([0-9]+)", coords):
+            if axis == "X":
+                x = int(number)
+            else:
+                y = int(number)
+        if x < 1 or y < 1 or x > 256 or y > 65536:
+            raise ValueError("Invalid SYLK cell coordinates")
+        if value.startswith('"') and value.endswith('"'):
+            value = value[1:-1].replace('""', '"').replace(';;', ';')
+        elif re.fullmatch(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?", value):
+            value = float(value)
+        else:
+            raise ValueError("Unsupported SYLK cell value")
+        cells[y - 1, x - 1] = value
+    if not cells:
+        raise ValueError("No cells in SYLK export")
+    rows = max(row for row, col in cells) + 1
+    cols = max(col for row, col in cells) + 1
+    if rows * cols > 1_000_000:
+        raise ValueError("SYLK frequency table is too large")
+    frame = pd.DataFrame(index=range(rows), columns=range(cols), dtype=object)
+    for (row, col), value in cells.items():
+        frame.iat[row, col] = value
+    return frame
+
+
 def _read_legacy_excel(path: Path):
-    """Read INEI's 2007 HTML-based Excel exports, preserving heading rows."""
+    """Read INEI HTML or SYLK Excel exports, preserving heading rows."""
     import re
     import pandas as pd
     text = path.read_bytes().decode("cp1252")
+    if text.startswith("ID;"):
+        return _read_sylk(text)
     if re.search(r"(?:Microsoft OLE DB|ADODB|Active Server Pages).*error", text, re.I | re.S):
         raise ValueError("INEI returned an error page instead of a census table")
     # Prevent pandas from promoting the multirow heading to column labels.

@@ -112,9 +112,11 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
             click.echo("        Aggregated tables | National selection (Perú), not microdata")
             for year in years:
                 for period_data in entry["years"][year].values():
-                    formats = sorted({f for m in period_data["modules"] for f in ("XLS", "XLSX") if m.get(f.lower() + "_url")})
+                    formats = sorted({f for m in period_data["modules"] for f in ("XLS", "XLSX") if m.get(f.lower() + "_url") or (f == "XLS" and m.get("redatam_query"))})
                     if formats:
                         click.echo(f"        {year}: {len(period_data['modules'])} modules | {', '.join(formats)}")
+                        if period_data.get("access") == "query_export":
+                            click.echo("          REDATAM national frequencies generated on demand")
                     else:
                         click.echo(f"        {year}: online query only; no automated downloads")
                         for resource in period_data.get("resources", []):
@@ -161,6 +163,8 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
         for entry in catalog:
             for year, periods in entry["years"].items():
                 for data in periods.values():
+                    if data.get("access") == "query_export":
+                        click.echo(f"{year}: generating national REDATAM frequency tables; server requests run sequentially.")
                     if data.get("access") == "online_query":
                         click.echo(f"{year}: online query only; automated download unavailable.")
                         for resource in data.get("resources", []):
