@@ -15,17 +15,17 @@ def read_module(
     tables: Optional[List[str]] = None,
     fmt: Optional[str] = None,
 ) -> Dict[str, "pandas.DataFrame"]:
-    """Read a module ZIP or XLSX workbook into a dict of DataFrames.
+    """Read a module ZIP, XLSX workbook, or INEI HTML-based XLS export.
 
     XLSX sheets retain every row (header=None) because census workbooks contain
     titles, notes, merged headings, and totals rather than rectangular microdata.
 
     Args:
-        source: Path to a ZIP/XLSX file, or a download code like "968-Modulo1629".
+        source: Path to a ZIP/XLSX/XLS file, or a download code like "968-Modulo1629".
             If a code is given, downloads it first.
         tables: Optional list of table names to read (e.g. ["RECH0", "RECH1"]).
             If None, reads all data files.
-        fmt: Format hint — "csv", "stata", "spss", "xlsx". Auto-detected from file
+        fmt: Format hint — "csv", "stata", "spss", "xlsx", "xls". Auto-detected from file
             extensions if not specified.
 
     Returns:
@@ -37,12 +37,17 @@ def read_module(
     source = str(source)
 
     # If it's a download code (not a file path), download to a temp location
-    if not source.lower().endswith((".zip", ".xlsx")) and "/" not in source and "\\" not in source:
+    if not source.lower().endswith((".zip", ".xlsx", ".xls")) and "/" not in source and "\\" not in source:
         source = _download_to_temp(source, fmt)
 
     path = Path(source)
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
+
+    if path.suffix.lower() == ".xls":
+        return {"tabDetalle": _read_legacy_excel(path)} if not tables or any(
+            t.lower() in "tabdetalle" for t in tables
+        ) else {}
 
     if path.suffix.lower() == ".xlsx":
         with pd.ExcelFile(path, engine="openpyxl") as workbook:
@@ -86,7 +91,7 @@ def read_catalog_entry(
         year: Year to read.
         period: Period label (if None, uses the first available period).
         module: Module name substring to filter (if None, reads first module).
-        fmt: Preferred format — "csv", "stata", "spss", "xlsx".
+        fmt: Preferred format — "csv", "stata", "spss", "xlsx", "xls".
         dest: Cache directory for downloads. If None, uses temp dir.
 
     Returns:
@@ -138,12 +143,16 @@ def read_catalog_entry(
 
 
 def list_tables(source: Union[str, Path]) -> List[dict]:
-    """List data files inside a ZIP or sheets inside an XLSX without reading them.
+    """List data files inside a ZIP, XLSX sheets, or the table in an INEI XLS export.
 
     Returns:
         List of dicts with keys: name, format, size_bytes, full_path.
     """
     path = Path(source)
+    if path.suffix.lower() == ".xls":
+        _read_legacy_excel(path)  # Reject error pages disguised as Excel.
+        return [{"name": "tabDetalle", "format": "xls",
+                 "size_bytes": path.stat().st_size, "full_path": "tabDetalle"}]
     if path.suffix.lower() == ".xlsx":
         from xml.etree import ElementTree as ET
         with zipfile.ZipFile(path) as workbook:
@@ -183,6 +192,21 @@ _DATA_EXTENSIONS = {
     ".dta": "stata",
     ".sav": "spss",
 }
+
+
+def _read_legacy_excel(path: Path):
+    """Read INEI's 2007 HTML-based Excel exports, preserving heading rows."""
+    import re
+    import pandas as pd
+    text = path.read_bytes().decode("cp1252")
+    if re.search(r"(?:Microsoft OLE DB|ADODB|Active Server Pages).*error", text, re.I | re.S):
+        raise ValueError("INEI returned an error page instead of a census table")
+    # Prevent pandas from promoting the multirow heading to column labels.
+    text = re.sub(r"<(/?)thead\b", r"<\1tbody", text, flags=re.I)
+    frames = pd.read_html(io.StringIO(text), attrs={"id": "tabDetalle"}, header=None, flavor="lxml")
+    if not frames or frames[0].empty:
+        raise ValueError("No census table in Excel export")
+    return frames[0]
 
 
 def _find_data_files(names: List[str]) -> List[tuple]:

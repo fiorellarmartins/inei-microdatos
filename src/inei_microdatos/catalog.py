@@ -23,7 +23,7 @@ def build_catalog(
     years: Optional[tuple[int, int]] = None,
     progress: bool = True,
 ) -> list[dict[str, Any]]:
-    """Crawl the Microdatos portal and the national Censo 2025 table catalog.
+    """Crawl the Microdatos portal and the population and housing census catalog.
 
     Args:
         client: INEIClient instance (created if not provided).
@@ -38,11 +38,10 @@ def build_catalog(
         client = INEIClient()
 
     from inei_microdatos.aliases import resolve_alias
-    from inei_microdatos.census import CENSUS_LABEL, build_census_catalog
+    from inei_microdatos.census import CENSUS_LABEL, build_census_catalog, requested_census_years
 
     queries = [resolve_alias(s).lower() for s in surveys] if surveys else None
-    census_matches = (not queries or any(q in CENSUS_LABEL.lower() for q in queries))
-    census_matches = census_matches and (not years or years[0] <= 2025 <= years[1])
+    census_years = requested_census_years(surveys, years)
     # A census-only crawl must not depend on the separate ASP portal.
     census_only = queries and all(q == CENSUS_LABEL.lower() for q in queries)
     all_surveys = [] if census_only else client.get_surveys()
@@ -92,8 +91,8 @@ def build_catalog(
 
         catalog.append(entry)
 
-    if census_matches:
-        catalog.append(build_census_catalog())
+    if census_years:
+        catalog.append(build_census_catalog(years=census_years))
 
     return _dedup_catalog(catalog)
 
@@ -224,7 +223,7 @@ def catalog_stats(catalog: list[dict]) -> dict[str, int]:
                 n_docs += len(period_data["docs"])
                 n_downloadable += sum(
                     1 for m in mods
-                    if m.get("csv_code") or m.get("stata_code") or m.get("spss_code") or m.get("xlsx_url")
+                    if m.get("csv_code") or m.get("stata_code") or m.get("spss_code") or m.get("xlsx_url") or m.get("xls_url")
                 )
     return {
         "surveys": n_surveys,
@@ -243,8 +242,9 @@ def filter_catalog(
     period: Optional[str] = None,
 ) -> list[dict]:
     """Filter catalog entries by survey name (or alias), year range, and/or period."""
-    from inei_microdatos.aliases import resolve_alias
+    from inei_microdatos.aliases import resolve_alias, ALIAS_YEARS
 
+    alias_year = ALIAS_YEARS.get(survey.lower()) if survey else None
     result = []
     if survey:
         survey = resolve_alias(survey)
@@ -262,6 +262,8 @@ def filter_catalog(
         filtered_years = {}
         for yr, year_data in entry["years"].items():
             yr_int = int(yr)
+            if alias_year is not None and yr_int != alias_year:
+                continue
             if year_min and yr_int < year_min:
                 continue
             if year_max and yr_int > year_max:

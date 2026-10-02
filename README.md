@@ -53,40 +53,57 @@ for name, df in dfs.items():
 # RECHM: (3002, 8)
 ```
 
-## Censo 2025: tabulados agregados
+## Censos de Población y Vivienda
 
-El catálogo incluye 11 libros Excel nacionales (Perú) de población, hogares y
-viviendas, publicados en el [portal de Censos 2025](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
-Son **tabulados agregados**, no microdatos de personas, hogares o viviendas.
-Esta integración cubre los libros nacionales; no descarga los libros regionales
-ni automatiza consultas a REDATAM. Los alias son `censo2025` y `cpv2025`.
+Un solo dataset, con la misma jerarquía del resto del catálogo:
+**censo → año → periodo `Unico` → módulos**. Usa `censo`, `cpv` o
+`censo-poblacion`. Los alias por año (`censo2017`, `cpv2025`, etc.) filtran esa
+misma entrada; no crean datasets duplicados.
 
-```bash
-inei-microdatos list --survey censo2025
-inei-microdatos download --survey censo2025 --format XLSX --dest ./data/
-inei-microdatos read "./data/CENSOS NACIONALES 2025 - Tabulados agregados (Perú)/2025/Unico/CPV2025-00-poblacion-951.xlsx" --info
-```
+| Año | Acceso incluido | Formato |
+|-----|-----------------|---------|
+| 1981, 1993, 2005 | Enlaces oficiales a consultas REDATAM; sin descarga automatizada | Consulta web |
+| 2007 | 103 cuadros descubiertos en el índice temático, selección nacional | XLS (tablas HTML servidas por INEI como Excel) |
+| 2017 | 5 tomos nacionales de resultados definitivos | XLSX |
+| 2025 | 11 libros nacionales de población, hogares y viviendas | XLSX |
 
-`download_modules(..., fmt="XLSX")`, `read_module()` y `read_catalog_entry()`
-también funcionan con estos libros. Cada hoja se lee sin eliminar filas de
-encabezado (`header=None`); los títulos, notas y totales requieren interpretación.
-`--table` permite seleccionar hojas. Estos tabulados no forman parte del índice
-de variables de microdatos.
-
-Con fallback activado, una solicitud CSV puede descargar el XLSX original si es
-el único formato disponible; no se convierte a CSV. Usa `--no-fallback` para
-exigir el formato indicado. Los archivos conservan la extensión `.xlsx` con
-cualquier layout.
-
-Si ya tienes un catálogo local anterior, este tiene prioridad sobre el incluido.
-Puedes generar un catálogo separado actualizado sin reemplazarlo:
+Fuentes: [directorio de censos](https://www.inei.gob.pe/estadisticas/censos/),
+[tabulados 2007](https://censos.inei.gob.pe/cpv2007/tabulados/),
+[resultados 2017](https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/),
+[tabulados 2025](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
 
 ```bash
-inei-microdatos crawl --survey censo2025 --catalog ./censo2025.json --refresh
-inei-microdatos download --catalog ./censo2025.json --survey censo2025 --format XLSX --dest ./data/
+inei-microdatos list --survey censo
+inei-microdatos list --survey censo --year-min 2017 --period Unico
+inei-microdatos download --survey censo --year-min 2017 --format XLSX --dest ./data/
+inei-microdatos download --survey censo2007 --format XLS --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA/2017/Unico/CPV2017-00-tomo-01.xlsx" --info
 ```
 
-Para mantener el catálogo incluido: `python scripts/update_censo2025.py`.
+Son **tabulados agregados**, no microdatos. `Unico` significa una ronda censal,
+no una encuesta anual. La estructura del catálogo es uniforme, pero las tablas,
+definiciones y geografías originales pueden cambiar entre censos; no se unen
+ni se armonizan sus filas. No se incluyen muestras de IPUMS, descargas de libros
+regionales ni automatización de REDATAM. Los años de consulta web muestran su
+enlace y la ausencia de descarga automatizada en `list` y `download`.
+
+`download_modules()`, `read_module()` y `read_catalog_entry()` usan la misma API
+que los otros datasets. Para XLSX, cada hoja conserva todas sus filas
+(`header=None`); para XLS 2007, la tabla `tabDetalle` conserva sus encabezados.
+`--table` permite seleccionar una hoja o tabla. Los tabulados no forman parte
+del índice de variables de microdatos. Los archivos conservan `.xlsx` o `.xls`
+con cualquier layout. Con fallback activado, CSV puede descargar el Excel
+original; no se convierte a CSV. Usa `--no-fallback` para exigir el formato.
+
+Un catálogo local anterior tiene prioridad sobre el incluido. Puedes crear uno
+separado actualizado sin reemplazarlo:
+
+```bash
+inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
+inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
+```
+
+Para actualizar la entrada incluida: `python scripts/update_census.py`.
 
 ## Búsqueda de variables
 
@@ -359,7 +376,8 @@ inei-microdatos crawl --survey enaho     # solo una encuesta específica
 | **SPSS** (.sav) | ~98% de los módulos | Mayor cobertura |
 | **STATA** (.dta) | ~42% | Incluye etiquetas de valores |
 | **CSV** | ~43% | UTF-8 con BOM |
-| **XLSX** | Censo 2025 | Tabulados agregados nacionales |
+| **XLSX** | Censos 2017 y 2025 | Tabulados agregados nacionales |
+| **XLS** | Censo 2007 | Exportaciones HTML de INEI |
 
 Las encuestas antiguas (pre-2008) frecuentemente solo están disponibles en SPSS/STATA, no en CSV. El flag `--format CSV` automáticamente cae a STATA o SPSS cuando CSV no está disponible. Usa `--no-fallback` para desactivar esto.
 
@@ -444,38 +462,57 @@ for name, df in dfs.items():
 # RECHM: (3002, 8)
 ```
 
-## Censo 2025: aggregated tables
+## Population and Housing Censuses
 
-The catalog includes 11 national Excel workbooks (Peru) covering population,
-households, and housing from the [Censo 2025 portal](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
-These are **aggregated tables**, not person-, household-, or dwelling-level
-microdata. This integration covers national workbooks; regional workbooks and
-REDATAM queries are not included. Use aliases `censo2025` or `cpv2025`.
+One dataset, using the catalog's existing hierarchy:
+**censo → year → `Unico` period → modules**. Use `censo`, `cpv`, or
+`censo-poblacion`. Year-specific aliases (`censo2017`, `cpv2025`, etc.) filter
+that same entry rather than creating duplicate datasets.
 
-```bash
-inei-microdatos list --survey censo2025
-inei-microdatos download --survey censo2025 --format XLSX --dest ./data/
-inei-microdatos read "./data/CENSOS NACIONALES 2025 - Tabulados agregados (Perú)/2025/Unico/CPV2025-00-poblacion-951.xlsx" --info
-```
+| Year | Included access | Format |
+|------|-----------------|--------|
+| 1981, 1993, 2005 | Official REDATAM query links; no automated download | Web query |
+| 2007 | 103 tables discovered in the thematic index, national selection | XLS (HTML tables served by INEI as Excel) |
+| 2017 | 5 national volumes of final results | XLSX |
+| 2025 | 11 national population, household, and housing workbooks | XLSX |
 
-`download_modules(..., fmt="XLSX")`, `read_module()`, and `read_catalog_entry()`
-support these workbooks. Each sheet is read with `header=None`, retaining titles,
-notes, and totals for interpretation. Select sheets with `--table`. Aggregate
-tables are not included in the microdata variable index.
-
-With fallback enabled, requesting CSV can download the original XLSX when that
-is the only available format; no CSV conversion takes place. Use `--no-fallback`
-to require the requested format. All layouts preserve the `.xlsx` extension.
-
-An older local catalog takes precedence over the bundled catalog. Refresh census
-data into a separate catalog without replacing it:
+Sources: [census directory](https://www.inei.gob.pe/estadisticas/censos/),
+[2007 tables](https://censos.inei.gob.pe/cpv2007/tabulados/),
+[2017 results](https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/),
+[2025 tables](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
 
 ```bash
-inei-microdatos crawl --survey censo2025 --catalog ./censo2025.json --refresh
-inei-microdatos download --catalog ./censo2025.json --survey censo2025 --format XLSX --dest ./data/
+inei-microdatos list --survey censo
+inei-microdatos list --survey censo --year-min 2017 --period Unico
+inei-microdatos download --survey censo --year-min 2017 --format XLSX --dest ./data/
+inei-microdatos download --survey censo2007 --format XLS --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA/2017/Unico/CPV2017-00-tomo-01.xlsx" --info
 ```
 
-To refresh the bundled census entry: `python scripts/update_censo2025.py`.
+These are **aggregated tables**, not microdata. `Unico` denotes one census round,
+not an annual survey. The catalog hierarchy is consistent, but original tables,
+definitions, and geographies may differ across censuses; rows are not combined or
+harmonized. IPUMS samples, regional-workbook downloads, and REDATAM automation
+are not included. Query-only years show their links and download limitations in
+`list` and `download`.
+
+`download_modules()`, `read_module()`, and `read_catalog_entry()` follow the same
+API as other datasets. XLSX sheets retain all rows (`header=None`); 2007 XLS
+exports retain the heading rows in `tabDetalle`. Use `--table` to select a sheet
+or table. Aggregate tables are not part of the microdata variable index. All
+layouts retain `.xlsx` or `.xls`. With fallback enabled, a CSV request may fetch
+the original Excel file; no conversion takes place. Use `--no-fallback` to
+require the requested format.
+
+An older local catalog takes precedence over the bundled one. Refresh into a
+separate file without replacing it:
+
+```bash
+inei-microdatos crawl --survey censo --catalog ./censo.json --refresh
+inei-microdatos download --catalog ./censo.json --survey censo2017 --format XLSX --dest ./data/
+```
+
+Refresh the bundled entry with `python scripts/update_census.py`.
 
 ## Variable search
 
@@ -748,7 +785,8 @@ inei-microdatos crawl --survey enaho     # crawl specific survey only
 | **SPSS** (.sav) | ~98% of modules | Best coverage |
 | **STATA** (.dta) | ~42% | Value labels included |
 | **CSV** | ~43% | UTF-8 with BOM |
-| **XLSX** | Censo 2025 | National aggregated tables |
+| **XLSX** | Censos 2017 and 2025 | National aggregated tables |
+| **XLS** | Censo 2007 | INEI HTML exports |
 
 Older surveys (pre-2008) are often available only in SPSS/STATA, not CSV. The `--format CSV` flag automatically falls back to STATA or SPSS when CSV isn't available. Use `--no-fallback` to disable this.
 

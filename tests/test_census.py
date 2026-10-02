@@ -51,14 +51,14 @@ def test_census_discovery(monkeypatch):
         {"idTema": 2, "nombDato": "Pending", "ruta": None, "peso": None},
     ]}
     monkeypatch.setattr("inei_microdatos.census.requests.get", get)
-    result = build_census_catalog()
+    result = build_census_catalog(years=[2025])
     mods = result["years"]["2025"]["Unico"]["modules"]
     assert len(mods) == 3
     assert all("Educaci%C3%B3n.xlsx" in m["xlsx_url"] for m in mods)
     assert {c.args[0].split("/")[-1] for c in get.call_args_list} == {str(t) for t in TOPICS.values()}
     get.return_value.json.return_value = {"success": False, "data": []}
     with pytest.raises(ValueError, match="Missing Censo"):
-        build_census_catalog()
+        build_census_catalog(years=[2025])
 
 
 def test_crawl_routing(monkeypatch, census):
@@ -123,7 +123,8 @@ def test_cli_census_and_workbook(census, workbook, tmp_path):
     runner = CliRunner()
     result = runner.invoke(cli, ["list", "--catalog", str(catalog), "--survey", "censo2025"])
     assert result.exit_code == 0
-    assert "Aggregated tables | XLSX" in result.output
+    assert "Aggregated tables" in result.output
+    assert "2025: 11 modules | XLSX" in result.output
     result = runner.invoke(cli, ["download", "--catalog", str(catalog), "--survey", "cpv2025", "--format", "XLSX", "--dest", str(tmp_path / "out"), "--dry-run"])
     assert result.exit_code == 0
     assert "11 files to download" in result.output
@@ -144,3 +145,104 @@ def test_legacy_spss_fallback_prefers_stata():
     from inei_microdatos.download import module_download
     selected = module_download({"csv_code": "csv", "stata_code": "stata"}, "SPSS")
     assert selected[2] == "STATA"
+
+
+def test_unified_census_years_and_aliases():
+    entries = filter_catalog(load_catalog(), survey="censo")
+    assert len(entries) == 1
+    assert set(entries[0]["years"]) == {"1981", "1993", "2005", "2007", "2017", "2025"}
+    for alias, year in [("censo2017", "2017"), ("cpv2007", "2007"), ("censo2025", "2025")]:
+        assert list(filter_catalog(entries, survey=alias)[0]["years"]) == [year]
+    assert filter_catalog(entries, survey="cpv2017", year_min=2025) == []
+    assert list(filter_catalog(entries, survey="censo", year_min=2017)[0]["years"]) == ["2017", "2025"]
+    for year in ("1981", "1993", "2005"):
+        period = entries[0]["years"][year]["Unico"]
+        assert period["access"] == "online_query"
+        assert period["modules"] == []
+        assert period["resources"][0]["url"].startswith("http://censos1.inei.gob.pe/")
+
+
+def test_year_filter_applied_before_discovery(monkeypatch):
+    from inei_microdatos.census import requested_census_years
+    assert requested_census_years(["censo"], (2000, 2020)) == [2005, 2007, 2017]
+    assert requested_census_years(["cpv2017", "cpv2025"], (2010, 2020)) == [2017]
+    assert requested_census_years(["endes"]) == []
+    builder = Mock(return_value=[])
+    monkeypatch.setattr("inei_microdatos.census._modules_2025", builder)
+    result = build_census_catalog(years=[1981])
+    builder.assert_not_called()
+    assert list(result["years"]) == ["1981"]
+
+
+def test_2017_discovery_national_only(monkeypatch):
+    html = '<a href="cuadros/00TOMO_01.xlsx">Excel</a>' * 2
+    html += '<a href="00TOMO_01.pdf">PDF</a><a href="cuadros/03TOMO_01.xlsx">Regional</a>'
+    monkeypatch.setattr("inei_microdatos.census._get_html", lambda url: html)
+    result = build_census_catalog(years=[2017])
+    modules = result["years"]["2017"]["Unico"]["modules"]
+    assert len(modules) == 1
+    assert modules[0]["module_code"] == "CPV2017-00-tomo-01"
+    assert modules[0]["xlsx_url"].endswith("Lib1544/cuadros/00TOMO_01.xlsx")
+
+
+def test_2007_discovery(monkeypatch):
+    from inei_microdatos.census import CENSUS_2007
+    html = """<tr><td><input onclick=javascript:clickRadioCuadro('001','3')></td>
+    <td title='VIVIENDAS &amp; HOGARES'>Short label</td></tr>"""
+    get = Mock(side_effect=["cambiarIU('001','VIVIENDA','title')", html])
+    monkeypatch.setattr("inei_microdatos.census._get_html", get)
+    result = build_census_catalog(years=[2007])
+    mod = result["years"]["2007"]["Unico"]["modules"][0]
+    assert mod["module_code"] == "CPV2007-00-001-001"
+    assert mod["module_name"] == "VIVIENDAS & HOGARES"
+    assert mod["xls_url"] == CENSUS_2007 + "Tabla.asp?proy=001&u=00&cuadro=001&exportar=xls"
+    assert not mod.get("xlsx_url")
+
+
+def test_legacy_html_excel_download_read_and_reject_error(tmp_path, monkeypatch):
+    from inei_microdatos.download import _valid_download
+    html = """<table id='tabDetalle'><thead><tr><td>Área</td><td>Total</td></tr></thead>
+    <tbody><tr><td>PERÚ</td><td>7566142</td></tr></tbody></table>"""
+    response = Mock()
+    response.iter_content.return_value = [html.encode("cp1252")]
+    monkeypatch.setattr("inei_microdatos.download.requests.get", Mock(return_value=response))
+    path = tmp_path / "legacy.xls"
+    assert _download_one("https://example.com/Tabla.asp", path) == "ok"
+    frame = read_module(path)["tabDetalle"]
+    assert frame.iloc[0, 0] == "Área"
+    assert frame.iloc[1, 0] == "PERÚ"
+    assert str(frame.iloc[1, 1]) == "7566142"
+    assert list_tables(path)[0]["format"] == "xls"
+    assert list(read_module(path, tables=["tabDetalle"])) == ["tabDetalle"]
+    assert read_module(path, tables=["absent"]) == {}
+    path.write_text("<html>Microsoft OLE DB Provider error</html>")
+    assert not _valid_download(path)
+    response.iter_content.return_value = [b"<html>Server error</html>"]
+    assert _download_one("https://example.com/Tabla.asp", path) == "bad_zip"
+    assert not path.exists()
+
+
+def test_query_only_cli_explains_missing_download(tmp_path):
+    from inei_microdatos.catalog import save_catalog
+    catalog = tmp_path / "catalog.json"
+    save_catalog(filter_catalog(load_catalog(), survey="cpv1981"), catalog)
+    result = CliRunner().invoke(cli, ["download", "--catalog", str(catalog),
+                                    "--survey", "censo", "--dest", str(tmp_path / "out")])
+    assert result.exit_code == 0
+    assert "1981: online query only" in result.output
+    assert "censos1981/redatam/" in result.output
+    assert not (tmp_path / "out").exists()
+
+
+def test_historical_download_counts_and_formats(tmp_path):
+    catalog = filter_catalog(load_catalog(), survey="censo", year_min=2007, year_max=2017)
+    assert list(catalog[0]["years"]) == ["2007", "2017"]
+    assert all(list(periods) == ["Unico"] for periods in catalog[0]["years"].values())
+    tasks = _collect_module_tasks(catalog, tmp_path, "CSV", True, LAYOUTS["default"])
+    assert len(tasks) == 108
+    assert len({path for _, path in tasks}) == 108
+    assert sum(path.suffix == ".xls" for _, path in tasks) == 103
+    assert sum(path.suffix == ".xlsx" for _, path in tasks) == 5
+    assert _collect_module_tasks(catalog, tmp_path, "CSV", False, LAYOUTS["default"]) == []
+    assert len(_collect_module_tasks(catalog, tmp_path, "XLS", False, LAYOUTS["default"])) == 103
+    assert len(_collect_module_tasks(catalog, tmp_path, "XLSX", False, LAYOUTS["default"])) == 5

@@ -19,7 +19,7 @@ from inei_microdatos.download import LAYOUTS, download_docs, download_modules
 
 DEFAULT_CATALOG = Path.home() / ".inei-microdatos" / "catalog.json"
 
-SURVEY_HELP = 'Survey name or alias (e.g. "enaho", "endes", "cenagro"). Run `aliases` to see all.'
+SURVEY_HELP = 'Survey name or alias (e.g. "enaho", "endes", "censo"). Run `aliases` to see all.'
 CATALOG_HELP = "Path to catalog JSON file (defaults to bundled catalog)."
 LAYOUT_HELP = (
     "Folder layout for downloaded files. Presets: "
@@ -109,7 +109,16 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
         yr_range = f"{years[0]}-{years[-1]}" if years else "N/A"
         click.echo(f"  [{entry['category'][:3]}] {entry['label']}")
         if entry.get("data_kind") == "aggregate_tables":
-            click.echo("        Aggregated tables | XLSX | National workbooks (Perú), not microdata")
+            click.echo("        Aggregated tables | National selection (Perú), not microdata")
+            for year in years:
+                for period_data in entry["years"][year].values():
+                    formats = sorted({f for m in period_data["modules"] for f in ("XLS", "XLSX") if m.get(f.lower() + "_url")})
+                    if formats:
+                        click.echo(f"        {year}: {len(period_data['modules'])} modules | {', '.join(formats)}")
+                    else:
+                        click.echo(f"        {year}: online query only; no automated downloads")
+                        for resource in period_data.get("resources", []):
+                            click.echo(f"          {resource['name']}: {resource['url']}")
         click.echo(f"        {yr_range} | {len(years)} years | {n_mods} modules | {n_docs} docs")
 
 
@@ -120,7 +129,7 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 @click.option("--year-min", type=int, help="Minimum year.")
 @click.option("--year-max", type=int, help="Maximum year.")
 @click.option("--period", help="Filter to periods matching this substring.")
-@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS", "XLSX"], case_sensitive=False), default="CSV",
+@click.option("--format", "fmt", type=click.Choice(["CSV", "STATA", "SPSS", "XLSX", "XLS"], case_sensitive=False), default="CSV",
               help="Download format (default: CSV).")
 @click.option("--dest", type=click.Path(), required=True, help="Destination directory.")
 @click.option("--layout", default="default", help=LAYOUT_HELP)
@@ -148,7 +157,14 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
     click.echo(f"Matched: {stats['surveys']} surveys, {stats['downloadable_modules']} downloadable modules")
 
     if any(e.get("data_kind") == "aggregate_tables" for e in catalog):
-        click.echo("Censo 2025: aggregated tables in XLSX; no person-level microdata or CSV conversion.")
+        click.echo("Population and housing census: original aggregate XLS/XLSX tables; no microdata or CSV conversion.")
+        for entry in catalog:
+            for year, periods in entry["years"].items():
+                for data in periods.values():
+                    if data.get("access") == "online_query":
+                        click.echo(f"{year}: online query only; automated download unavailable.")
+                        for resource in data.get("resources", []):
+                            click.echo(f"  {resource['url']}")
 
     result = download_modules(catalog, dest, fmt=fmt, fallback=not no_fallback, layout=layout, workers=workers, dry_run=dry_run)
     if dry_run:
@@ -195,11 +211,11 @@ def docs(catalog_path, survey, year_min, year_max, dest, layout, workers):
 @cli.command()
 @click.argument("source")
 @click.option("--table", "-t", multiple=True, help="Table names to read (reads all if omitted).")
-@click.option("--format", "fmt", type=click.Choice(["csv", "stata", "spss", "xlsx"], case_sensitive=False),
+@click.option("--format", "fmt", type=click.Choice(["csv", "stata", "spss", "xlsx", "xls"], case_sensitive=False),
               help="Format hint (auto-detected if omitted).")
 @click.option("--info", is_flag=True, help="Just list tables or workbook sheets, don't read.")
 def read(source, table, fmt, info):
-    """Read a module ZIP or XLSX workbook and show its contents.
+    """Read a module ZIP, XLSX workbook, or census XLS export and show its contents.
 
     \b
     SOURCE can be a path to a ZIP file or a download code like "968-Modulo1629".

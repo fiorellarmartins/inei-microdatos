@@ -153789,17 +153789,1179 @@
       }
     },
     {
-      "category": "Tabulados",
-      "value": "CPV2025-TABULADOS",
-      "label": "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
+      "category": "Censos",
+      "value": "CPV",
+      "label": "CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA",
       "data_kind": "aggregate_tables",
       "geography": {
         "code": "00",
         "name": "Perú"
       },
-      "source_url": "https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados",
-      "crawled_at": "2026-10-02T19:43:10.030933+00:00",
+      "source_url": "https://www.inei.gob.pe/estadisticas/censos/",
+      "crawled_at": "2026-10-02T20:11:02.113908+00:00",
       "years": {
+        "1981": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [],
+            "docs": [],
+            "access": "online_query",
+            "source_url": "http://censos1.inei.gob.pe/censos1981/redatam/",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "http://censos1.inei.gob.pe/censos1981/redatam/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Online query reference only; automated downloads are not supported for this year."
+          }
+        },
+        "1993": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [],
+            "docs": [],
+            "access": "online_query",
+            "source_url": "http://censos1.inei.gob.pe/censos1993/redatam/",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "http://censos1.inei.gob.pe/censos1993/redatam/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Online query reference only; automated downloads are not supported for this year."
+          }
+        },
+        "2005": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [],
+            "docs": [],
+            "access": "online_query",
+            "source_url": "http://censos1.inei.gob.pe/Censos2005/redatam/",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "http://censos1.inei.gob.pe/Censos2005/redatam/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Online query reference only; automated downloads are not supported for this year."
+          }
+        },
+        "2007": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-001",
+                "module_name": "CUADRO Nº 1: VIVIENDAS PARTICULARES, POR CONDICIÓN DE OCUPACIÓN DE LA VIVIENDA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-002",
+                "module_name": "CUADRO Nº 2: VIVIENDAS PARTICULARES, POR ÁREA URBANA Y RURAL, SEGÚN DEPARTAMENTO, PROVINCIA Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-003",
+                "module_name": "CUADRO Nº 3: VIVIENDAS COLECTIVAS Y OTRO TIPO, POR ÁREA URBANA Y RURAL, SEGÚN DEPARTAMENTO, PROVINCIA Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-004",
+                "module_name": "CUADRO Nº 4: POBLACIÓN EN VIVIENDAS PARTICULARES, POR ÁREA URBANA Y RURAL, SEGÚN DEPARTAMENTO Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-005",
+                "module_name": "CUADRO Nº 5: POBLACIÓN EN VIVIENDAS COLECTIVAS Y OTRO TIPO, POR ÁREA URBANA Y RURAL, SEGÚN DEPARTAMENTO, PROVINCIA Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-006",
+                "module_name": "CUADRO Nº 6: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES Y TOTAL DE OCUPANTES PRESENTES, POR ÁREA URBANA Y RURAL, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=006&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-007",
+                "module_name": "CUADRO Nº 7: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR MATERIAL DE PREDOMINANTE EN LAS PAREDES EXTERIORES DE LA VIVIENDA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=007&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-008",
+                "module_name": "CUADRO Nº 8: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR MATERIAL PREDOMINANTE EN LOS PISOS DE LA VIVIENDA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=008&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-009",
+                "module_name": "CUADRO Nº 9: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR TIPO DE ABASTECIMIENTO DE AGUA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=009&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-010",
+                "module_name": "CUADRO Nº 10: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR DISPONIBILIDAD DEL SERVICIO DE AGUA POTABLE TODOS LOS DÍAS DE LA SEMANA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=010&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-011",
+                "module_name": "CUADRO Nº 11: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR TIPO DE ABASTECIMIENTO DE AGUA POTABLE, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, DISPONIBILIDAD DE AGUA TODOS LOS DÍAS DE LA SEMANA, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=011&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-012",
+                "module_name": "CUADRO Nº 12: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES QUE SI DISPONEN DEL SERVICIO DE AGUA POTABLE TODOS LOS DÍAS DE LA SEMANA, POR NÚMERO DE HORAS AL DÍA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=012&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-013",
+                "module_name": "CUADRO Nº 13: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES QUE NO DISPONEN DEL SERVICIO DE AGUA TODOS LOS DÍAS DE LA SEMANA, POR NÚMERO DE DÍAS A LA SEMANA QUE DISPONE DEL SERVICIO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=013&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-014",
+                "module_name": "CUADRO Nº 14: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES QUE NO DISPONEN DEL SERVICIO DE AGUA TODOS LOS DÍAS DE LA SEMANA, POR NÚMERO DE HORAS AL DÍA QUE DISPONEN DEL SERVICIO EN LOS DÍAS QUE CUENTAN CON ESTE SERVICIO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=014&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-015",
+                "module_name": "CUADRO Nº 15: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR DISPONIBILIDAD DE SERVICIO HIGIÉNICO EN LA VIVIENDA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=015&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-016",
+                "module_name": "CUADRO Nº 16: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR DISPONIBILIDAD DE ALUMBRADO ELÉCTRICO, POR RED PÚBLICA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=016&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-017",
+                "module_name": "CUADRO Nº 17: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR DISPONIBILIDAD DE ALUMBRADO ELÉCTRICO, POR RED PÚBLICA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, Y TIPO DE ABASTECIMIENTO DE AGUA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=017&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-018",
+                "module_name": "CUADRO Nº 18: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR DISPONIBILIDAD DE ALUMBRADO ELÉCTRICO, POR RED PÚBLICA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, Y TIPO DE SERVICIO HIGIÉNICO QUE TIENE LA VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=018&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-019",
+                "module_name": "CUADRO Nº 19: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR NÚMERO DE HABITACIONES DE LA VIVIENDA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=019&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-001-020",
+                "module_name": "CUADRO Nº 20: TOTAL DE VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR RÉGIMEN DE TENENCIA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=001&u=00&cuadro=020&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-002-021",
+                "module_name": "CUADRO Nº 1: VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR NÚMERO DE HOGARES, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=002&u=00&cuadro=021&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-002-022",
+                "module_name": "CUADRO Nº 2: TOTAL DE HOGARES EN VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR VARIEDAD DE ARTEFACTOS Y EQUIPOS QUE POSEE, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=002&u=00&cuadro=022&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-002-023",
+                "module_name": "CUADRO Nº 4: TOTAL DE HOGARES EN VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR TIPO DE ENERGÍA O COMBUSTIBLE QUE MÁS UTILIZAN EN EL HOGAR PARA COCINAR SUS ALIMENTOS, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=002&u=00&cuadro=023&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-002-024",
+                "module_name": "CUADRO Nº 6: TOTAL DE HOGARES EN VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR PERSONAS QUE PERTENECÍAN AL HOGAR Y AHORA VIVEN PERMANENTEMENTE EN OTRO PAÍS, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=002&u=00&cuadro=024&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-002-025",
+                "module_name": "CUADRO Nº 7: TOTAL DE HOGARES EN VIVIENDAS PARTICULARES CON OCUPANTES PRESENTES, POR PADECIMIENTO DE ALGUNA DIFICULTAD O LIMITACIÓN FÍSICA O MENTAL PERMANENTE DE ALGÚN MIEMBRO DEL HOGAR, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, TIPO DE VIVIENDA Y TOTAL DE OCUPANTES PRESENTES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=002&u=00&cuadro=025&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN TOTAL, POR ÁREA URBANA Y RURAL, Y SEXO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO Y EDADES SIMPLES",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-002",
+                "module_name": "CUADRO Nº 2: POBLACIÓN TOTAL, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y TIPO DE VIVIENDA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-003",
+                "module_name": "CUADRO Nº 3: POBLACIÓN TOTAL EN VIVIENDAS PARTICULARES, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, Y TIPO DE VIVIENDA PARTICULAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-004",
+                "module_name": "CUADRO Nº 4: POBLACIÓN TOTAL EN VIVIENDAS PARTICULARES, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y PARENTESCO CON EL JEFE DEL HOGAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-005",
+                "module_name": "CUADRO Nº 5: POBLACIÓN TOTAL, POR TENENCIA DE PARTIDA DE NACIMIENTO OTORGADO POR EL REGISTRO CIVIL, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRANDES GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-006",
+                "module_name": "CUADRO Nº 6: POBLACIÓN DE 18 Y MÁS AÑOS DE EDAD, POR TENENCIA DE DOCUMENTO NACIONAL DE IDENTIDAD (DNI), SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRANDES GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=006&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-007",
+                "module_name": "CUADRO Nº 7: POBLACIÓN TOTAL, POR SEXO Y GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA PERMANENTE, DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=007&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-008",
+                "module_name": "CUADRO Nº 8: POBLACIÓN TOTAL, POR SEXO Y GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA PERMANENTE HACE 5 AÑOS, DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=008&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-003-009",
+                "module_name": "CUADRO Nº 9: POBLACIÓN TOTAL, POR SEXO Y GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA DE LA MADRE CUANDO NACIÓ, DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=003&u=00&cuadro=009&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, NIVEL EDUCATIVO ALCANZADO Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-002",
+                "module_name": "CUADRO Nº 2: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, ESTADO CIVIL Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-003",
+                "module_name": "CUADRO Nº 3: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, CONDICIÓN DE ACTIVIDAD Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-004",
+                "module_name": "CUADRO Nº 4: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS QUE SE ENCUENTRAN ACTUALMENTE VIVOS, SEGÚN DEPARTAMENTO, PROVIINCIA, DISTRITO, ÁREA URBANA Y RURAL, NIVEL EDUCATIVO ALCANZADO Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-005",
+                "module_name": "CUADRO Nº 5: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS QUE SE ENCUENTRAN ACTUALMENTE VIVOS, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, ESTADO CIVIL Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-006",
+                "module_name": "CUADRO Nº 6: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS QUE SE ENCUENTRAN ACTUALMENTE VIVOS, SEGÚN DEPARTAMENTO, PROVINCIAL, DISTRITO, ÁREA URBANA Y RURAL, CONDICIÓN DE ACTIVIDAD Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=006&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-007",
+                "module_name": "CUADRO Nº 7: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, HIJOS SOBREVIVIENTES, HIJOS NACIDOS EL ÚLTIMO AÑO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, NIVEL EDUCATIVO ALCANZADO Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=007&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-008",
+                "module_name": "CUADRO Nº 8: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, HIJOS SOBREVIVIENTES, HIJOS NACIDOS EL ÚLTIMO AÑO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, ESTADO CIVIL Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=008&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-009",
+                "module_name": "CUADRO Nº 9: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, HIJOS SOBREVIVIENTES, HIJOS NACIDOS EL ÚLTIMO AÑO, SEGÚN DEPARTAMENTO, PROVIINCIA, ÁREA URBANA Y RURAL, CONDICIÓN DE ACTIVIDAD Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=009&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-010",
+                "module_name": "CUADRO Nº 10: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR AÑO EN QUE NACIÓ SU ÚLTIMO HIJO NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, NIVEL EDUCATIVO ALCANZADO Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=010&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-011",
+                "module_name": "CUADRO Nº 11: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR AÑO EN QUE NACIÓ SU ÚLTIMO HIJO NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, ESTADO CIVIL Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=011&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-012",
+                "module_name": "CUADRO Nº 12: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR AÑO EN QUE NACIÓ SU ÚLTIMO HIJO NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, CONDICIÓN DE ACTIVIDAD Y GRUPOS QUINQUENALES DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=012&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-013",
+                "module_name": "CUADRO Nº 13: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS  DE EDAD, POR EDAD QUE TENÍA CUANDO NACIÓ SU PRIMER HIJO(A) NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=013&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-014",
+                "module_name": "CUADRO Nº 14: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR EDAD QUE TENÍA CUANDO NACIÓ SU PRIMER HIJO(A) NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, Y ESTADO CIVIL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=014&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-006-015",
+                "module_name": "CUADRO Nº 15: POBLACIÓN FEMENINA DE 12 Y MÁS AÑOS DE EDAD, POR EDAD QUE TENÍA CUANDO NACIÓ SU PRIMER HIJO(A) NACIDO VIVO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, Y RELIGIÓN QUE PROFESA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=006&u=00&cuadro=015&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-008-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN DE 12  Y MÁS AÑOS  DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RELIGIÓN QUE PROFESA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=008&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-008-002",
+                "module_name": "CUADRO Nº 2: POBLACIÓN DE 12  Y MÁS AÑOS  DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y ESTADO CIVIL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=008&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-008-003",
+                "module_name": "CUADRO Nº 3: POBLACIÓN FEMENINA DE 12  Y MÁS AÑOS  DE EDAD, POR NÚMERO DE HIJOS NACIDOS VIVOS, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, Y RELIGIÓN QUE PROFESA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=008&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO E IDIOMA O LENGUA CON EL QUE APRENDIÓ A HABLAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-002",
+                "module_name": "CUADRO Nº 2: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO E IDIOMA O LENGUA CON LA QUE APRENDIÓ A HABLAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-003",
+                "module_name": "CUADRO Nº 3: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-004",
+                "module_name": "CUADRO Nº 4: POBLACIÓN EN VIVIENDAS PARTICULARES DE 3 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RELACIÓN DE PARENTESCO CON EL JEFE DEL HOGAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-005",
+                "module_name": "CUADRO Nº 5: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA PERMANENTE DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-006",
+                "module_name": "CUADRO Nº 6: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA PERMANENTE HACE 5 AÑOS, DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=006&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-007",
+                "module_name": "CUADRO Nº 7: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, LUGAR DE RESIDENCIA DE LA MADRE CUANDO NACIÓ, DENTRO Y FUERA DEL PAÍS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=007&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-008",
+                "module_name": "CUADRO Nº 8: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y CONDICIÓN DE ALFABETISMO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=008&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-009",
+                "module_name": "CUADRO Nº 9: POBLACIÓN DE 3 A 24 AÑOS DE EDAD, POR CONDICIÓN DE ALFABETISMO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRUPOS DE EDAD NORMATIVA DE ESTUDIOS",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=009&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-010",
+                "module_name": "CUADRO Nº 10: POBLACIÓN DE 3 A 24 AÑOS DE EDAD, POR GRUPOS DE EDAD NORMATIVA, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y ASISTENCIA A UN CENTRO DE ENSEÑANZA REGULAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=010&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-011",
+                "module_name": "CUADRO Nº 12: POBLACIÓN DE 6 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y CONDICIÓN DE ACTIVIDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=011&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-012",
+                "module_name": "CUADRO Nº 13: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=012&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-013",
+                "module_name": "CUADRO Nº 14: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=013&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-004-014",
+                "module_name": "CUADRO Nº 15: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR NIVEL EDUCATIVO ALCANZADO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y CATEGORÍA DE OCUPACIÓN",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=004&u=00&cuadro=014&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y CONDICIÓN DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-002",
+                "module_name": "CUADRO Nº 3: POBLACIÓN DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS  DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, NIVEL  EDUCATIVO ALCANZADO Y CONDICIÓN DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-003",
+                "module_name": "CUADRO Nº 4: POBLACIÓN ECONÓMICAMENTE ACTIVA  DE 6 Y MÁS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y  RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-004",
+                "module_name": "CUADRO Nº 5: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 6 Y MÁS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-005",
+                "module_name": "CUADRO Nº 6: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD,  POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-006",
+                "module_name": "CUADRO Nº 7: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=006&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-007",
+                "module_name": "CUADRO Nº 8: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y CATEGORÍA DE OCUPACIÓN ",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=007&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-008",
+                "module_name": "CUADRO Nº 9: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y CATEGORÍA DE OCUPACIÓN",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=008&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-009",
+                "module_name": "CUADRO Nº 10: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR TAMAÑO DE ESTABLECIMIENTO DONDE TRABAJA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y GRANDES GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=009&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-010",
+                "module_name": "CUADRO Nº 11: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR TAMAÑO DE ESTABLECIMIENTO DONDE TRABAJA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, NIVEL EDUCATIVO ALCANZADO Y GRANDES GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=010&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-011",
+                "module_name": "CUADRO Nº 12: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR TAMAÑO DE ESTABLECIMIENTO DONDE TRABAJA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=011&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-012",
+                "module_name": "CUADRO Nº 13: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR TAMAÑO DE ESTABLECIMIENTO DONDE TRABAJA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=012&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-013",
+                "module_name": "CUADRO Nº 14: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR TAMAÑO DE  ESTABLECIMIENTO DONDE TRABAJA, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, GRANDES GRUPOS DE EDAD Y CATEGORÍA DE OCUPACIÓN",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=013&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-014",
+                "module_name": "CUADRO Nº 15: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 6 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=014&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-015",
+                "module_name": "CUADRO Nº 16: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 14 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=015&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-016",
+                "module_name": "CUADRO Nº 17: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=016&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-017",
+                "module_name": "CUADRO Nº 18: POBLACIÓN OCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y OCUPACIÓN PRINCIPAL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=017&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-018",
+                "module_name": "CUADRO Nº 19: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 6 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=018&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-019",
+                "module_name": "CUADRO Nº 21: POBLACIÓN ECONÓMICAMENTE ACTIVA DE 14 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=019&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-020",
+                "module_name": "CUADRO Nº 23: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=020&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-021",
+                "module_name": "CUADRO Nº 25: POBLACIÓN OCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=021&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-022",
+                "module_name": "CUADRO Nº 27: POBLACIÓN OCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=022&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-023",
+                "module_name": "CUADRO Nº 29:  POBLACIÓN OCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=023&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-024",
+                "module_name": "CUADRO Nº 30: POBLACIÓN OCUPADA DE 12 Y MÁS AÑOS DE EDAD, POR CATEGORÍA DE OCUPACIÓN, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y ESTADO CIVIL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=024&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-025",
+                "module_name": "CUADRO Nº 31:  POBLACIÓN ECONÓMICAMENTE ACTIVA DE 14 Y MÁS AÑOS DE EDAD, POR OCUPACIÓN PRINCIPAL, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=025&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-026",
+                "module_name": "CUADRO Nº 32: POBLACIÓN OCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR OCUPACIÓN PRINCIPAL, SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y RAMA DE ACTIVIDAD ECONÓMICA",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=026&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-027",
+                "module_name": "CUADRO Nº 34: POBLACIÓN DESOCUPADA DE 6 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=027&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-028",
+                "module_name": "CUADRO Nº 35: POBLACIÓN DESOCUPADA DE 12 Y MÁS AÑOS DE EDAD, POR GRANDES GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y ESTADO CIVIL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=028&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-029",
+                "module_name": "CUADRO Nº 36: POBLACIÓN DESOCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR TIPO DE DESEMPLEO,  SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=029&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-030",
+                "module_name": "CUADRO Nº 37: POBLACIÓN DESOCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR TIPO DE DESEMPLEO,  SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=030&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-031",
+                "module_name": "CUADRO Nº 38: POBLACIÓN DESOCUPADA DE 14 Y MÁS AÑOS DE EDAD, POR TIPO DE DESEMPLEO, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, GRUPOS DE EDAD Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=031&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-005-032",
+                "module_name": "CUADRO Nº 39: POBLACIÓN ECONÓMICAMENTE INACTIVA DE 6 Y MÁS AÑOS , POR ACTIVIDAD NO LABORAL, SEGÚN DEPARTAMENTO, PROVINCIA Y DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRANDES GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=005&u=00&cuadro=032&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-007-001",
+                "module_name": "CUADRO Nº 1: POBLACIÓN TOTAL, POR AFILIACIÓN A ALGÚN TIPO DE SEGURO DE SALUD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y GRUPOS DE EDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=007&u=00&cuadro=001&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-007-002",
+                "module_name": "CUADRO Nº 2: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR AFILIACIÓN A ALGÚN TIPO DE SEGURO DE SALUD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y NIVEL EDUCATIVO ALCANZADO",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=007&u=00&cuadro=002&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-007-003",
+                "module_name": "CUADRO Nº 3: POBLACIÓN DE 3 Y MÁS AÑOS DE EDAD, POR AFILIACIÓN A ALGÚN TIPO DE SEGURO DE SALUD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y LENGUA O IDIOMA CON EL QUE APRENDIÓ A HABLAR",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=007&u=00&cuadro=003&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-007-004",
+                "module_name": "CUADRO Nº 4: POBLACIÓN DE 6 Y MÁS AÑOS DE EDAD, POR AFILIACIÓN A ALGÚN TIPO DE SEGURO DE SALUD, SEGÚN DEPARTAMENTO, PROVINCIA, DISTRITO, ÁREA URBANA Y RURAL, SEXO Y CONDICIÓN DE ACTIVIDAD",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=007&u=00&cuadro=004&exportar=xls",
+                "file_encoding": "windows-1252"
+              },
+              {
+                "survey_code": "CPV2007",
+                "module_code": "CPV2007-00-007-005",
+                "module_name": "CUADRO Nº 5: POBLACIÓN DE 12 Y MÁS AÑOS DE EDAD, POR AFILIACIÓN A ALGÚN TIPO DE SEGURO DE SALUD, SEGÚN DEPARTAMENTO, PROVINCIA, ÁREA URBANA Y RURAL, SEXO Y ESTADO CIVIL",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xls_url": "https://censos.inei.gob.pe/cpv2007/tabulados/Tabla.asp?proy=007&u=00&cuadro=005&exportar=xls",
+                "file_encoding": "windows-1252"
+              }
+            ],
+            "docs": [],
+            "access": "download",
+            "source_url": "https://censos.inei.gob.pe/cpv2007/tabulados/",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "http://censos1.inei.gob.pe/Censos2007/redatam/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Original national tabulations; layouts and definitions vary by census."
+          }
+        },
+        "2017": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [
+              {
+                "survey_code": "CPV2017",
+                "module_code": "CPV2017-00-tomo-01",
+                "module_name": "Resultados definitivos: Tomo 1",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/cuadros/00TOMO_01.xlsx"
+              },
+              {
+                "survey_code": "CPV2017",
+                "module_code": "CPV2017-00-tomo-02",
+                "module_name": "Resultados definitivos: Tomo 2",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/cuadros/00TOMO_02.xlsx"
+              },
+              {
+                "survey_code": "CPV2017",
+                "module_code": "CPV2017-00-tomo-03",
+                "module_name": "Resultados definitivos: Tomo 3",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/cuadros/00TOMO_03.xlsx"
+              },
+              {
+                "survey_code": "CPV2017",
+                "module_code": "CPV2017-00-tomo-04",
+                "module_name": "Resultados definitivos: Tomo 4",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/cuadros/00TOMO_04.xlsx"
+              },
+              {
+                "survey_code": "CPV2017",
+                "module_code": "CPV2017-00-tomo-05",
+                "module_name": "Resultados definitivos: Tomo 5",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/cuadros/00TOMO_05.xlsx"
+              }
+            ],
+            "docs": [],
+            "access": "download",
+            "source_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1544/",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "https://censos2017.inei.gob.pe/redatam/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Original national tabulations; layouts and definitions vary by census."
+          }
+        },
         "2025": {
           "Unico": {
             "period_value": "unico",
@@ -153904,7 +155066,17 @@
                 "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/vivienda/Servicios_basicos_de_la_vivienda.xlsx"
               }
             ],
-            "docs": []
+            "docs": [],
+            "access": "download",
+            "source_url": "https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados",
+            "resources": [
+              {
+                "name": "REDATAM",
+                "url": "https://redatamcpv2025.inei.gob.pe/",
+                "type": "online_query"
+              }
+            ],
+            "note": "Original national tabulations; layouts and definitions vary by census."
           }
         }
       }

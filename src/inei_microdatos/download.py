@@ -36,12 +36,12 @@ def download_modules(
     progress: bool = True,
     dry_run: bool = False,
 ) -> dict[str, int]:
-    """Download microdata ZIPs or aggregate XLSX tables from a catalog.
+    """Download microdata ZIPs or aggregate XLS/XLSX tables from a catalog.
 
     Args:
         catalog: Catalog entries (from build_catalog or load_catalog).
         dest: Destination directory.
-        fmt: Format — "CSV", "STATA", "SPSS", or "XLSX".
+        fmt: Format — "CSV", "STATA", "SPSS", "XLSX", or "XLS".
         fallback: If True, fall back to another format when preferred isn't available.
         layout: Folder layout — "default", "flat", "by-year", "by-format",
             or a custom template with {survey}, {year}, {period}, {code},
@@ -54,8 +54,8 @@ def download_modules(
         Dict with counts: ok, skipped, failed, bad_zip (or files/would_skip for dry_run).
     """
     fmt = fmt.upper()
-    if fmt not in ("CSV", "STATA", "SPSS", "XLSX"):
-        raise ValueError(f"Invalid format: {fmt}. Must be CSV, STATA, SPSS, or XLSX.")
+    if fmt not in ("CSV", "STATA", "SPSS", "XLSX", "XLS"):
+        raise ValueError(f"Invalid format: {fmt}. Must be CSV, STATA, SPSS, XLSX, or XLS.")
 
     template = LAYOUTS.get(layout, layout)
     tasks = _collect_module_tasks(catalog, dest, fmt, fallback, template)
@@ -89,7 +89,7 @@ def download_docs(
 # ---------------------------------------------------------------------------
 
 _FORMAT_KEYS = {"CSV": "csv_code", "STATA": "stata_code", "SPSS": "spss_code"}
-_FORMATS = ("CSV", "STATA", "SPSS", "XLSX")
+_FORMATS = ("CSV", "STATA", "SPSS", "XLSX", "XLS")
 
 
 def module_download(mod: dict, fmt: str, fallback: bool = True):
@@ -98,16 +98,18 @@ def module_download(mod: dict, fmt: str, fallback: bool = True):
     if fmt not in _FORMATS:
         raise ValueError(f"Invalid format: {fmt}")
     order = {
-        "CSV": ("CSV", "STATA", "SPSS", "XLSX"),
-        "STATA": ("STATA", "CSV", "SPSS", "XLSX"),
-        "SPSS": ("SPSS", "STATA", "CSV", "XLSX"),
-        "XLSX": ("XLSX", "CSV", "STATA", "SPSS"),
+        "CSV": ("CSV", "STATA", "SPSS", "XLSX", "XLS"),
+        "STATA": ("STATA", "CSV", "SPSS", "XLSX", "XLS"),
+        "SPSS": ("SPSS", "STATA", "CSV", "XLSX", "XLS"),
+        "XLSX": ("XLSX", "XLS", "CSV", "STATA", "SPSS"),
+        "XLS": ("XLS", "XLSX", "CSV", "STATA", "SPSS"),
     }
     formats = order[fmt] if fallback else [fmt]
     for actual_fmt in formats:
-        if actual_fmt == "XLSX":
-            if mod.get("xlsx_url"):
-                return mod["xlsx_url"], mod["module_code"], "XLSX", ".xlsx"
+        if actual_fmt in ("XLSX", "XLS"):
+            url = mod.get(actual_fmt.lower() + "_url")
+            if url:
+                return url, mod["module_code"], actual_fmt, "." + actual_fmt.lower()
         else:
             code = mod.get(_FORMAT_KEYS[actual_fmt])
             if code:
@@ -137,7 +139,7 @@ def _collect_module_tasks(
                         module_name=_safe_dirname(mod.get("module_name", code)),
                         format=actual_fmt,
                     )
-                    if extension == ".xlsx":
+                    if extension in (".xlsx", ".xls"):
                         rel = str(Path(rel).with_suffix(extension))
                     tasks.append((url, dest / rel))
     return tasks
@@ -198,6 +200,12 @@ def _run_downloads(
 
 
 def _valid_download(path: Path) -> bool:
+    if path.suffix.lower() == ".xls":
+        from inei_microdatos.reader import _read_legacy_excel
+        try:
+            return not _read_legacy_excel(path).empty
+        except (ValueError, OSError):
+            return False
     if not zipfile.is_zipfile(path):
         return False
     if path.suffix.lower() == ".xlsx":

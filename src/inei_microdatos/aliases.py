@@ -21,8 +21,9 @@ ALIASES = {
     "epen-deptos":  "EPEN  DEPARTAMENTOS",
 
     # Censuses
-    "censo2025":    "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
-    "cpv2025":      "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
+    "censo":        "CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA",
+    "cpv":          "CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA",
+    "censo-poblacion": "CENSOS NACIONALES DE POBLACIÓN Y VIVIENDA",
     "cenagro":      "CENSO NACIONAL AGROPECUARIO - CENAGRO",
     "cenama":       "CENSO NACIONAL DE MERCADOS DE ABASTOS",
     "censo-edu":    "CENSO DE INFRAESTRUCTURA EDUCATIVA",
@@ -77,6 +78,13 @@ ALIASES = {
     "egresados":    "EGRESADOS UNIVERSITARIOS",
     "inst-edu":     "INSTITUCIONES EDUCATIVAS",
 }
+
+
+ALIAS_YEARS = {f"{prefix}{year}": year
+               for prefix in ("censo", "cpv")
+               for year in (1981, 1993, 2005, 2007, 2017, 2025)}
+for _alias in ALIAS_YEARS:
+    ALIASES[_alias] = ALIASES["censo"]
 
 
 def resolve_alias(name: str) -> str:
