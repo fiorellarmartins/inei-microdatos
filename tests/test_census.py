@@ -136,9 +136,11 @@ def test_cli_census_and_workbook(census, workbook, tmp_path):
     assert "Notas" in result.output
 
 
-def test_aggregate_tables_are_not_variable_indexed(census):
+def test_aggregate_tables_have_census_index_descriptors(census):
     from inei_microdatos.variables import _collect_modules
-    assert _collect_modules(census) == []
+    modules = _collect_modules(census)
+    assert len(modules) == 11
+    assert all(m["format"] == "XLSX" and "census_module" in m for m in modules)
 
 
 def test_legacy_spss_fallback_prefers_stata():
