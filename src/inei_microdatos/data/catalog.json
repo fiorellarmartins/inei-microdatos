@@ -153787,6 +153787,127 @@
           }
         }
       }
+    },
+    {
+      "category": "Tabulados",
+      "value": "CPV2025-TABULADOS",
+      "label": "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
+      "data_kind": "aggregate_tables",
+      "geography": {
+        "code": "00",
+        "name": "Perú"
+      },
+      "source_url": "https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados",
+      "crawled_at": "2026-10-02T19:43:10.030933+00:00",
+      "years": {
+        "2025": {
+          "Unico": {
+            "period_value": "unico",
+            "modules": [
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-951",
+                "module_name": "Poblacion: Indicadores demográficos",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Indicadores_demograficos.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-952",
+                "module_name": "Poblacion: Fecundidad",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Fecundidad.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-954",
+                "module_name": "Poblacion: Estado civil, identidad y seguro de salud",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Estado_civil_identidad_y_seguro_de_salud.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-955",
+                "module_name": "Poblacion: Educación",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Educacion.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-956",
+                "module_name": "Poblacion: Discapacidad",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Discapacidad.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-957",
+                "module_name": "Poblacion: Etnicidad",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Etnicidad.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-poblacion-958",
+                "module_name": "Poblacion: Población en edad de trabajar",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/poblacion/Poblacion_en_edad_de_trabajar.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-hogar-961",
+                "module_name": "Hogar: Características del hogar",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/hogar/Caracteristicas_del_hogar.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-hogar-962",
+                "module_name": "Hogar: Equipamiento del hogar",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/hogar/Equipamiento_del_hogar.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-vivienda-959",
+                "module_name": "Vivienda: Características de la vivienda",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/vivienda/Caracteristicas_de_la_vivienda.xlsx"
+              },
+              {
+                "survey_code": "CPV2025",
+                "module_code": "CPV2025-00-vivienda-960",
+                "module_name": "Vivienda: Servicios básicos de la vivienda",
+                "csv_code": null,
+                "stata_code": null,
+                "spss_code": null,
+                "xlsx_url": "https://proyectos.inei.gob.pe/dir-segmentacion-ci/postcensal/prod/adjuntos/censos-2025/descarga_datos/tabulados/00/vivienda/Servicios_basicos_de_la_vivienda.xlsx"
+              }
+            ],
+            "docs": []
+          }
+        }
+      }
     }
   ]
 }

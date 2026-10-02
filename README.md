@@ -26,7 +26,7 @@ Este paquete maneja todo eso.
 pip install inei-microdatos
 ```
 
-Requiere Python 3.9+. Incluye pandas y pyreadstat para leer datos en todos los formatos (CSV, STATA, SPSS).
+Requiere Python 3.9+. Incluye pandas, pyreadstat y openpyxl para leer CSV, STATA, SPSS y XLSX.
 
 ## Inicio rápido
 
@@ -52,6 +52,41 @@ for name, df in dfs.items():
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
 ```
+
+## Censo 2025: tabulados agregados
+
+El catálogo incluye 11 libros Excel nacionales (Perú) de población, hogares y
+viviendas, publicados en el [portal de Censos 2025](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
+Son **tabulados agregados**, no microdatos de personas, hogares o viviendas.
+Esta integración cubre los libros nacionales; no descarga los libros regionales
+ni automatiza consultas a REDATAM. Los alias son `censo2025` y `cpv2025`.
+
+```bash
+inei-microdatos list --survey censo2025
+inei-microdatos download --survey censo2025 --format XLSX --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES 2025 - Tabulados agregados (Perú)/2025/Unico/CPV2025-00-poblacion-951.xlsx" --info
+```
+
+`download_modules(..., fmt="XLSX")`, `read_module()` y `read_catalog_entry()`
+también funcionan con estos libros. Cada hoja se lee sin eliminar filas de
+encabezado (`header=None`); los títulos, notas y totales requieren interpretación.
+`--table` permite seleccionar hojas. Estos tabulados no forman parte del índice
+de variables de microdatos.
+
+Con fallback activado, una solicitud CSV puede descargar el XLSX original si es
+el único formato disponible; no se convierte a CSV. Usa `--no-fallback` para
+exigir el formato indicado. Los archivos conservan la extensión `.xlsx` con
+cualquier layout.
+
+Si ya tienes un catálogo local anterior, este tiene prioridad sobre el incluido.
+Puedes generar un catálogo separado actualizado sin reemplazarlo:
+
+```bash
+inei-microdatos crawl --survey censo2025 --catalog ./censo2025.json --refresh
+inei-microdatos download --catalog ./censo2025.json --survey censo2025 --format XLSX --dest ./data/
+```
+
+Para mantener el catálogo incluido: `python scripts/update_censo2025.py`.
 
 ## Búsqueda de variables
 
@@ -324,6 +359,7 @@ inei-microdatos crawl --survey enaho     # solo una encuesta específica
 | **SPSS** (.sav) | ~98% de los módulos | Mayor cobertura |
 | **STATA** (.dta) | ~42% | Incluye etiquetas de valores |
 | **CSV** | ~43% | UTF-8 con BOM |
+| **XLSX** | Censo 2025 | Tabulados agregados nacionales |
 
 Las encuestas antiguas (pre-2008) frecuentemente solo están disponibles en SPSS/STATA, no en CSV. El flag `--format CSV` automáticamente cae a STATA o SPSS cuando CSV no está disponible. Usa `--no-fallback` para desactivar esto.
 
@@ -381,7 +417,7 @@ This package handles all of that.
 pip install inei-microdatos
 ```
 
-Requires Python 3.9+. Includes pandas and pyreadstat to read data in all formats (CSV, STATA, SPSS).
+Requires Python 3.9+. Includes pandas, pyreadstat, and openpyxl to read CSV, STATA, SPSS, and XLSX.
 
 ## Quick start
 
@@ -407,6 +443,39 @@ for name, df in dfs.items():
 # RECH4: (135045, 22)
 # RECHM: (3002, 8)
 ```
+
+## Censo 2025: aggregated tables
+
+The catalog includes 11 national Excel workbooks (Peru) covering population,
+households, and housing from the [Censo 2025 portal](https://censos2025.inei.gob.pe/resultados/descarga-de-datos/cuadros-estadisticos/tabulados).
+These are **aggregated tables**, not person-, household-, or dwelling-level
+microdata. This integration covers national workbooks; regional workbooks and
+REDATAM queries are not included. Use aliases `censo2025` or `cpv2025`.
+
+```bash
+inei-microdatos list --survey censo2025
+inei-microdatos download --survey censo2025 --format XLSX --dest ./data/
+inei-microdatos read "./data/CENSOS NACIONALES 2025 - Tabulados agregados (Perú)/2025/Unico/CPV2025-00-poblacion-951.xlsx" --info
+```
+
+`download_modules(..., fmt="XLSX")`, `read_module()`, and `read_catalog_entry()`
+support these workbooks. Each sheet is read with `header=None`, retaining titles,
+notes, and totals for interpretation. Select sheets with `--table`. Aggregate
+tables are not included in the microdata variable index.
+
+With fallback enabled, requesting CSV can download the original XLSX when that
+is the only available format; no CSV conversion takes place. Use `--no-fallback`
+to require the requested format. All layouts preserve the `.xlsx` extension.
+
+An older local catalog takes precedence over the bundled catalog. Refresh census
+data into a separate catalog without replacing it:
+
+```bash
+inei-microdatos crawl --survey censo2025 --catalog ./censo2025.json --refresh
+inei-microdatos download --catalog ./censo2025.json --survey censo2025 --format XLSX --dest ./data/
+```
+
+To refresh the bundled census entry: `python scripts/update_censo2025.py`.
 
 ## Variable search
 
@@ -679,6 +748,7 @@ inei-microdatos crawl --survey enaho     # crawl specific survey only
 | **SPSS** (.sav) | ~98% of modules | Best coverage |
 | **STATA** (.dta) | ~42% | Value labels included |
 | **CSV** | ~43% | UTF-8 with BOM |
+| **XLSX** | Censo 2025 | National aggregated tables |
 
 Older surveys (pre-2008) are often available only in SPSS/STATA, not CSV. The `--format CSV` flag automatically falls back to STATA or SPSS when CSV isn't available. Use `--no-fallback` to disable this.
 

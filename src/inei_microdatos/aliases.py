@@ -21,6 +21,8 @@ ALIASES = {
     "epen-deptos":  "EPEN  DEPARTAMENTOS",
 
     # Censuses
+    "censo2025":    "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
+    "cpv2025":      "CENSOS NACIONALES 2025 - Tabulados agregados (Perú)",
     "cenagro":      "CENSO NACIONAL AGROPECUARIO - CENAGRO",
     "cenama":       "CENSO NACIONAL DE MERCADOS DE ABASTOS",
     "censo-edu":    "CENSO DE INFRAESTRUCTURA EDUCATIVA",

@@ -15,14 +15,17 @@ def read_module(
     tables: Optional[List[str]] = None,
     fmt: Optional[str] = None,
 ) -> Dict[str, "pandas.DataFrame"]:
-    """Read a module ZIP into a dict of DataFrames.
+    """Read a module ZIP or XLSX workbook into a dict of DataFrames.
+
+    XLSX sheets retain every row (header=None) because census workbooks contain
+    titles, notes, merged headings, and totals rather than rectangular microdata.
 
     Args:
-        source: Path to a ZIP file, or a download code like "968-Modulo1629".
+        source: Path to a ZIP/XLSX file, or a download code like "968-Modulo1629".
             If a code is given, downloads it first.
         tables: Optional list of table names to read (e.g. ["RECH0", "RECH1"]).
             If None, reads all data files.
-        fmt: Format hint — "csv", "stata", "spss". Auto-detected from file
+        fmt: Format hint — "csv", "stata", "spss", "xlsx". Auto-detected from file
             extensions if not specified.
 
     Returns:
@@ -34,12 +37,20 @@ def read_module(
     source = str(source)
 
     # If it's a download code (not a file path), download to a temp location
-    if not source.endswith(".zip") and "/" not in source and "\\" not in source:
+    if not source.lower().endswith((".zip", ".xlsx")) and "/" not in source and "\\" not in source:
         source = _download_to_temp(source, fmt)
 
     path = Path(source)
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
+
+    if path.suffix.lower() == ".xlsx":
+        with pd.ExcelFile(path, engine="openpyxl") as workbook:
+            return {
+                name: workbook.parse(name, header=None)
+                for name in workbook.sheet_names
+                if not tables or any(t.lower() in name.lower() for t in tables)
+            }
 
     result = {}
 
@@ -75,7 +86,7 @@ def read_catalog_entry(
         year: Year to read.
         period: Period label (if None, uses the first available period).
         module: Module name substring to filter (if None, reads first module).
-        fmt: Preferred format — "csv", "stata", "spss".
+        fmt: Preferred format — "csv", "stata", "spss", "xlsx".
         dest: Cache directory for downloads. If None, uses temp dir.
 
     Returns:
@@ -106,48 +117,50 @@ def read_catalog_entry(
         raise ValueError("No matching modules found.")
 
     mod = mods[0]
-    fmt_upper = fmt.upper()
-    code_key = {"CSV": "csv_code", "STATA": "stata_code", "SPSS": "spss_code"}
+    from inei_microdatos.download import module_download, _download_one
 
-    # Try preferred format, then fallback
-    code = None
-    actual_fmt = fmt_upper
-    for try_fmt in [fmt_upper, "STATA", "SPSS", "CSV"]:
-        code = mod.get(code_key.get(try_fmt, ""))
-        if code:
-            actual_fmt = try_fmt
-            break
-
-    if not code:
-        raise ValueError(f"No download code available for module {mod['module_name']}")
-
-    url = f"{DOWNLOAD_BASE}{actual_fmt}/{code}.zip"
+    selected = module_download(mod, fmt)
+    if not selected:
+        raise ValueError(f"No download available for module {mod['module_name']}")
+    url, code, actual_fmt, extension = selected
 
     if dest:
-        dest_path = Path(dest) / f"{code}.zip"
+        dest_path = Path(dest) / f"{code}{extension}"
     else:
         import tempfile
-        dest_path = Path(tempfile.gettempdir()) / "inei_microdatos" / f"{code}.zip"
+        dest_path = Path(tempfile.gettempdir()) / "inei_microdatos" / f"{code}{extension}"
 
-    if not dest_path.exists():
-        dest_path.parent.mkdir(parents=True, exist_ok=True)
-        import requests
-        r = requests.get(url, timeout=120, stream=True)
-        r.raise_for_status()
-        with open(dest_path, "wb") as f:
-            for chunk in r.iter_content(8192):
-                f.write(chunk)
+    status = _download_one(url, dest_path)
+    if status not in ("ok", "skipped"):
+        raise OSError(f"Could not download module {mod['module_name']}: {status}")
 
     return read_module(dest_path, fmt=actual_fmt.lower())
 
 
 def list_tables(source: Union[str, Path]) -> List[dict]:
-    """List data tables inside a module ZIP without reading them.
+    """List data files inside a ZIP or sheets inside an XLSX without reading them.
 
     Returns:
         List of dicts with keys: name, format, size_bytes, full_path.
     """
     path = Path(source)
+    if path.suffix.lower() == ".xlsx":
+        from xml.etree import ElementTree as ET
+        with zipfile.ZipFile(path) as workbook:
+            root = ET.fromstring(workbook.read("xl/workbook.xml"))
+            rels = ET.fromstring(workbook.read("xl/_rels/workbook.xml.rels"))
+            targets = {rel.attrib["Id"]: rel.attrib["Target"] for rel in rels}
+            result = []
+            for sheet in root.findall(".//{*}sheet"):
+                rel_id = sheet.attrib["{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"]
+                target = targets[rel_id]
+                target = target.lstrip("/") if target.startswith("/") else "xl/" + target
+                result.append({
+                    "name": sheet.attrib["name"], "format": "xlsx",
+                    "size_bytes": workbook.getinfo(target).file_size,
+                    "full_path": target,
+                })
+            return result
     result = []
     with zipfile.ZipFile(path) as zf:
         for name, detected_fmt, table_name in _find_data_files(zf.namelist()):
