@@ -345,7 +345,8 @@ Las sub-encuestas temáticas (Empleo, Educación, Victimización, etc.) y las va
 
 El alias `censo` reúne los años 1981, 1993, 2005, 2007, 2017 y 2025, con la misma
 estructura de año, periodo y módulos del catálogo. Incluye tabulados agregados
-y búsqueda de variables de origen y títulos de tablas.
+y búsqueda de variables de origen y títulos de tablas. Usa `--ubigeo` para
+seleccionar un departamento, provincia o distrito según la cobertura de cada cuadro.
 
 Consulta la [guía de censos](docs/census.md) para ver cobertura, formatos,
 ejemplos, fuentes y limitaciones por año.
@@ -714,6 +715,7 @@ The thematic sub-surveys (Empleo, Educación, Victimización, etc.) and PANEL va
 The `censo` alias groups 1981, 1993, 2005, 2007, 2017, and 2025 using the same
 year, period, and module structure as the rest of the catalog. It includes
 aggregate tables and search over source variables and table titles.
+Use `--ubigeo` to select a department, province, or district where the table supports it.
 
 See the [census guide](docs/census.md#english) for coverage, formats, examples,
 sources, and limitations by year.

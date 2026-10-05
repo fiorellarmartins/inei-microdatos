@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import click
+import requests
 
 from inei_microdatos.catalog import (
     build_catalog,
@@ -139,7 +140,8 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 @click.option("--no-fallback", is_flag=True, help="Don't fall back to another format when preferred isn't available.")
 @click.option("--dry-run", is_flag=True, help="Show what would be downloaded without downloading.")
 @click.option("--include-docs", is_flag=True, help="Also download documentation.")
-def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout, workers, no_fallback, dry_run, include_docs):
+@click.option("--ubigeo", help="Census INEI code: 2 digits department, 4 province, 6 district.")
+def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout, workers, no_fallback, dry_run, include_docs, ubigeo):
     """Download microdata files or aggregate census tables.
 
     \b
@@ -159,18 +161,25 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
     click.echo(f"Matched: {stats['surveys']} surveys, {stats['downloadable_modules']} downloadable modules")
 
     if any(e.get("data_kind") == "aggregate_tables" for e in catalog):
-        click.echo("Population and housing census: original aggregate XLS/XLSX tables; no microdata or CSV conversion.")
+        if ubigeo:
+            click.echo(f"Census geographic selection: {ubigeo}. XLSX files contain derived subsets; tables without this geography are reported as unavailable.")
+        else:
+            click.echo("Population and housing census: original aggregate XLS/XLSX tables; no microdata or CSV conversion.")
         for entry in catalog:
             for year, periods in entry["years"].items():
                 for data in periods.values():
                     if data.get("access") == "query_export":
-                        click.echo(f"{year}: generating national REDATAM frequency tables; server requests run sequentially.")
+                        scope = f"ubigeo {ubigeo}" if ubigeo else "national"
+                        click.echo(f"{year}: generating {scope} REDATAM frequency tables; server requests run sequentially.")
                     if data.get("access") == "online_query":
                         click.echo(f"{year}: online query only; automated download unavailable.")
                         for resource in data.get("resources", []):
                             click.echo(f"  {resource['url']}")
 
-    result = download_modules(catalog, dest, fmt=fmt, fallback=not no_fallback, layout=layout, workers=workers, dry_run=dry_run)
+    try:
+        result = download_modules(catalog, dest, fmt=fmt, fallback=not no_fallback, layout=layout, workers=workers, dry_run=dry_run, ubigeo=ubigeo)
+    except (ValueError, requests.RequestException) as exc:
+        raise click.ClickException(str(exc)) from exc
     if dry_run:
         if include_docs:
             click.echo("\nDocumentation:")
@@ -178,6 +187,8 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
         return
 
     click.echo(f"\nModules: {result['ok']} downloaded, {result['skipped']} skipped, {result['failed']} failed, {result['bad_zip']} bad")
+    if result.get("unavailable"):
+        click.echo(f"{result['unavailable']} modules have no tables for ubigeo {ubigeo}.")
 
     if include_docs:
         doc_result = download_docs(catalog, dest, layout=layout, workers=workers)

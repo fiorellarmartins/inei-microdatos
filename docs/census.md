@@ -47,7 +47,8 @@ temporales. Las consultas se ejecutan secuencialmente y los archivos válidos se
 reutilizan. Se conservan los pesos del formulario, incluido `PERSONA.FACTEXP`
 en 1981, y la cobertura de la base consultada; no se ajustan sus totales.
 Este soporte requiere que el servidor REDATAM esté disponible; no incluye
-cruces personalizados, selección regional ni extracción de registros individuales.
+cruces personalizados ni extracción de registros individuales. La selección
+geográfica opcional se describe a continuación.
 
 `download_modules()`, `read_module()` y `read_catalog_entry()` usan la misma API
 que los otros datasets. Para XLSX, cada hoja conserva todas sus filas
@@ -91,6 +92,64 @@ Para actualizar el catálogo incluido: `python scripts/update_census.py`.
 Para reconstruir el índice censal incluido: `python scripts/update_census_index.py`
 (opcionalmente `--data-dir ./data/`). El script conserva el índice de encuestas y
 rechaza una reconstrucción incompleta.
+
+## Selección geográfica uniforme
+
+Usa `--ubigeo` en la descarga o `ubigeo=` en Python. El código INEI debe ser una
+cadena con **2 dígitos para departamento**, **4 para provincia** o **6 para
+distrito**, conservando los ceros iniciales. Por ejemplo, `15`, `1501` y `150101`
+seleccionan el departamento de Lima, la provincia de Lima y el distrito de Lima.
+Omite el parámetro para mantener la descarga nacional.
+
+```bash
+inei-microdatos download --survey censo2025 --ubigeo 150101 --dest ./data/
+inei-microdatos download --survey censo1993 --ubigeo 1501 --dest ./data/
+inei-microdatos download --survey censo2017 --ubigeo 01 --dest ./data/
+```
+
+```python
+from inei_microdatos import load_catalog, download_modules, read_catalog_entry
+from inei_microdatos.catalog import filter_catalog
+
+census = filter_catalog(load_catalog(), survey="censo2025")
+download_modules(census, dest="./data", ubigeo="150101")
+tables = read_catalog_entry(
+    census[0], "2025", module="Indicadores demográficos",
+    dest="./cache", ubigeo="150101",
+)
+# Cada DataFrame incluye ubigeo, census_year y geography en .attrs.
+```
+
+También puedes usar `select_census_geography(census, "150101")` para obtener un
+catálogo filtrado sin modificar el original y pasarlo a `download_modules()`.
+La selección se valida en la fuente oficial de **cada año**; no traslada límites
+actuales a censos antiguos. Un código inexistente produce un error. La opción
+solo se aplica al catálogo de población y vivienda; primero filtra `survey="censo"`
+o un alias por año. La validación requiere conexión, incluso con `--dry-run`.
+
+| Años | Cómo se aplica |
+|------|----------------|
+| 1981, 1993, 2005 | Selección geográfica del formulario REDATAM; se conservan sus pesos y se descarga el XLS original generado para esa área. |
+| 2007 | Selección del ubigeo en el portal de tabulados; descarga del XLS original de esa área. |
+| 2017, 2025 | Resolución del código en la geografía oficial del año y extracción de los bloques correspondientes de los libros nacionales. |
+
+En 2017/2025 el resultado es un **XLSX derivado**: conserva valores, encabezados
+y notas de las tablas seleccionadas, pero no reproduce estilos, celdas combinadas
+ni anexos del libro original. El filtro considera departamento, provincia y
+distrito conjuntamente para distinguir nombres repetidos. Una selección de
+departamento o provincia conserva sus bloques y subdivisiones disponibles;
+no calcula nuevos totales ni armoniza geografías. Los originales se conservan
+como caché junto al directorio de selección y se reutilizan.
+
+Los archivos seleccionados incluyen `ubigeo-<código>` en su nombre y las descargas
+por catálogo se separan en un subdirectorio con ese nombre, también con layouts
+personalizados. Las hojas sin el nivel geográfico solicitado se omiten; si ningún
+cuadro del módulo lo ofrece, la descarga cuenta ese módulo como `unavailable` y
+`read_catalog_entry()` lanza `GeographyUnavailable`. Nunca se sustituye la selección
+por datos nacionales. La cobertura distrital depende de cada cuadro.
+En los libros nacionales comprobados, el detalle distrital está en el cuadro 1
+del tomo 1 de 2017 y en los cuadros 1 y 2 de «Indicadores demográficos» de 2025;
+el filtro no añade ese detalle a los demás cuadros.
 
 ---
 
@@ -143,8 +202,8 @@ export (SYLK content with an `.xls` extension). The catalog stores query
 parameters, not temporary URLs. Queries run sequentially and valid local files
 are reused. Form weights, including `PERSONA.FACTEXP` in 1981, and the queried
 database's coverage are preserved; totals are not adjusted. This requires a
-working REDATAM server. Custom cross-tabulations, regional selections, and
-individual-record extraction are not included.
+working REDATAM server. Custom cross-tabulations and individual-record extraction
+are not included. Optional geographic selection is described below.
 
 `download_modules()`, `read_module()`, and `read_catalog_entry()` follow the same
 API as other datasets. XLSX sheets retain all rows (`header=None`); 2007 XLS
@@ -188,3 +247,58 @@ To refresh the bundled catalog: `python scripts/update_census.py`.
 To rebuild the bundled census index: `python scripts/update_census_index.py`
 (optionally `--data-dir ./data/`). The script preserves survey entries and
 rejects an incomplete rebuild.
+
+## Uniform geographic selection
+
+Use `--ubigeo` when downloading or `ubigeo=` in Python. Supply an INEI code as a
+string with **2 digits for a department**, **4 for a province**, or **6 for a
+district**, keeping leading zeros. For example, `15`, `1501`, and `150101` select
+Lima department, Lima province, and Lima district. Omit it for national downloads.
+
+```bash
+inei-microdatos download --survey censo2025 --ubigeo 150101 --dest ./data/
+inei-microdatos download --survey censo1993 --ubigeo 1501 --dest ./data/
+inei-microdatos download --survey censo2017 --ubigeo 01 --dest ./data/
+```
+
+```python
+from inei_microdatos import load_catalog, download_modules, read_catalog_entry
+from inei_microdatos.catalog import filter_catalog
+
+census = filter_catalog(load_catalog(), survey="censo2025")
+download_modules(census, dest="./data", ubigeo="150101")
+tables = read_catalog_entry(
+    census[0], "2025", module="Indicadores demográficos",
+    dest="./cache", ubigeo="150101",
+)
+# Each DataFrame records ubigeo, census_year, and geography in .attrs.
+```
+
+Alternatively, `select_census_geography(census, "150101")` returns a scoped catalog
+without modifying the original; pass it to `download_modules()`. Codes are
+validated against the official geography of **each census year**. Current boundaries
+are not applied to older censuses. Missing codes raise an error. This option only
+supports the population and housing census catalog; filter `survey="censo"` or a
+year alias first. Validation requires a connection, including with `--dry-run`.
+
+| Years | Selection method |
+|-------|------------------|
+| 1981, 1993, 2005 | REDATAM form selection, preserving its weights and downloading the original XLS generated for that area. |
+| 2007 | Ubigeo selection in the tabulation portal, downloading that area's original XLS. |
+| 2017, 2025 | Resolve codes using the census year's official geography and extract matching blocks from national workbooks. |
+
+For 2017/2025, the output is a **derived XLSX** retaining selected table values,
+headings, and notes. It does not reproduce source styles, merged cells, or annexes.
+The filter matches the complete department/province/district hierarchy to distinguish
+repeated place names. Department and province selections retain their available
+blocks and subdivisions; no new totals or geographic harmonization are calculated.
+Source workbooks are cached alongside the selection directory and reused.
+
+Selected filenames include `ubigeo-<code>`, and catalog downloads use a subdirectory
+with that name, including custom layouts. Sheets without the requested geographic
+detail are omitted. If a module contains no matching tables, downloads count it as
+`unavailable`, and `read_catalog_entry()` raises `GeographyUnavailable`. It never
+falls back to national data. District coverage depends on the individual table.
+In the national workbooks checked, district detail is available in table 1 of
+2017 volume 1 and tables 1 and 2 of the 2025 demographic indicators workbook;
+the filter does not add that detail to other tables.
