@@ -140,7 +140,7 @@ def list_cmd(catalog_path, survey, year_min, year_max, period):
 @click.option("--no-fallback", is_flag=True, help="Don't fall back to another format when preferred isn't available.")
 @click.option("--dry-run", is_flag=True, help="Show what would be downloaded without downloading.")
 @click.option("--include-docs", is_flag=True, help="Also download documentation.")
-@click.option("--ubigeo", help="Census INEI code: 2 digits department, 4 province, 6 district.")
+@click.option("--ubigeo", help="INEI code: 2 digits department, 4 province, 6 district; verified datasets only.")
 def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout, workers, no_fallback, dry_run, include_docs, ubigeo):
     """Download microdata files or aggregate census tables.
 
@@ -159,6 +159,10 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
 
     stats = catalog_stats(catalog)
     click.echo(f"Matched: {stats['surveys']} surveys, {stats['downloadable_modules']} downloadable modules")
+
+    if ubigeo and any(e.get("data_kind") != "aggregate_tables" for e in catalog):
+        click.echo("Survey geographic selection: downloads source CSV ZIPs and creates derived CSV ZIPs. "
+                   "Coverage varies by year and table; use 'geography' to inspect it offline.")
 
     if any(e.get("data_kind") == "aggregate_tables" for e in catalog):
         if ubigeo:
@@ -188,7 +192,11 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
 
     click.echo(f"\nModules: {result['ok']} downloaded, {result['skipped']} skipped, {result['failed']} failed, {result['bad_zip']} bad")
     if result.get("unavailable"):
-        click.echo(f"{result['unavailable']} modules have no tables for ubigeo {ubigeo}.")
+        click.echo(f"{result['unavailable']} modules have no verified selection available for ubigeo {ubigeo}.")
+    if result.get("empty"):
+        click.echo(f"{result['empty']} modules support the selection but contain no matching observations.")
+    if result.get("partial"):
+        click.echo(f"{result['partial']} modules produced partial subsets: some source records could not be located. See geography.json in each ZIP.")
 
     if include_docs:
         doc_result = download_docs(catalog, dest, layout=layout, workers=workers)
@@ -457,6 +465,33 @@ def stats(catalog_path):
         click.echo(f"  Catalog crawled at:   {age}")
     else:
         click.echo("  Catalog crawled at:   unknown (legacy format)")
+
+
+@cli.command("geography")
+@click.option("--catalog", "catalog_path", type=click.Path(), default=str(DEFAULT_CATALOG), help=CATALOG_HELP)
+@click.option("--survey", help=SURVEY_HELP)
+@click.option("--year-min", type=int)
+@click.option("--year-max", type=int)
+@click.option("--period", help="Filter periods by substring.")
+@click.option("--module", help="Filter module names by substring.")
+@click.option("--json", "as_json", is_flag=True, help="Print machine-readable capability metadata.")
+def geography_cmd(catalog_path, survey, year_min, year_max, period, module, as_json):
+    """Inspect verified geographic levels per module/table, without downloading."""
+    import json
+    from inei_microdatos.survey_geography import geography_capabilities
+    catalog = filter_catalog(load_catalog(catalog_path), survey=survey, year_min=year_min,
+                             year_max=year_max, period=period)
+    capabilities = geography_capabilities(catalog)
+    if module:
+        capabilities = [c for c in capabilities if module.lower() in c["module_name"].lower()]
+    if as_json:
+        click.echo(json.dumps(capabilities, ensure_ascii=False, indent=2))
+        return
+    for item in capabilities:
+        click.echo(f"{item['survey']} | {item['year']} | {item['period']} | {item['module_name']}")
+        click.echo(f"  {item['status']}: {', '.join(item['levels']) or 'no verified levels'}")
+        for table in item["tables"]:
+            click.echo(f"    {table['table']}: {', '.join(table['levels']) or table.get('reason') or 'unsupported'} ({table['method']})")
 
 
 def _print_stats(s: dict):

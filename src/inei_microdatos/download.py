@@ -6,6 +6,7 @@ import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Optional
+from threading import Lock, RLock
 
 import requests
 from tqdm import tqdm
@@ -15,6 +16,8 @@ from inei_microdatos.client import DOWNLOAD_BASE, BASE_URL
 _TIMEOUT = 120
 _CHUNK = 8192
 _MAX_RETRIES = 3
+_PATH_LOCKS = {}
+_PATH_LOCKS_GUARD = Lock()
 
 # Folder layout presets.
 # Placeholders: {survey}, {year}, {period}, {code}, {module_name}, {format}
@@ -50,11 +53,12 @@ def download_modules(
         workers: Number of parallel download threads.
         progress: Show progress bar.
         dry_run: If True, print what would be downloaded without downloading.
-        ubigeo: Census-year INEI code: 2 digits (department), 4 (province), 6 (district).
+        ubigeo: INEI code: 2 digits (department), 4 (province), 6 (district).
 
     Returns:
         Dict with counts: ok, skipped, failed, bad_zip (or files/would_skip for dry_run).
-        Geographic downloads add unavailable when a module has no matching tables.
+        Geographic downloads may add unavailable (no supported tables), empty
+        (no matching survey observations), or partial (unresolved survey records/tables).
     """
     fmt = fmt.upper()
     if fmt not in ("CSV", "STATA", "SPSS", "XLSX", "XLS"):
@@ -62,8 +66,8 @@ def download_modules(
 
     template = LAYOUTS.get(layout, layout)
     if ubigeo is not None:
-        from inei_microdatos.geography import select_census_geography
-        catalog = select_census_geography(catalog, ubigeo)
+        from inei_microdatos.survey_geography import select_geography
+        catalog = select_geography(catalog, ubigeo)
     tasks = _collect_module_tasks(catalog, dest, fmt, fallback, template)
     if dry_run:
         return _dry_run_report(tasks)
@@ -103,6 +107,11 @@ def module_download(mod: dict, fmt: str, fallback: bool = True):
     fmt = fmt.upper()
     if fmt not in _FORMATS:
         raise ValueError(f"Invalid format: {fmt}")
+    if mod.get("survey_geography_query"):
+        if fmt != "CSV" and not fallback:
+            raise ValueError("Derived survey subsets use CSV; choose CSV or enable format fallback")
+        code = (mod.get("csv_code") or mod["module_code"]) + "-ubigeo-" + mod["geography"]["code"]
+        return mod["survey_geography_query"], code, "CSV", ".zip"
     order = {
         "CSV": ("CSV", "STATA", "SPSS", "XLSX", "XLS"),
         "STATA": ("STATA", "CSV", "SPSS", "XLSX", "XLS"),
@@ -160,6 +169,9 @@ def _collect_module_tasks(
                         rel = str(rel_path.parent / ("ubigeo-" + mod["geography"]["code"]) / rel_path.name)
                         if isinstance(url, dict) and url.get("kind") == "census_geography":
                             url = dict(url, source_path=str(dest / rel_path.parent / (mod["module_code"] + ".xlsx")))
+                        elif isinstance(url, dict) and url.get("kind") == "survey_geography":
+                            url = dict(url, source_path=str(dest / rel_path.parent / ".geography-sources" /
+                                                           "CSV" / (url["module_code"] + ".zip")))
                     tasks.append((url, dest / rel))
     return tasks
 
@@ -236,16 +248,37 @@ def _valid_download(path: Path) -> bool:
 
 
 def _download_one(url: str | dict, dest: Path) -> str:
+    # Multiple ENDES modules share parent archives. Never read a partially written cache.
+    with _PATH_LOCKS_GUARD:
+        lock = _PATH_LOCKS.setdefault(str(dest.resolve()), RLock())
+    with lock:
+        return _download_one_locked(url, dest)
+
+
+def _download_one_locked(url: str | dict, dest: Path) -> str:
     from inei_microdatos.geography import GeographyUnavailable
+    if isinstance(url, dict) and url.get("kind") == "geography_unavailable":
+        return "unavailable"
     if dest.exists():
         if dest.stat().st_size > 0 and _valid_download(dest):
-            return "skipped"
+            if not isinstance(url, dict) or url.get("kind") != "survey_geography":
+                return "skipped"
+            from inei_microdatos.survey_geography import matching_subset
+            if matching_subset(dest, url):
+                return "skipped"
 
     dest.parent.mkdir(parents=True, exist_ok=True)
 
     for attempt in range(_MAX_RETRIES):
         try:
-            if isinstance(url, dict) and url.get("kind") == "census_geography":
+            outcome = "ok"
+            if isinstance(url, dict) and url.get("kind") == "survey_geography":
+                from inei_microdatos.survey_geography import subset_survey_archive
+                raw = Path(url.get("source_path", dest.parent / ".geography-sources" / "CSV" / (url["module_code"] + ".zip")))
+                if _download_one(url["url"], raw) not in ("ok", "skipped"):
+                    raise OSError("Could not download source survey archive")
+                outcome = subset_survey_archive(raw, dest, url)
+            elif isinstance(url, dict) and url.get("kind") == "census_geography":
                 from inei_microdatos.geography import subset_workbook
                 raw = Path(url.get("source_path", dest.parent / (url["module_code"] + ".xlsx")))
                 if _download_one(url["url"], raw) not in ("ok", "skipped"):
@@ -263,7 +296,7 @@ def _download_one(url: str | dict, dest: Path) -> str:
             if not _valid_download(dest):
                 dest.unlink(missing_ok=True)
                 return "bad_zip"
-            return "ok"
+            return outcome
         except GeographyUnavailable:
             dest.unlink(missing_ok=True)
             return "unavailable"
@@ -280,16 +313,34 @@ def _dry_run_report(tasks: list) -> dict:
     """Print what would be downloaded and return summary stats."""
     would_download = 0
     would_skip = 0
+    unavailable = 0
     for url, path in tasks:
-        if path.exists() and path.stat().st_size > 0 and _valid_download(path):
+        if isinstance(url, dict) and url.get("kind") == "geography_unavailable":
+            unavailable += 1
+            print(f"  unavailable: {path.name} ({url['reason']})")
+            continue
+        cached = path.exists() and path.stat().st_size > 0 and _valid_download(path)
+        if cached and isinstance(url, dict) and url.get("kind") == "survey_geography":
+            from inei_microdatos.survey_geography import matching_subset
+            cached = matching_subset(path, url)
+        if cached:
             would_skip += 1
         else:
             would_download += 1
-            print(f"  {url}")
+            if isinstance(url, dict) and url.get("kind") == "survey_geography":
+                print(f"  {url['url']} -> derived CSV subset, ubigeo {url['code']}")
+                parents = sorted({t["parent_code"] for t in url["rule"]["tables"] if t.get("parent_code")})
+                if parents:
+                    print(f"    Geographic dependencies (reused when cached): {', '.join(parents)}")
+            else:
+                print(f"  {url}")
             print(f"    -> {path}")
 
     print(f"\n  {would_download} files to download, {would_skip} already exist")
-    return {"files": would_download, "would_skip": would_skip}
+    result = {"files": would_download, "would_skip": would_skip}
+    if unavailable:
+        result["unavailable"] = unavailable
+    return result
 
 
 def _safe_dirname(s: str) -> str:

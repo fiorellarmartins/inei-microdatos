@@ -329,6 +329,22 @@ inei-microdatos crawl --survey enaho     # solo una encuesta específica
 
 Las encuestas antiguas (pre-2008) frecuentemente solo están disponibles en SPSS/STATA, no en CSV. El flag `--format CSV` automáticamente cae a STATA o SPSS cuando CSV no está disponible. Usa `--no-fallback` para desactivar esto.
 
+## Selección geográfica
+
+Usa `--ubigeo` o `ubigeo=` para seleccionar un departamento, provincia o distrito
+en los datasets verificados. Consulta primero la cobertura por año, módulo y tabla:
+
+```bash
+inei-microdatos geography --survey endes --year-min 2024 --year-max 2024
+inei-microdatos download --survey endes --year-min 2024 --year-max 2024 --ubigeo 150101 --dest ./data/
+```
+
+El soporte inicial de encuestas cubre módulos de 2024 de ENAHO, ENDES, ENAPRES,
+EPEN Departamentos, RENAMU y ENA; EPEN admite solo departamento. Los subconjuntos
+son ZIP CSV derivados, con un reporte de cobertura, y conservan los originales.
+Consulta la [guía de selección geográfica](docs/geography.md) para ver niveles,
+limitaciones, estados de resultado y ejemplos de Python.
+
 ## Notas por dataset
 
 ### Separación metodológica de ENAHO
@@ -697,6 +713,22 @@ inei-microdatos crawl --survey enaho     # crawl specific survey only
 | **XLS** | Censuses 1981, 1993, 2005, and 2007 | INEI SYLK or HTML exports |
 
 Older surveys (pre-2008) are often available only in SPSS/STATA, not CSV. The `--format CSV` flag automatically falls back to STATA or SPSS when CSV isn't available. Use `--no-fallback` to disable this.
+
+## Geographic selection
+
+Use `--ubigeo` or `ubigeo=` to select a department, province, or district in verified
+datasets. Inspect coverage by year, module, and table before downloading:
+
+```bash
+inei-microdatos geography --survey endes --year-min 2024 --year-max 2024
+inei-microdatos download --survey endes --year-min 2024 --year-max 2024 --ubigeo 150101 --dest ./data/
+```
+
+Initial survey support covers 2024 modules from ENAHO, ENDES, ENAPRES,
+EPEN Departamentos, RENAMU, and ENA; EPEN supports departments only. Subsets are
+derived CSV ZIPs with coverage reports; original archives remain intact.
+See the [geographic selection guide](docs/geography.md#english) for supported levels,
+limitations, result statuses, and Python examples.
 
 ## Dataset notes
 

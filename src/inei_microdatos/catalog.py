@@ -94,7 +94,8 @@ def build_catalog(
     if census_years:
         catalog.append(build_census_catalog(years=census_years))
 
-    return _dedup_catalog(catalog)
+    from inei_microdatos.survey_geography import annotate_catalog
+    return annotate_catalog(_dedup_catalog(catalog))
 
 
 # ENAHO methodology boundary: "Anterior" = pre-2004, "Actualizada" = 2004+
@@ -201,11 +202,12 @@ def _read_timestamp(path: Path) -> Optional[str]:
 
 
 def _read_catalog_file(path: Path) -> list[dict]:
+    from inei_microdatos.survey_geography import annotate_catalog
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
     if isinstance(data, list):
-        return data  # legacy format (raw list)
-    return data["catalog"]
+        return annotate_catalog(data)  # legacy format (raw list)
+    return annotate_catalog(data["catalog"])
 
 
 def catalog_stats(catalog: list[dict]) -> dict[str, int]:
