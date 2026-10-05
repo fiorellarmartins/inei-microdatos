@@ -7,7 +7,7 @@ from inei_microdatos.reader import read_module, read_catalog_entry, list_tables
 from inei_microdatos.variables import search as search_variables, search_across_years
 from inei_microdatos.geography import select_census_geography
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __all__ = [
     "INEIClient",
     "build_catalog",
