@@ -1,0 +1,5460 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo01",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo01/Enaho01-2024-100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo02",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo02/ENAHO-TABLA-CIIU-REV3.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo02/ENAHO-TABLA-CIIU-REV4.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo02/ENAHO-TABLA-CIUO-88.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo02/ENAHO-TABLA-CNO-2015.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo02/Enaho01-2024-200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo03",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo03/Enaho01A-2024-300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo04",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo04/Enaho01A-2024-400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo05",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo05/ENAHO-TABLA-CIIU-REV3.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo05/ENAHO-TABLA-CIIU-REV4.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo05/ENAHO-TABLA-CIUO-88.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo05/ENAHO-TABLA-CNO-2015.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo05/Enaho01a-2024-500.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo07",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo07/Enaho01-2024-601.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo08",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo08/Enaho01-2024-602.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo08/Enaho01-2024-602A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo08/Enaho01-2024-602B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo09",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo09/Enaho01-2024-603.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo10",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo10/Enaho01-2024-604.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo11",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo11/Enaho01-2024-605.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo12",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo12/Enaho01-2024-606.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo13",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo13/Enaho01-2024-607.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo15",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo15/Enaho01-2024-609.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo16",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo16/Enaho01-2024-610.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo17",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo17/Enaho01-2024-611.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo18",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo18/Enaho01-2024-612.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo22",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo22/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo22/Enaho02-2024-2000.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo22/Enaho02-2024-2000A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo22/Enaho02-2024-2100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo23",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo23/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo23/Enaho02-2024-2200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo24",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo24/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo24/Enaho02-2024-2300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo25",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo25/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo25/Enaho02-2024-2400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo26",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo26/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo26/Enaho02-2024-2500.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo27",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo27/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo27/Enaho02-2024-2600.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo28",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "Reference table",
+          "path": "966-Modulo28/ENAHO-TABLA-AGROPECUARIO.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": []
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo28/Enaho02-2024-2700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo34",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo34/Sumaria-2024-12g.csv",
+          "encoding": "latin-1",
+          "delimiter": ";",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo34/Sumaria-2024.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo37",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo37/Enaho01-2024-700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo37/Enaho01-2024-700A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo37/Enaho01-2024-700B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo77",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo77/Enaho04-2024-1-Preg-1-a-13.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo77/Enaho04-2024-2-Preg-14-a-22.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo77/Enaho04-2024-3-Preg-23.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo77/Enaho04-2024-4-Preg-24.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo77/Enaho04-2024-5-Preg-25.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo78",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo78/Enaho01-2024-606D.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo84",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo84/Enaho01-2024-800A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo84/Enaho01-2024-800B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo85",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo85/Enaho01B-2024-1.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo85/Enaho01B-2024-2.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "966-Modulo1825",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo1825/Enaho01-2024-613.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "966-Modulo1825/Enaho01-2024-613h.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo01",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo01/Enaho01-2024-100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo02",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo02/Enaho01-2024-200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo03",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo03/Enaho01A-2024-300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo04",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo04/Enaho01A-2024-400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo07",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo07/Enaho01-2024-601.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo37",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo37/Enaho01-2024-700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo37/Enaho01-2024-700A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo37/Enaho01-2024-700B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 1",
+      "archive_code": "913-Modulo85",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo81/Enaho01B-2024-1.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "913-Modulo81/Enaho01B-2024-2.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo01",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo01/Enaho01-2024-100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo02",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo02/Enaho01-2024-200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo03",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo03/Enaho01A-2024-300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo04",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo04/Enaho01A-2024-400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo07",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo07/Enaho01-2024-601.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo37",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo37/Enaho01-2024-700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo37/Enaho01-2024-700A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo37/Enaho01-2024-700B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 2",
+      "archive_code": "920-Modulo85",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo85/Enaho01B-2024-1.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "920-Modulo85/Enaho01B-2024-2.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo01",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo01/Enaho01-2024-100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo02",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo02/Enaho01-2024-200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo03",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo03/Enaho01A-2024-300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo04",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo04/Enaho01A-2024-400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo07",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo07/Enaho01-2024-601.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo37",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo37/Enaho01-2024-700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo37/Enaho01-2024-700A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo37/Enaho01-2024-700B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 3",
+      "archive_code": "926-Modulo85",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo85/Enaho01B-2024-1.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "926-Modulo85/Enaho01B-2024-2.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo01",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo01/Enaho01-2024-100.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo02",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo02/Enaho01-2024-200.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo03",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo03/Enaho01A-2024-300.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo04",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo04/Enaho01A-2024-400.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo07",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo07/Enaho01-2024-601.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo37",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo37/Enaho01-2024-700.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo37/Enaho01-2024-700A.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo37/Enaho01-2024-700B.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Condiciones de Vida y Pobreza - ENAHO",
+      "year": "2024",
+      "period": "Trimestre 4",
+      "archive_code": "962-Modulo85",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-55/20_Diccionario_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo85/Enaho01B-2024-1.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "962-Modulo85/Enaho01B-2024-2.csv",
+          "encoding": "latin-1",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOME",
+            "VIVIENDA",
+            "HOGAR",
+            "UBIGEO"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Anual - (Ene-Dic)",
+      "archive_code": "935-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "EPEN 2024 BD_Publicacion Dpto.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Amazonas",
+      "archive_code": "936-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "01 Amazonas EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Áncash",
+      "archive_code": "937-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "02 Ancash EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Apurímac",
+      "archive_code": "938-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "03 Apurimac EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Arequipa",
+      "archive_code": "939-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "04 Arequipa EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Ayacucho",
+      "archive_code": "940-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "05 Ayacucho EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Cajamarca",
+      "archive_code": "941-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "06 Cajamarca EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Cusco",
+      "archive_code": "942-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "08 Cusco EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Huancavelica",
+      "archive_code": "943-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "09 Huancavelica EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Huánuco",
+      "archive_code": "944-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "10 Huanuco EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Ica",
+      "archive_code": "945-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "11 Ica EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Junín",
+      "archive_code": "946-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "12 Junin EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "La Libertad",
+      "archive_code": "947-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "13 La Libertad EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Lambayeque",
+      "archive_code": "948-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "14 Lambayeque EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Lima",
+      "archive_code": "949-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "15 Lima EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Loreto",
+      "archive_code": "950-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "16 Loreto EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Madre de Dios",
+      "archive_code": "951-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "17 Madre de Dios EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Moquegua",
+      "archive_code": "952-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "18 Moquegua EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Pasco",
+      "archive_code": "953-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "19 Pasco EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Piura",
+      "archive_code": "954-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "20 Piura EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Puno",
+      "archive_code": "955-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "21 Puno EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "San Martín",
+      "archive_code": "956-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "22 San Martin EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Tacna",
+      "archive_code": "957-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "23 Tacna EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Tumbes",
+      "archive_code": "958-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "24 Tumbes EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "EPEN  DEPARTAMENTOS",
+      "year": "2024",
+      "period": "Ucayali",
+      "archive_code": "959-Modulo76",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-156/Diccionario.zip"
+      ],
+      "tables": [
+        {
+          "method": "department",
+          "columns": [
+            "CCDD"
+          ],
+          "levels": [
+            "department"
+          ],
+          "path": "25 Ucayali EPEN Anual 2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "HOGAR",
+            "CCDD"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1629",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "968-Modulo1629/RECH0_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1629/RECH1_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1629/RECH4_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1629/RECHM_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1630",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1630/RECH23_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1631",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "UBIGEO"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "968-Modulo1631/REC0111_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID",
+            "HHID",
+            "UBIGEO"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1631/REC91_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1632",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1632/RE223132_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1632/REC21_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1633",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1633/REC41_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1633/REC94_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1634",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1634/DIT_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1634/REC42_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1634/REC43_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1634/REC95_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1635",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1635/RE516171_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1636",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1636/RE758081_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1636/REC82_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1637",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1637/REC83_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1637/REC84DV_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1638",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1638/REC44_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1638/RECH5_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1638/RECH6_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1639",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "CASEID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1631",
+          "parent_table": "REC0111_2024.csv",
+          "parent_key": "CASEID",
+          "path": "968-Modulo1639/REC93DVdisciplina_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CASEID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1640",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1640/CSALUD01_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1640/CSALUD08_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Demográfica y de Salud Familiar - ENDES",
+      "year": "2024",
+      "period": "Unico",
+      "archive_code": "968-Modulo1641",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioHogar.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioIndividual.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-5/DiccionarioSalud.zip"
+      ],
+      "tables": [
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/Programas Sociales x Hogar_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_BECA18_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_COMEDOR_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_PENSION65_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_QALIWARMA_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_TRABAJA_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_VL_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        },
+        {
+          "method": "join",
+          "columns": [
+            "HHID"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "parent_code": "968-Modulo1629",
+          "parent_table": "RECH0_2024.csv",
+          "parent_key": "HHID",
+          "path": "968-Modulo1641/PS_WAWAWASI_2024.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "HHID"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1893",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1893/01_CAP100A_01.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "No verified geographic field or relationship",
+          "path": "973-Modulo1893/01_CAP100A_02.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1893/01_CAP100A_03.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1893/01_CAP100A_04.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1893/CARATULA.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1893/USOSTIERRA.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1894",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1894/02_CAP100B_01.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1894/02_CAP100B_02.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1895",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1895/03_CAP200A.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1895/03_CAP200AB.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1896",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1896/04_CAP200B_1.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1897",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1897/05_CAP200C.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1898",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1898/06_CAP200D.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1899",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1899/07_CAP200E.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1900",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1900/08_CAP300AB.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1901",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1901/09_CAP400A.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1902",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1902/10_CAP400A_1.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1902/10_CAP400A_2.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        },
+        {
+          "method": "unsupported",
+          "columns": [],
+          "levels": [],
+          "reason": "No verified geographic field or relationship",
+          "path": "973-Modulo1902/10_CAP400A_3.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1903",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1903/11_CAP400B.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1904",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1904/12_CAP400C.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1905",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1905/13_CAP500AB.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1906",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1906/14_CAP600.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1907",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1907/15_CAP700.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1908",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1908/16_CAP800.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1909",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1909/17_CAP900.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1910",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1910/18_CAP1000.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1911",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1911/19_CAP1100.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1912",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1912/20_CAP1200A_IS.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "ENCUESTA NACIONAL AGROPECUARIA",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "973-Modulo1913",
+      "meaning": "agricultural_unit_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/01_CUESTIONARIO_ENA_2024.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-62/02_CUESTIONARIO_EMPRESA_2024.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "973-Modulo1913/21_CAP1200B_ME.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI",
+            "ID_PROD",
+            "UA"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1856",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1856/CAP_100E_URBANO_RURAL_3.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1857",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1857/CAP_200_URBANO_RURAL_4.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1858",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1858/CAP_300_URBANO_RURAL_5.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1859",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1859/CAP_500_URBANO_RURAL_6.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1860",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1860/CAP_600_ANUAL_7.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1861",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1861/CAP_700_URBANO_RURAL_8.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1862",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1862/CAP_800_URBANO_9.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1863",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1863/CAP_800A_URBANO_RURAL_10.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1864",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1864/CAP_900_URBANO_11.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Encuesta Nacional de Programas Presupuestales - ENAPRES",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "965-Modulo1865",
+      "meaning": "household_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/02_Cuestionario_01A.zip",
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-18/03_Cuestionario_01B.zip"
+      ],
+      "tables": [
+        {
+          "method": "components",
+          "columns": [
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "965-Modulo1865/CAP_1000_URBANO_12.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ",",
+          "text_columns": [
+            "CONGLOMERADO",
+            "VIVIENDA",
+            "HOGAR",
+            "CCDD",
+            "CCPP",
+            "CCDI"
+          ]
+        }
+      ]
+    },
+    {
+      "survey_value": "Registro Nacional de Municipalidades - RENAMU",
+      "year": "2024",
+      "period": "Anual",
+      "archive_code": "928-Modulo1814",
+      "meaning": "municipality_location",
+      "sources": [
+        "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/DocumentosZIP/2024-142/Diccionario_Anexo01.zip"
+      ],
+      "tables": [
+        {
+          "method": "ubigeo",
+          "columns": [
+            "Ubigeo"
+          ],
+          "levels": [
+            "department",
+            "province",
+            "district"
+          ],
+          "path": "Base-Datos_2024_f.csv",
+          "encoding": "utf-8-sig",
+          "delimiter": ";",
+          "text_columns": [
+            "ccdd",
+            "ccpp",
+            "ccdi",
+            "Ubigeo"
+          ]
+        }
+      ]
+    }
+  ]
+}

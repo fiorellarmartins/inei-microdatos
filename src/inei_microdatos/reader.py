@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import io
+import json
 import zipfile
 from pathlib import Path
 from typing import Dict, List, Optional, Union
@@ -62,6 +63,8 @@ def read_module(
 
     with zipfile.ZipFile(path) as zf:
         data_files = _find_data_files(zf.namelist())
+        report = json.loads(zf.read("geography.json")) if "geography.json" in zf.namelist() else None
+        report_tables = {t["file"]: t for t in report["tables"]} if report else {}
 
         for name, detected_fmt, table_name in data_files:
             if tables and not any(t.lower() in table_name.lower() for t in tables):
@@ -71,7 +74,14 @@ def read_module(
                 data = io.BytesIO(f.read())
 
             use_fmt = fmt or detected_fmt
-            df = _read_data(data, use_fmt, name)
+            if report and name in report_tables:
+                info = report_tables[name]
+                df = pd.read_csv(data, encoding="utf-8", low_memory=False,
+                                 dtype={c: "string" for c in info["text_columns"]})
+                df.attrs.update(ubigeo=report["ubigeo"], survey_year=report["year"],
+                                geography_report=report, geographic_rows=info)
+            else:
+                df = _read_data(data, use_fmt, name)
             result[table_name] = df
 
     return result
@@ -95,18 +105,18 @@ def read_catalog_entry(
         module: Module name substring to filter (if None, reads first module).
         fmt: Preferred format — "csv", "stata", "spss", "xlsx", "xls".
         dest: Cache directory for downloads. If None, uses temp dir.
-        ubigeo: Optional 2/4/6-digit census-year INEI geographic code.
+        ubigeo: Optional 2/4/6-digit INEI code, where a verified adapter exists.
 
     Returns:
         Dict mapping table name to DataFrame.
     """
     year = str(year)
     if ubigeo is not None:
-        from inei_microdatos.geography import select_census_geography
+        from inei_microdatos.survey_geography import select_geography
         scoped = dict(catalog_entry, years={year: catalog_entry.get("years", {}).get(year, {})})
         if not scoped["years"][year]:
             raise ValueError(f"Year {year} not available")
-        catalog_entry = select_census_geography([scoped], ubigeo)[0]
+        catalog_entry = select_geography([scoped], ubigeo)[0]
     years = catalog_entry.get("years", {})
     if year not in years:
         available = sorted(years.keys())
@@ -149,11 +159,11 @@ def read_catalog_entry(
     if status == "unavailable":
         from inei_microdatos.geography import GeographyUnavailable
         raise GeographyUnavailable(f"Module {mod['module_name']} has no tables for ubigeo {mod['geography']['code']}")
-    if status not in ("ok", "skipped"):
+    if status not in ("ok", "skipped", "empty", "partial"):
         raise OSError(f"Could not download module {mod['module_name']}: {status}")
 
     frames = read_module(dest_path, fmt=actual_fmt.lower())
-    if mod.get("geography"):
+    if mod.get("geography", {}).get("names"):
         for frame in frames.values():
             frame.attrs.update(ubigeo=mod["geography"]["code"], census_year=year, geography=mod["geography"]["names"])
     return frames

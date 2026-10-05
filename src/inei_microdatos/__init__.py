@@ -6,8 +6,9 @@ from inei_microdatos.download import download_modules, download_docs, LAYOUTS
 from inei_microdatos.reader import read_module, read_catalog_entry, list_tables
 from inei_microdatos.variables import search as search_variables, search_across_years
 from inei_microdatos.geography import select_census_geography
+from inei_microdatos.survey_geography import geography_capabilities, select_geography
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 __all__ = [
     "INEIClient",
     "build_catalog",
@@ -20,4 +21,6 @@ __all__ = [
     "list_tables",
     "LAYOUTS",
     "select_census_geography",
+    "select_geography",
+    "geography_capabilities",
 ]

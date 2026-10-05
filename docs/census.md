@@ -123,9 +123,10 @@ tables = read_catalog_entry(
 También puedes usar `select_census_geography(census, "150101")` para obtener un
 catálogo filtrado sin modificar el original y pasarlo a `download_modules()`.
 La selección se valida en la fuente oficial de **cada año**; no traslada límites
-actuales a censos antiguos. Un código inexistente produce un error. La opción
-solo se aplica al catálogo de población y vivienda; primero filtra `survey="censo"`
-o un alias por año. La validación requiere conexión, incluso con `--dry-run`.
+actuales a censos antiguos. Un código inexistente produce un error. La validación
+censal requiere conexión, incluso con `--dry-run`. Desde 0.5.0, el parámetro común
+también admite [encuestas con adaptadores verificados](geography.md);
+`select_census_geography()` sigue siendo específico del catálogo censal.
 
 | Años | Cómo se aplica |
 |------|----------------|
@@ -277,9 +278,10 @@ tables = read_catalog_entry(
 Alternatively, `select_census_geography(census, "150101")` returns a scoped catalog
 without modifying the original; pass it to `download_modules()`. Codes are
 validated against the official geography of **each census year**. Current boundaries
-are not applied to older censuses. Missing codes raise an error. This option only
-supports the population and housing census catalog; filter `survey="censo"` or a
-year alias first. Validation requires a connection, including with `--dry-run`.
+are not applied to older censuses. Missing codes raise an error. Census validation
+requires a connection, including with `--dry-run`. Since 0.5.0, the common argument
+also supports [surveys with verified adapters](geography.md#english);
+`select_census_geography()` remains specific to the census catalog.
 
 | Years | Selection method |
 |-------|------------------|
