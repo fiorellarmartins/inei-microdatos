@@ -5,6 +5,7 @@ from inei_microdatos.catalog import build_catalog, load_catalog, save_catalog, c
 from inei_microdatos.download import download_modules, download_docs, LAYOUTS
 from inei_microdatos.reader import read_module, read_catalog_entry, list_tables
 from inei_microdatos.variables import search as search_variables, search_across_years
+from inei_microdatos.geography import select_census_geography
 
 __version__ = "0.3.0"
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     "read_catalog_entry",
     "list_tables",
     "LAYOUTS",
+    "select_census_geography",
 ]

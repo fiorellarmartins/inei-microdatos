@@ -35,6 +35,7 @@ def download_modules(
     workers: int = 4,
     progress: bool = True,
     dry_run: bool = False,
+    ubigeo: Optional[str] = None,
 ) -> dict[str, int]:
     """Download microdata ZIPs or aggregate XLS/XLSX tables from a catalog.
 
@@ -49,15 +50,20 @@ def download_modules(
         workers: Number of parallel download threads.
         progress: Show progress bar.
         dry_run: If True, print what would be downloaded without downloading.
+        ubigeo: Census-year INEI code: 2 digits (department), 4 (province), 6 (district).
 
     Returns:
         Dict with counts: ok, skipped, failed, bad_zip (or files/would_skip for dry_run).
+        Geographic downloads add unavailable when a module has no matching tables.
     """
     fmt = fmt.upper()
     if fmt not in ("CSV", "STATA", "SPSS", "XLSX", "XLS"):
         raise ValueError(f"Invalid format: {fmt}. Must be CSV, STATA, SPSS, XLSX, or XLS.")
 
     template = LAYOUTS.get(layout, layout)
+    if ubigeo is not None:
+        from inei_microdatos.geography import select_census_geography
+        catalog = select_census_geography(catalog, ubigeo)
     tasks = _collect_module_tasks(catalog, dest, fmt, fallback, template)
     if dry_run:
         return _dry_run_report(tasks)
@@ -105,17 +111,22 @@ def module_download(mod: dict, fmt: str, fallback: bool = True):
         "XLS": ("XLS", "XLSX", "CSV", "STATA", "SPSS"),
     }
     formats = order[fmt] if fallback else [fmt]
+    code = mod.get("module_code", "")
+    if mod.get("geography"):
+        code += "-ubigeo-" + mod["geography"]["code"]
     for actual_fmt in formats:
         if actual_fmt in ("XLSX", "XLS"):
+            if actual_fmt == "XLSX" and mod.get("geography_query"):
+                return mod["geography_query"], code, "XLSX", ".xlsx"
             if actual_fmt == "XLS" and mod.get("redatam_query"):
-                return mod["redatam_query"], mod["module_code"], "XLS", ".xls"
+                return mod["redatam_query"], code, "XLS", ".xls"
             url = mod.get(actual_fmt.lower() + "_url")
             if url:
-                return url, mod["module_code"], actual_fmt, "." + actual_fmt.lower()
+                return url, code, actual_fmt, "." + actual_fmt.lower()
         else:
-            code = mod.get(_FORMAT_KEYS[actual_fmt])
-            if code:
-                return f"{DOWNLOAD_BASE}{actual_fmt}/{code}.zip", code, actual_fmt, ".zip"
+            archive_code = mod.get(_FORMAT_KEYS[actual_fmt])
+            if archive_code:
+                return f"{DOWNLOAD_BASE}{actual_fmt}/{archive_code}.zip", archive_code, actual_fmt, ".zip"
     return None
 
 
@@ -143,6 +154,12 @@ def _collect_module_tasks(
                     )
                     if extension in (".xlsx", ".xls"):
                         rel = str(Path(rel).with_suffix(extension))
+                    if mod.get("geography"):
+                        # Isolate selections even when a custom layout omits {code}.
+                        rel_path = Path(rel)
+                        rel = str(rel_path.parent / ("ubigeo-" + mod["geography"]["code"]) / rel_path.name)
+                        if isinstance(url, dict) and url.get("kind") == "census_geography":
+                            url = dict(url, source_path=str(dest / rel_path.parent / (mod["module_code"] + ".xlsx")))
                     tasks.append((url, dest / rel))
     return tasks
 
@@ -193,6 +210,8 @@ def _run_downloads(
         futures = {pool.submit(_download_one, url, path): (url, path) for url, path in tasks}
         for future in as_completed(futures):
             result = future.result()
+            if result not in stats:
+                stats[result] = 0
             stats[result] += 1
             bar.update(1)
             bar.set_postfix(ok=stats["ok"], skip=stats["skipped"], fail=stats["failed"])
@@ -217,6 +236,7 @@ def _valid_download(path: Path) -> bool:
 
 
 def _download_one(url: str | dict, dest: Path) -> str:
+    from inei_microdatos.geography import GeographyUnavailable
     if dest.exists():
         if dest.stat().st_size > 0 and _valid_download(dest):
             return "skipped"
@@ -225,7 +245,13 @@ def _download_one(url: str | dict, dest: Path) -> str:
 
     for attempt in range(_MAX_RETRIES):
         try:
-            if isinstance(url, dict):
+            if isinstance(url, dict) and url.get("kind") == "census_geography":
+                from inei_microdatos.geography import subset_workbook
+                raw = Path(url.get("source_path", dest.parent / (url["module_code"] + ".xlsx")))
+                if _download_one(url["url"], raw) not in ("ok", "skipped"):
+                    raise OSError("Could not download source census workbook")
+                subset_workbook(raw, dest, url["geography"])
+            elif isinstance(url, dict):
                 from inei_microdatos.redatam import export_excel
                 dest.write_bytes(export_excel(url))
             else:
@@ -238,6 +264,9 @@ def _download_one(url: str | dict, dest: Path) -> str:
                 dest.unlink(missing_ok=True)
                 return "bad_zip"
             return "ok"
+        except GeographyUnavailable:
+            dest.unlink(missing_ok=True)
+            return "unavailable"
         except Exception:
             if dest.exists():
                 dest.unlink(missing_ok=True)

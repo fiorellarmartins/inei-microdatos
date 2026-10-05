@@ -84,6 +84,7 @@ def read_catalog_entry(
     module: Optional[str] = None,
     fmt: str = "csv",
     dest: Optional[Union[str, Path]] = None,
+    ubigeo: Optional[str] = None,
 ) -> Dict[str, "pandas.DataFrame"]:
     """Read data directly from a catalog entry, downloading as needed.
 
@@ -94,10 +95,18 @@ def read_catalog_entry(
         module: Module name substring to filter (if None, reads first module).
         fmt: Preferred format — "csv", "stata", "spss", "xlsx", "xls".
         dest: Cache directory for downloads. If None, uses temp dir.
+        ubigeo: Optional 2/4/6-digit census-year INEI geographic code.
 
     Returns:
         Dict mapping table name to DataFrame.
     """
+    year = str(year)
+    if ubigeo is not None:
+        from inei_microdatos.geography import select_census_geography
+        scoped = dict(catalog_entry, years={year: catalog_entry.get("years", {}).get(year, {})})
+        if not scoped["years"][year]:
+            raise ValueError(f"Year {year} not available")
+        catalog_entry = select_census_geography([scoped], ubigeo)[0]
     years = catalog_entry.get("years", {})
     if year not in years:
         available = sorted(years.keys())
@@ -137,10 +146,17 @@ def read_catalog_entry(
         dest_path = Path(tempfile.gettempdir()) / "inei_microdatos" / f"{code}{extension}"
 
     status = _download_one(url, dest_path)
+    if status == "unavailable":
+        from inei_microdatos.geography import GeographyUnavailable
+        raise GeographyUnavailable(f"Module {mod['module_name']} has no tables for ubigeo {mod['geography']['code']}")
     if status not in ("ok", "skipped"):
         raise OSError(f"Could not download module {mod['module_name']}: {status}")
 
-    return read_module(dest_path, fmt=actual_fmt.lower())
+    frames = read_module(dest_path, fmt=actual_fmt.lower())
+    if mod.get("geography"):
+        for frame in frames.values():
+            frame.attrs.update(ubigeo=mod["geography"]["code"], census_year=year, geography=mod["geography"]["names"])
+    return frames
 
 
 def list_tables(source: Union[str, Path]) -> List[dict]:
