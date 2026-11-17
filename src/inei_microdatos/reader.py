@@ -6,16 +6,16 @@ import io
 import json
 import zipfile
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Optional, Union
 
 from inei_microdatos.client import DOWNLOAD_BASE
 
 
 def read_module(
     source: Union[str, Path],
-    tables: Optional[List[str]] = None,
+    tables: Optional[list[str]] = None,
     fmt: Optional[str] = None,
-) -> Dict[str, "pandas.DataFrame"]:
+) -> dict[str, "pandas.DataFrame"]:
     """Read a module ZIP, XLSX workbook, or INEI HTML/SYLK XLS export.
 
     XLSX sheets retain every row (header=None) because census workbooks contain
@@ -95,7 +95,7 @@ def read_catalog_entry(
     fmt: str = "csv",
     dest: Optional[Union[str, Path]] = None,
     ubigeo: Optional[str] = None,
-) -> Dict[str, "pandas.DataFrame"]:
+) -> dict[str, "pandas.DataFrame"]:
     """Read data directly from a catalog entry, downloading as needed.
 
     Args:
@@ -169,7 +169,7 @@ def read_catalog_entry(
     return frames
 
 
-def list_tables(source: Union[str, Path]) -> List[dict]:
+def list_tables(source: str | Path) -> list[dict]:
     """List data files inside a ZIP, XLSX sheets, or the table in an INEI XLS export.
 
     Returns:
