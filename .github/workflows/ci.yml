@@ -27,3 +27,24 @@ jobs:
 
       - name: Run tests
         run: pytest tests/ -v
+
+  minimal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package without optional dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e . pytest
+
+      - name: Check optional dependencies are absent
+        run: |
+          python -c "import importlib.util, inei_microdatos; assert importlib.util.find_spec('pandas') is None; assert importlib.util.find_spec('pyreadstat') is None; assert importlib.util.find_spec('openpyxl') is None"
+
+      - name: Run optional dependency tests
+        run: pytest tests/test_optional_dependencies.py -v
