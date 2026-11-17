@@ -7,6 +7,7 @@ from pathlib import Path
 import click
 import requests
 
+from inei_microdatos._dependencies import OptionalDependencyError
 from inei_microdatos.catalog import (
     build_catalog,
     catalog_age,
@@ -182,7 +183,7 @@ def download(catalog_path, survey, year_min, year_max, period, fmt, dest, layout
 
     try:
         result = download_modules(catalog, dest, fmt=fmt, fallback=not no_fallback, layout=layout, workers=workers, dry_run=dry_run, ubigeo=ubigeo)
-    except (ValueError, requests.RequestException) as exc:
+    except (ValueError, requests.RequestException, OptionalDependencyError) as exc:
         raise click.ClickException(str(exc)) from exc
     if dry_run:
         if include_docs:
@@ -251,19 +252,22 @@ def read(source, table, fmt, info):
     """
     from inei_microdatos.reader import list_tables, read_module
 
-    if info:
-        tables = list_tables(source)
-        if not tables:
-            click.echo("No data tables found.")
+    try:
+        if info:
+            tables = list_tables(source)
+            if not tables:
+                click.echo("No data tables found.")
+                return
+            click.echo(f"{'Table':<30} {'Format':<8} {'Size':>12}")
+            click.echo("-" * 52)
+            for t in tables:
+                size_mb = t["size_bytes"] / 1024 / 1024
+                click.echo(f"{t['name']:<30} {t['format']:<8} {size_mb:>9.1f} MB")
             return
-        click.echo(f"{'Table':<30} {'Format':<8} {'Size':>12}")
-        click.echo("-" * 52)
-        for t in tables:
-            size_mb = t["size_bytes"] / 1024 / 1024
-            click.echo(f"{t['name']:<30} {t['format']:<8} {size_mb:>9.1f} MB")
-        return
 
-    dfs = read_module(source, tables=list(table) if table else None, fmt=fmt)
+        dfs = read_module(source, tables=list(table) if table else None, fmt=fmt)
+    except OptionalDependencyError as exc:
+        raise click.ClickException(str(exc)) from None
 
     if not dfs:
         click.echo("No data files found.")
@@ -417,7 +421,10 @@ def index_cmd(catalog_path, survey, year_min, year_max, period, dest, workers, d
     n_mods = sum(len(p["modules"]) for e in catalog for y in e["years"].values() for p in y.values())
     click.echo(f"Indexing {n_mods} modules...")
 
-    new_entries = build_index(catalog, dest=dest, workers=workers, data_dir=data_dir)
+    try:
+        new_entries = build_index(catalog, dest=dest, workers=workers, data_dir=data_dir)
+    except OptionalDependencyError as exc:
+        raise click.ClickException(str(exc)) from None
 
     click.echo(f"\nIndexed {len(new_entries)} modules.")
     total_vars = sum(v.get("kind", "variable") == "variable" for e in new_entries for v in e["variables"])

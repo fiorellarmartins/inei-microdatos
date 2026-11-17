@@ -5,12 +5,13 @@ from __future__ import annotations
 import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 from threading import Lock, RLock
 
 import requests
 from tqdm import tqdm
 
+from inei_microdatos._dependencies import assert_optional_import
 from inei_microdatos.client import DOWNLOAD_BASE, BASE_URL
 
 _TIMEOUT = 120
@@ -32,7 +33,7 @@ LAYOUTS = {
 def download_modules(
     catalog: list[dict],
     dest: str | Path,
-    fmt: str = "CSV",
+    fmt: Literal["CSV", "STATA", "SPSS", "XLSX", "XLS"] = "CSV",
     fallback: bool = True,
     layout: str = "default",
     workers: int = 4,
@@ -71,6 +72,11 @@ def download_modules(
     tasks = _collect_module_tasks(catalog, dest, fmt, fallback, template)
     if dry_run:
         return _dry_run_report(tasks)
+    kinds = {url.get("kind") for url, _ in tasks if isinstance(url, dict)}
+    if "survey_geography" in kinds:
+        assert_optional_import("pandas", extra="pandas", min_version="1.2")
+    if "census_geography" in kinds:
+        assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
     return _run_downloads(tasks, workers, progress, desc=f"Downloading {fmt}")
 
 
@@ -234,11 +240,8 @@ def _run_downloads(
 
 def _valid_download(path: Path) -> bool:
     if path.suffix.lower() == ".xls":
-        from inei_microdatos.reader import _read_legacy_excel
-        try:
-            return not _read_legacy_excel(path).empty
-        except (ValueError, OSError):
-            return False
+        from inei_microdatos.reader import _valid_legacy_excel
+        return _valid_legacy_excel(path)
     if not zipfile.is_zipfile(path):
         return False
     if path.suffix.lower() == ".xlsx":

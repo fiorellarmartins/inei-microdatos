@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import zipfile
 
+from inei_microdatos._dependencies import assert_optional_import
 from inei_microdatos.census import CENSUS_VALUE
 from inei_microdatos.client import DOWNLOAD_BASE
 from inei_microdatos.geography import GeographyUnavailable, select_census_geography, validate_ubigeo
@@ -140,6 +141,7 @@ def _row_codes(frame, spec, width=6):
 
 
 def _chunks(archive, spec, usecols=None):
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     import pandas as pd
     with archive.open(spec["path"]) as stream:
         yield from pd.read_csv(stream, encoding=spec["encoding"], sep=spec["delimiter"],
@@ -147,6 +149,7 @@ def _chunks(archive, spec, usecols=None):
 
 
 def _parent_mapping(rule, spec, source_dir, width):
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     import pandas as pd
     from inei_microdatos.download import _download_one
     key = (rule["survey_value"], rule["year"], rule["period"], spec["parent_code"])
@@ -174,6 +177,7 @@ def _parent_mapping(rule, spec, source_dir, width):
 
 def subset_survey_archive(source: Path, dest: Path, query: dict) -> str:
     """Stream a derived ZIP, retaining original values and reporting omissions."""
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     code, rule = query["code"], query["rule"]
     level = LEVELS[len(code)]
     report = {"version": 1, "ubigeo": code, "survey": rule["survey_value"], "year": rule["year"],
