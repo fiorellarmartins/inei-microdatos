@@ -23,10 +23,11 @@ Este paquete maneja todo eso.
 ## Instalación
 
 ```bash
-pip install inei-microdatos
+pip install inei-microdatos              # catálogo, descargas y búsqueda
+pip install "inei-microdatos[pandas]"    # + lectura en DataFrames (CSV, STATA, SPSS, XLSX)
 ```
 
-Requiere Python 3.9+. Incluye pandas, pyreadstat y openpyxl para leer CSV, STATA, SPSS y XLSX.
+Requiere Python 3.9+. El paquete base no depende de pandas. El extra `pandas` incluye pandas, pyreadstat y openpyxl.
 
 ## Inicio rápido
 
@@ -408,10 +409,11 @@ This package handles all of that.
 ## Install
 
 ```bash
-pip install inei-microdatos
+pip install inei-microdatos              # catalog, downloads, and search
+pip install "inei-microdatos[pandas]"    # + DataFrame readers (CSV, STATA, SPSS, XLSX)
 ```
 
-Requires Python 3.9+. Includes pandas, pyreadstat, and openpyxl to read CSV, STATA, SPSS, and XLSX.
+Requires Python 3.9+. The base package does not depend on pandas. The `pandas` extra includes pandas, pyreadstat, and openpyxl.
 
 ## Quick start
 

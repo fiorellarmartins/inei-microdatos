@@ -6,8 +6,9 @@ import gzip
 import json
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 
+from inei_microdatos._dependencies import assert_optional_import
 from inei_microdatos.client import DOWNLOAD_BASE
 
 _BUNDLED_INDEX = Path(__file__).parent / "data" / "variable_index.json.gz"
@@ -21,7 +22,7 @@ def search(
     year: Optional[str] = None,
     module: Optional[str] = None,
     exact: bool = False,
-) -> List[dict]:
+) -> list[dict]:
     """Search variables and census tables by source name or label.
 
     Args:
@@ -76,7 +77,7 @@ def search_across_years(
     variable: str,
     index: Optional[list] = None,
     survey: Optional[str] = None,
-) -> Dict[str, List[dict]]:
+) -> dict[str, list[dict]]:
     """Track a variable across years — shows when it appears, disappears, or changes.
 
     Args:
@@ -178,6 +179,11 @@ def build_index(
 
     if not to_index:
         return existing
+
+    if any("census_module" not in mod for mod in to_index):
+        assert_optional_import("pyreadstat", extra="pandas", min_version="1.0")
+    if any(mod.get("census_module", {}).get("xlsx_url") for mod in to_index):
+        assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
 
     new_entries = []
     bar = tqdm(total=len(to_index), desc="Indexing", disable=not progress)
@@ -282,6 +288,7 @@ def _index_one_module(mod_info: dict, data_dir=None) -> Optional[dict]:
 
 def _extract_metadata(zf, filename: str, ext: str, mod_info: dict) -> dict:
     """Extract variable metadata from a data file inside a ZIP."""
+    assert_optional_import("pyreadstat", extra="pandas", min_version="1.0")
     import pyreadstat
     import tempfile
     import os

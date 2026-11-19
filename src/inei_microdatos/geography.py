@@ -14,6 +14,7 @@ from xml.etree import ElementTree as ET
 import requests
 from lxml import html
 
+from inei_microdatos._dependencies import assert_optional_import
 from inei_microdatos.census import CENSUS_VALUE, CENSUS_2007
 
 
@@ -252,6 +253,7 @@ def subset_rows(rows, geography: dict):
 
 def subset_workbook(source: Path, dest: Path, geography: dict) -> None:
     """Create a derived XLSX with source values, headers and geographic blocks."""
+    assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
     from openpyxl import load_workbook, Workbook
     source_book = load_workbook(source, read_only=True, data_only=True)
     result = Workbook(write_only=True)

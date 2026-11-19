@@ -6,16 +6,17 @@ import io
 import json
 import zipfile
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Optional, Union
 
+from inei_microdatos._dependencies import assert_optional_import
 from inei_microdatos.client import DOWNLOAD_BASE
 
 
 def read_module(
     source: Union[str, Path],
-    tables: Optional[List[str]] = None,
+    tables: Optional[list[str]] = None,
     fmt: Optional[str] = None,
-) -> Dict[str, "pandas.DataFrame"]:
+) -> dict[str, "pandas.DataFrame"]:
     """Read a module ZIP, XLSX workbook, or INEI HTML/SYLK XLS export.
 
     XLSX sheets retain every row (header=None) because census workbooks contain
@@ -33,6 +34,7 @@ def read_module(
         Dict mapping table name (without year suffix) to DataFrame.
         E.g. {"RECH0": df1, "RECH1": df2, ...}
     """
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     import pandas as pd
 
     source = str(source)
@@ -52,6 +54,7 @@ def read_module(
         ) else {}
 
     if path.suffix.lower() == ".xlsx":
+        assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
         with pd.ExcelFile(path, engine="openpyxl") as workbook:
             return {
                 name: workbook.parse(name, header=None)
@@ -95,7 +98,7 @@ def read_catalog_entry(
     fmt: str = "csv",
     dest: Optional[Union[str, Path]] = None,
     ubigeo: Optional[str] = None,
-) -> Dict[str, "pandas.DataFrame"]:
+) -> dict[str, "pandas.DataFrame"]:
     """Read data directly from a catalog entry, downloading as needed.
 
     Args:
@@ -110,6 +113,7 @@ def read_catalog_entry(
     Returns:
         Dict mapping table name to DataFrame.
     """
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     year = str(year)
     if ubigeo is not None:
         from inei_microdatos.survey_geography import select_geography
@@ -148,6 +152,11 @@ def read_catalog_entry(
     if not selected:
         raise ValueError(f"No download available for module {mod['module_name']}")
     url, code, actual_fmt, extension = selected
+    actual_fmt = actual_fmt.lower()
+    if actual_fmt == "spss":
+        assert_optional_import("pyreadstat", extra="pandas", min_version="1.0")
+    elif actual_fmt == "xlsx":
+        assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
 
     if dest:
         dest_path = Path(dest) / f"{code}{extension}"
@@ -169,7 +178,7 @@ def read_catalog_entry(
     return frames
 
 
-def list_tables(source: Union[str, Path]) -> List[dict]:
+def list_tables(source: str | Path) -> list[dict]:
     """List data files inside a ZIP, XLSX sheets, or the table in an INEI XLS export.
 
     Returns:
@@ -177,7 +186,8 @@ def list_tables(source: Union[str, Path]) -> List[dict]:
     """
     path = Path(source)
     if path.suffix.lower() == ".xls":
-        _read_legacy_excel(path)  # Reject error pages disguised as Excel.
+        if not _valid_legacy_excel(path):  # Reject error pages disguised as Excel.
+            raise ValueError("No census table in Excel export")
         name = _legacy_table_name(path)
         return [{"name": name, "format": "xls",
                  "size_bytes": path.stat().st_size, "full_path": name}]
@@ -227,14 +237,10 @@ def _legacy_table_name(path: Path) -> str:
         return "REDATAM" if stream.read(3) == b"ID;" else "tabDetalle"
 
 
-def _read_sylk(text: str):
-    """Read the cell-value records in INEI exports without executing formulas.
-
-    Preserve title, blank, heading and footer rows. Formatting records and the
-    unreliable declared dimensions are ignored; unsupported cell records fail.
-    """
+def _parse_sylk(text: str) -> tuple[dict, int, int]:
+    """Parse SYLK cell-value records without pandas or formula execution."""
     import re
-    import pandas as pd
+
     if not text.rstrip().endswith("\nE"):
         raise ValueError("Incomplete SYLK export")
     cells = {}
@@ -265,21 +271,63 @@ def _read_sylk(text: str):
     cols = max(col for row, col in cells) + 1
     if rows * cols > 1_000_000:
         raise ValueError("SYLK frequency table is too large")
+    return cells, rows, cols
+
+
+def _read_sylk(text: str):
+    """Read the cell-value records in INEI exports without executing formulas.
+
+    Preserve title, blank, heading and footer rows. Formatting records and the
+    unreliable declared dimensions are ignored; unsupported cell records fail.
+    """
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
+    import pandas as pd
+
+    cells, rows, cols = _parse_sylk(text)
     frame = pd.DataFrame(index=range(rows), columns=range(cols), dtype=object)
     for (row, col), value in cells.items():
         frame.iat[row, col] = value
     return frame
 
 
+def _legacy_excel_text(path: Path) -> str:
+    """Decode an INEI HTML/SYLK export and reject HTML error pages."""
+    import re
+
+    text = path.read_bytes().decode("cp1252")
+    if not text.startswith("ID;") and re.search(
+        r"(?:Microsoft OLE DB|ADODB|Active Server Pages).*error", text, re.I | re.S
+    ):
+        raise ValueError("INEI returned an error page instead of a census table")
+    return text
+
+
+def _valid_legacy_excel(path: Path) -> bool:
+    """Validate an INEI XLS export without pandas."""
+    import re
+
+    try:
+        text = _legacy_excel_text(path)
+        if text.startswith("ID;"):
+            _parse_sylk(text)
+            return True
+        return bool(
+            re.search(r"<table\b[^>]*\sid\s*=\s*['\"]?tabDetalle", text, re.I)
+            and re.search(r"<tr\b", text, re.I)
+        )
+    except (ValueError, OSError, UnicodeDecodeError):
+        return False
+
+
 def _read_legacy_excel(path: Path):
     """Read INEI HTML or SYLK Excel exports, preserving heading rows."""
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     import re
     import pandas as pd
-    text = path.read_bytes().decode("cp1252")
+
+    text = _legacy_excel_text(path)
     if text.startswith("ID;"):
         return _read_sylk(text)
-    if re.search(r"(?:Microsoft OLE DB|ADODB|Active Server Pages).*error", text, re.I | re.S):
-        raise ValueError("INEI returned an error page instead of a census table")
     # Prevent pandas from promoting the multirow heading to column labels.
     text = re.sub(r"<(/?)thead\b", r"<\1tbody", text, flags=re.I)
     frames = pd.read_html(io.StringIO(text), attrs={"id": "tabDetalle"}, header=None, flavor="lxml")
@@ -310,9 +358,12 @@ def _find_data_files(names: List[str]) -> List[tuple]:
 
 def _read_data(data: io.BytesIO, fmt: str, name: str) -> "pandas.DataFrame":
     """Read a data buffer into a DataFrame."""
+    assert_optional_import("pandas", extra="pandas", min_version="1.2")
     import pandas as pd
 
     fmt = fmt.lower()
+    if fmt == "spss":
+        assert_optional_import("pyreadstat", extra="pandas", min_version="1.0")
     if fmt == "csv":
         # INEI CSVs are UTF-8 with BOM, comma-separated
         try:

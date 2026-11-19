@@ -6,9 +6,12 @@ import re
 import tempfile
 from pathlib import Path
 
+from inei_microdatos._dependencies import assert_optional_import
+
 
 def workbook_tables(path: Path) -> list[dict]:
     """Read titles from the first rows, without indexing observations or totals."""
+    assert_optional_import("openpyxl", extra="pandas", min_version="3.1")
     from openpyxl import load_workbook
 
     tables = []

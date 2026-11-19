@@ -204,7 +204,7 @@ def test_custom_layout_isolation_format_fallback_and_dry_run(fixture_registry, t
     tasks = _collect_module_tasks(scoped, tmp_path, "CSV", False, "{module_name}.zip")
     q, path = tasks[0]
     assert path == tmp_path / "ubigeo-01/BASE.zip"
-    assert ".geography-sources/CSV/BASE.zip" in q["source_path"]
+    assert Path(q["source_path"]).parts[-3:] == (".geography-sources", "CSV", "BASE.zip")
     result = download_modules(catalog("DEP"), tmp_path, ubigeo="010101", dry_run=True)
     assert result == {"files": 0, "would_skip": 0, "unavailable": 1}
     assert "unavailable" in capsys.readouterr().out
